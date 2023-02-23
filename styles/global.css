@@ -1,3 +1,8 @@
+:root {
+  --color-primary: #496bbe;
+  --color-secondary: #2a4b8c;
+}
+
 html,
 body {
   padding: 0;
@@ -8,12 +13,16 @@ body {
   font-size: 18px;
 }
 
-* {
-  box-sizing: border-box;
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
 }
 
 a {
-  color: #0070f3;
+  color: var(--color-primary);
   text-decoration: none;
 }
 
@@ -24,4 +33,23 @@ a:hover {
 img {
   max-width: 100%;
   display: block;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+  gap: 10px;
 }

@@ -1,0 +1,55 @@
+.card {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 30%;
+}
+
+.translationCard {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.buttonBottom {
+  align-self: stretch;
+  margin-top: auto;
+}
+
+.resourceCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.translationCardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  min-width: 60%;
+}
+
+.cardTitle {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.visibilityOptions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.visibilityButtonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

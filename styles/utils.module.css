@@ -3,7 +3,7 @@
   line-height: 1.2;
   font-weight: 800;
   letter-spacing: -0.05rem;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .headingXl {
@@ -11,13 +11,13 @@
   line-height: 1.3;
   font-weight: 800;
   letter-spacing: -0.05rem;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .headingLg {
   font-size: 1.5rem;
   line-height: 1.4;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .headingMd {
@@ -49,4 +49,27 @@
 
 .lightText {
   color: #666;
+}
+
+.halfWidth {
+  width: 50%;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.sevenWidth {
+  width: 70%;
+}
+
+.centered {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

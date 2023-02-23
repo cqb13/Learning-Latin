@@ -1,0 +1,31 @@
+.nav {
+  display: flex;
+  padding: 0.5rem;
+  gap: 0.5rem;
+}
+
+.active {
+  border-radius: 0.5rem;
+  background-color: rgb(68, 68, 68, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.scrolled {
+  border-bottom: 2px solid rgb(68, 68, 68, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.link {
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 0.3rem;
+  border: 2px solid rgb(68, 68, 68, 0);
+  transition: 0.25s;
+}
+
+.link:hover {
+  text-decoration: none;
+  border: 2px solid rgb(68, 68, 68, 0.1);
+  border-radius: 0.5rem;
+}
