@@ -2,6 +2,7 @@ import ChartData from "../../types/chart";
 
 const personalPronouns: ChartData = {
   chartCount: 3,
+  name: "Personal Pronouns",
   chart: [
     {
       name: "Personal Pronouns [I, of me]",

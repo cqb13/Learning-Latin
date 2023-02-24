@@ -2,6 +2,7 @@ import ChartData from "../../types/chart";
 
 const declensions: ChartData = {
   chartCount: 5,
+  name: "Declension Endings",
   chart: [
     {
       name: "First Declension",

@@ -1,11 +1,12 @@
+import TranslationCard from "../components/cards/translationCard/translationCard";
+import cardStyles from "../components/cards/cards.module.css";
+import macronHandler from "../lib/utils/macronHandler";
+import styles from "../styles/translate.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Layout from "../components/layout/layout";
 import Button from "../components/button/button";
-import TranslationCard from "../components/cards/translationCard/translationCard";
-import cardStyles from "../components/cards/cards.module.css";
-import { useState } from "react";
-import styles from "../styles/translate.module.css";
 import Text from "../components/text/text";
+import { useState } from "react";
 
 const Translate = () => {
   const [query, setQuery] = useState<string>("");
@@ -19,7 +20,8 @@ const Translate = () => {
     type: "latin-to-english" | "english-to-latin"
   ) => {
     try {
-      const response = await fetch(`/api/${type}?word=${query}`);
+      let cleanQuery = macronHandler(query);
+      const response = await fetch(`/api/${type}?word=${cleanQuery}`);
       const data = await response.json();
       const newTranslations = Object.entries(
         data
@@ -44,10 +46,16 @@ const Translate = () => {
         <section className={styles.searchContainer}>
           <Text placeholder="Enter a word" onChange={onChange} />
           <div className="button-container">
-            <Button onClick={() => getTranslation("latin-to-english")} class={utilStyles.fullWidth}>
+            <Button
+              onClick={() => getTranslation("latin-to-english")}
+              class ={utilStyles.fullWidth}
+            >
               Latin To English
             </Button>
-            <Button onClick={() => getTranslation("english-to-latin")} class={utilStyles.fullWidth}>
+            <Button
+              onClick={() => getTranslation("english-to-latin")}
+              class ={utilStyles.fullWidth}
+            >
               English To Latin
             </Button>
           </div>

@@ -2,6 +2,7 @@ import ChartData from "../../types/chart";
 
 const relativePronouns: ChartData = {
   chartCount: 1,
+  name: "Relative Pronouns",
   chart: [
     {
       name: "Relative Pronouns Singular",

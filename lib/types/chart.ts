@@ -14,5 +14,6 @@ interface Chart {
 
 export default interface ChartData {
   chartCount: number;
+  name: string;
   chart: Chart[];
 }

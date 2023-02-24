@@ -6,15 +6,13 @@ import resources from "../lib/data/resources";
 
 const Resources = () => {
   return (
-    <Layout title='Resources'>
+    <Layout title="Resources">
       <section className={utilStyles.container}>
         <div className={utilStyles.heading2Xl}>
           <h1>Resources</h1>
         </div>
         <section className={cardStyles.resourceCardContainer}>
-          {resources.map((resource) => (
-            <ResourceCard {...resource} />
-          ))}
+          {resources.map(resource => <ResourceCard {...resource} />)}
         </section>
       </section>
     </Layout>

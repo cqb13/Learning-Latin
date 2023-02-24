@@ -63,6 +63,18 @@
   width: 70%;
 }
 
+.threeWidth {
+  width: 30%;
+}
+
+.twoWidth {
+  width: 20%;
+}
+
+.oneWidth {
+  width: 10%;
+}
+
 .centered {
   text-align: center;
   margin: 0 auto;

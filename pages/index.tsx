@@ -17,7 +17,11 @@ const Home = () => {
           website. Development will be slow. If you find any bugs please open an
           issue in the github repository.
         </p>
-        <Button href='https://github.com/cqb13' target='_blank'>
+        <Button
+          href="https://github.com/cqb13"
+          target="_blank"
+          class={`button-container ${utilStyles.oneWidth}`}
+        >
           View Github
         </Button>
       </section>

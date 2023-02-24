@@ -2,6 +2,7 @@ import ChartData from "../../types/chart";
 
 const personalEndings: ChartData = {
   chartCount: 1,
+  name: "Personal Endings",
   chart: [
     {
       name: "Personal Endings",

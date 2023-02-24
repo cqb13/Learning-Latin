@@ -2,6 +2,7 @@ import ChartData from "../../types/chart";
 
 const futureTense: ChartData = {
   chartCount: 2,
+  name: "Future Tense",
   chart: [
     {
       name: "Future Tense 1st & 2nd Conjugation Verbs",
