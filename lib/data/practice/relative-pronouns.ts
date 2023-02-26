@@ -1,7 +1,7 @@
 import ChartData from "../../types/chart";
 
 const relativePronouns: ChartData = {
-  chartCount: 1,
+  chartCount: 2,
   name: "Relative Pronouns",
   chart: [
     {

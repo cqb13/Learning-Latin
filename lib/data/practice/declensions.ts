@@ -59,6 +59,7 @@ const declensions: ChartData = {
     {
       name: "Third Declension",
       labels: ["Form", "Singular", "Plural"],
+      link: "Third Declension Neuter",
       rows: [
         {
           rowTitle: "Nominative",
@@ -85,6 +86,7 @@ const declensions: ChartData = {
     {
       name: "Third Declension Neuter",
       labels: ["Form", "Singular", "Plural"],
+      returnLink: "Third Declension",
       rows: [
         {
           rowTitle: "Nominative",
@@ -111,6 +113,7 @@ const declensions: ChartData = {
     {
       name: "Fourth Declension",
       labels: ["Form", "Singular", "Plural"],
+      link: "Fourth Declension Neuter",
       rows: [
         {
           rowTitle: "Nominative",
@@ -137,6 +140,7 @@ const declensions: ChartData = {
     {
       name: "Fourth Declension Neuter",
       labels: ["Form", "Singular", "Plural"],
+      returnLink: "Fourth Declension",
       rows: [
         {
           rowTitle: "Nominative",

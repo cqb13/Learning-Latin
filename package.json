@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "start": "next dev",
     "build": "next build",
-    "start": "next start"
+    "begin": "next start"
   },
   "dependencies": {
     "date-fns": "^2.29.3",

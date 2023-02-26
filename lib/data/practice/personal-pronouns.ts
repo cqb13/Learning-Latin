@@ -8,6 +8,7 @@ const personalPronouns: ChartData = {
       name: "Personal Pronouns [I, of me]",
       note: "I, of me",
       labels: ["Form", "Singular", "Plural"],
+      link: "Personal Pronouns [I, of me] Meaning",
       rows: [
         {
           rowTitle: "Nominative",
@@ -35,6 +36,7 @@ const personalPronouns: ChartData = {
       name: "Personal Pronouns [I, of me] Meaning",
       note: "I, of me",
       labels: ["Form", "Singular", "Plural"],
+      returnLink: "Personal Pronouns [I, of me]",
       rows: [
         {
           rowTitle: "Nominative",
@@ -62,6 +64,7 @@ const personalPronouns: ChartData = {
       name: "Personal Pronouns [You, of you]",
       note: "You, of you",
       labels: ["Form", "Singular", "Plural"],
+      link: "Personal Pronouns [You, of you] Meaning",
       rows: [
         {
           rowTitle: "Nominative",
@@ -89,6 +92,7 @@ const personalPronouns: ChartData = {
       name: "Personal Pronouns [You, of you] Meaning",
       note: "You, of you",
       labels: ["Form", "Singular", "Plural"],
+      returnLink: "Personal Pronouns [You, of you]",
       rows: [
         {
           rowTitle: "Nominative",
@@ -116,6 +120,7 @@ const personalPronouns: ChartData = {
       name: "Personal Pronouns [He, She, It] Singular",
       note: "He, She, It (Is, Ea, Id)",
       labels: ["Form", "Masculine", "Feminine", "Neuter"],
+      link: "Personal Pronouns [He, She, It] Singular Meaning",
       rows: [
         {
           rowTitle: "Nominative",
@@ -143,6 +148,7 @@ const personalPronouns: ChartData = {
       name: "Personal Pronouns [He, She, It] Singular Meaning",
       note: "He, She, It (Is, Ea, Id)",
       labels: ["Form", "Masculine", "Feminine", "Neuter"],
+      returnLink: "Personal Pronouns [He, She, It] Singular",
       rows: [
         {
           rowTitle: "Nominative",
@@ -174,6 +180,7 @@ const personalPronouns: ChartData = {
       name: "Personal Pronouns [He, She, It] Plural",
       note: "He, She, It (Is, Ea, Id)",
       labels: ["Form", "Masculine", "Feminine", "Neuter"],
+      link: "Personal Pronouns [He, She, It] Plural Meaning",
       rows: [
         {
           rowTitle: "Nominative",
@@ -201,6 +208,7 @@ const personalPronouns: ChartData = {
       name: "Personal Pronouns [He, She, It] Plural Meaning",
       note: "He, She, It (Is, Ea, Id)",
       labels: ["Form", "Masculine", "Feminine", "Neuter"],
+      returnLink: "Personal Pronouns [He, She, It] Plural",
       rows: [
         {
           rowTitle: "Nominative",

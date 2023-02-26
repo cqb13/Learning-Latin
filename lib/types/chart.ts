@@ -8,6 +8,8 @@ interface Row {
 interface Chart {
   name: string;
   labels: string[];
+  link?: string;
+  returnLink?: string;
   note?: string;
   rows: Row[];
 }

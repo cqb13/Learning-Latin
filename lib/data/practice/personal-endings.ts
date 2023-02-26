@@ -7,6 +7,7 @@ const personalEndings: ChartData = {
     {
       name: "Personal Endings",
       labels: ["Form", "Singular", "Plural"],
+      link: "Personal Endings Meaning",
       rows: [
         {
           rowTitle: "1st",
@@ -25,6 +26,7 @@ const personalEndings: ChartData = {
     {
       name: "Personal Endings Meaning",
       labels: ["Form", "Singular", "Plural"],
+      returnLink: "Personal Endings",
       rows: [
         {
           rowTitle: "1st",
