@@ -75,9 +75,21 @@
   width: 10%;
 }
 
+.centerText {
+  text-align: center;
+}
+
 .centered {
   text-align: center;
   margin: 0 auto;
+}
+
+.right {
+  border-color: green;
+}
+
+.wrong {
+  border-color: red;
 }
 
 .container {

@@ -1,4 +1,5 @@
 import utilStyles from "../styles/utils.module.css";
+import styles from "../styles/practice.module.css";
 import Layout from "../components/layout/layout";
 import Button from "../components/button/button";
 
@@ -17,13 +18,16 @@ const Practice = () => {
         <div className={utilStyles.heading2Xl}>
           <h1>Practice</h1>
         </div>
-        {practiceRoutes.map(route =>
-          <Button
-            link={`/practice/${route[0].toLowerCase().replace(" ", "-")}`}
-          >
-            {route[0]}
-          </Button>
-        )}
+        <section className={styles.practiceNav}>
+          {practiceRoutes.map(route =>
+            <Button
+              link={`/practice/${route[0].toLowerCase().replace(" ", "-")}`}
+              class={utilStyles.twoWidth}
+            >
+              {route[0]}
+            </Button>
+          )}
+        </section>
       </section>
     </Layout>
   );

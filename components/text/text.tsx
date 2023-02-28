@@ -4,6 +4,7 @@ type TextProps = {
     placeholder: string;
     class?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; 
+    id?: string | string[];
 }
 
 const Text = (props: TextProps) => {
@@ -13,7 +14,7 @@ const Text = (props: TextProps) => {
 
     return (
         <>
-            <input type="text" placeholder={props.placeholder} className={`${styles.input} ${props.class}`} onChange={onChange} />
+            <input type="text" placeholder={props.placeholder} className={`${styles.input} ${props.class}`} onChange={onChange} id={props.id}/>
         </>
     );
 }

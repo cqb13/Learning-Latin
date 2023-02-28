@@ -1,7 +1,7 @@
 import ChartData from "../../types/chart";
 
 const personalPronouns: ChartData = {
-  chartCount: 3,
+  chartCount: 4,
   name: "Personal Pronouns",
   chart: [
     {

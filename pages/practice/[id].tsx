@@ -8,7 +8,9 @@ import Layout from "../../components/layout/layout";
 import ChartData from "../../lib/types/chart";
 import Button from "../../components/button/button";
 import arrowHandler from "../../lib/utils/arrowHandler";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Chart from "../../components/chart/chart";
+import styles from "../../styles/practice.module.css";
 
 export async function getStaticPaths() {
   const paths = [
@@ -46,19 +48,21 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
 }
 
 const PracticeChart = ({ data }: { data: ChartData }) => {
-  const [chartIndex, setChartIndex] = useState(0);
+  const [currentChart, setCurrentChart] = useState(1);
   const [linkedChartIndex] = useState([] as number[]);
+  const [chartIndex, setChartIndex] = useState(0);
 
-  //add linked chat index to array to skip over them when switching charts
-  for (let i = 0; i < data.chart.length; i++) {
-    if (data.chart[i].link) {
-      for (let j = 0; j < data.chart.length; j++) {
-        if (data.chart[j].name === data.chart[i].link) {
-          linkedChartIndex.push(j);
+  useEffect(() => {
+    for (let i = 0; i < data.chart.length; i++) {
+      if (data.chart[i].link) {
+        for (let j = 0; j < data.chart.length; j++) {
+          if (data.chart[j].name === data.chart[i].link) {
+            linkedChartIndex.push(j);
+          }
         }
       }
     }
-  }
+  }, []);
 
   const handleSwitchChart = (event: { target: { innerHTML: string } }) => {
     let cleanInput = arrowHandler(event.target.innerHTML);
@@ -71,10 +75,12 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
 
       if (nextIndex < data.chart.length) {
         setChartIndex(nextIndex);
+        setCurrentChart(currentChart + 1);
       }
 
       if (nextIndex === data.chart.length) {
         setChartIndex(0);
+        setCurrentChart(1);
       }
     }
 
@@ -90,10 +96,26 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
 
       if (prevIndex >= 0) {
         setChartIndex(prevIndex);
+        if (currentChart > 1) {
+          setCurrentChart(currentChart - 1);
+        } else {
+          setCurrentChart(data.chartCount);
+        }
       }
     }
+    
+    clearChart();
   };
 
+  const clearChart = () => {
+    const inputs = document.querySelectorAll("input");
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].classList.remove(utilStyles.right);
+      inputs[i].classList.remove(utilStyles.wrong);
+      (inputs[i] as HTMLInputElement).value = "";
+    }
+  };
+  
   const switchToLinkedChart = (event: { target: { innerHTML: string } }) => {
     for (let i = 0; i < data.chart.length; i++) {
       if (data.chart[i].name === event.target.innerHTML) {
@@ -102,7 +124,11 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
     }
   };
 
-  //prettier-ignore
+  /*
+  - add an options popup, that saves settings in browser storage
+    - options to check check chart as you go, or after you finish
+  */
+
   return (
     <Layout title={data.name}>
       <section className={utilStyles.container}>
@@ -112,40 +138,26 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
           </h1>
         </div>
 
-        <section>
-          {data.chartCount > 1? <Button onClick={handleSwitchChart}>{"<"}</Button> : null}
-          <h1>{data.chart[chartIndex].name}</h1>
-          {data.chart[chartIndex].note? <p>{data.chart[chartIndex].note}</p> : null}
-          {data.chartCount > 1? <Button onClick={handleSwitchChart}>{">"}</Button> : null}
-          <table>
-            <thead>
-              <tr>
-                {data.chart[chartIndex].labels.map((label, index) => (
-                  <th key={index}>{label}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data.chart[chartIndex].rows.map((row) => (
-                <tr>
-                  <td>
-                    {row.rowTitle}
-                  </td>
-                  {row.rowContent.map((content, index) => (
-                    <td key={index}>{content}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {/*TODO: instead of linked chart name, use icon, then make component hover info that will display name on hover*/}
-          {data.chart[chartIndex].link || data.chart[chartIndex].returnLink? (
-            <Button onClick={switchToLinkedChart}>
-              {data.chart[chartIndex].link || data.chart[chartIndex].returnLink}
-            </Button>
-          ) : null}
-        </section>
+        <section className={utilStyles.container}>
+          <div className={styles.chartTitleContainer}>
+            {data.chartCount > 1? <Button onClick={handleSwitchChart}>{"<"}</Button>: null}
+            <div className={utilStyles.centerText}>
+              <h1>{data.chart[chartIndex].name}</h1>
+              {data.chart[chartIndex].note? <p>{data.chart[chartIndex].note}</p>: null}
+            </div>
+            {data.chartCount > 1? <Button onClick={handleSwitchChart}>{">"}</Button>: null}
+          </div>
+          <p>{currentChart} / {data.chartCount}</p>
 
+          <Chart data={data} chartIndex={chartIndex}/>
+          {/*make bellow a components called chart footer, add show answer option, check button, and switch chart option*/}
+          {data.chart[chartIndex].link || data.chart[chartIndex].returnLink
+            ? <Button onClick={switchToLinkedChart}>
+                {data.chart[chartIndex].link ||
+                  data.chart[chartIndex].returnLink}
+              </Button>
+            : null}
+        </section>
       </section>
     </Layout>
   );
