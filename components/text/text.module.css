@@ -8,7 +8,7 @@
 
 .input:focus {
   outline: none;
-  border-color: var(--color-secondary);
+  border-color: var(--color-secondary) !important;
 }
 
 .input::placeholder {

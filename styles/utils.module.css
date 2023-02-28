@@ -85,11 +85,11 @@
 }
 
 .right {
-  border-color: green;
+  border-color: green !important;
 }
 
 .wrong {
-  border-color: red;
+  border-color: red !important;
 }
 
 .container {

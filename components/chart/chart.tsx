@@ -56,6 +56,7 @@ const Chart = ({data, chartIndex}: {data: ChartData, chartIndex: number}) => {
     }
   }
 
+  //TODO: find a better way to store answers, so they are not the id
   return (
     <table className={styles.chart}>
       <thead>
