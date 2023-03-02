@@ -1,62 +1,69 @@
-import ChartData from "../../lib/types/chart";
-import styles from "./chart.module.css"
-import utilStyles from "../../styles/utils.module.css"
 import macronHandler, { checkForMacrons } from "../../lib/utils/macronHandler";
+import ChartData from "../../lib/types/chart";
+import styles from "./chart.module.css";
+import { useState } from "react";
 import Text from "../text/text";
-
-const Chart = ({data, chartIndex}: {data: ChartData, chartIndex: number}) => {
+ 
+const Chart = ({ data, chartIndex, answers }: { data: ChartData, chartIndex: number, answers: boolean }) => {
+  const [value, setValue] = useState("");
 
   const checkAnswer = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
     const id = event.target.id;
-    const answer = event.target.value.toLowerCase()
-    const hasMacron = checkForMacrons(answer)
+    const answer = event.target.value.toLowerCase();
+    const hasMacron = checkForMacrons(answer);
 
     if (answer === "") {
-      event.target.classList.remove(utilStyles.right)
-      event.target.classList.remove(utilStyles.wrong)
-      return
+      event.target.classList.remove(styles.right);
+      event.target.classList.remove(styles.wrong);
+      return;
     }
 
     if (answer === id) {
-      changeAccuracyState(event, true)
-      return
+      changeAccuracyState(event, true);
+      return;
     }
 
     //makes macrons in answers optional
     if (!hasMacron && answer === macronHandler(id)) {
-      changeAccuracyState(event, true)
-      return
+      changeAccuracyState(event, true);
+      return;
     }
 
     //check list answers
     if (id.includes(",")) {
-      const list = id.split(",")
-      let value = answer
+      const list = id.split(",");
+      let value = answer;
       value = value.split(" ").join("");
       value = value.replace(/[^a-zA-Z]/g, "");
       //make sure that the answer has all the elements in the list and no extra elements
-      if (list.every(element => answer.includes(element)) && list.length === value.length) {
-        changeAccuracyState(event, true)
-        return
+      if (
+        list.every(element => answer.includes(element)) &&
+        list.length === value.length
+      ) {
+        changeAccuracyState(event, true);
+        return;
       }
     }
 
-    changeAccuracyState(event, false)
-  }
+    changeAccuracyState(event, false);
+  };
 
-  const changeAccuracyState = (event: React.ChangeEvent<HTMLInputElement>, right: boolean) => {
+  const changeAccuracyState = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    right: boolean
+  ) => {
     if (right) {
-      event.target.classList.remove(utilStyles.wrong)
-      event.target.classList.add(utilStyles.right)
-      console.log("right")
+      event.target.classList.remove(styles.wrong);
+      event.target.classList.add(styles.right);
     } else {
-      event.target.classList.remove(utilStyles.right)
-      event.target.classList.add(utilStyles.wrong)
-      console.log("wrong")
+      event.target.classList.remove(styles.right);
+      event.target.classList.add(styles.wrong);
     }
-  }
+  };
 
   //TODO: find a better way to store answers, so they are not the id
+  //prettier-ignore
   return (
     <table className={styles.chart}>
       <thead>
@@ -76,7 +83,11 @@ const Chart = ({data, chartIndex}: {data: ChartData, chartIndex: number}) => {
             </td>
             {row.rowContent.map((content, index) =>
               <td key={index}>
-                <Text placeholder="Answer" id={content} onChange={checkAnswer}/>
+                {answers ? (
+                  <Text placeholder="" value={content}/>
+                ) : (
+                  <Text placeholder="Answer" id={content} onChange={checkAnswer}/>
+                )}
               </td>
             )}
           </tr>

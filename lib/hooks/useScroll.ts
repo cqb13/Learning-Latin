@@ -19,6 +19,6 @@ const useScroll = (type: "scrollOffSet" | "scrolling", threshold: number) => {
   }, [onScroll]);
 
   return scrolled;
-}
+};
 
 export default useScroll;

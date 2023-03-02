@@ -84,14 +84,6 @@
   margin: 0 auto;
 }
 
-.right {
-  border-color: green !important;
-}
-
-.wrong {
-  border-color: red !important;
-}
-
 .container {
   display: flex;
   flex-direction: column;

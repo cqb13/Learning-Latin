@@ -9,7 +9,7 @@ import Text from "../components/text/text";
 import { useState } from "react";
 
 const Translate = () => {
-  const [query, setQuery] = useState<string>("");
+  const [query, setQuery] = useState("");
   const [translations, setTranslations] = useState<any[]>([]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +19,7 @@ const Translate = () => {
   const getTranslation = async (
     type: "latin-to-english" | "english-to-latin"
   ) => {
+    setQuery("");
     try {
       let cleanQuery = macronHandler(query);
       const response = await fetch(`/api/${type}?word=${cleanQuery}`);
@@ -44,17 +45,17 @@ const Translate = () => {
           <h1>Translator</h1>
         </div>
         <section className={styles.searchContainer}>
-          <Text placeholder="Enter a word" onChange={onChange} />
+          <Text placeholder="Enter a word" onChange={onChange} value={query} />
           <div className="button-container">
             <Button
               onClick={() => getTranslation("latin-to-english")}
-              class ={utilStyles.fullWidth}
+              class={utilStyles.fullWidth}
             >
               Latin To English
             </Button>
             <Button
               onClick={() => getTranslation("english-to-latin")}
-              class ={utilStyles.fullWidth}
+              class={utilStyles.fullWidth}
             >
               English To Latin
             </Button>

@@ -1,37 +1,61 @@
+import TextProps from "../../lib/types/TextProps";
 import { useState, useEffect } from "react";
 import styles from "./text.module.css";
- 
-type TextProps = {
-    placeholder: string;
-    class?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; 
-    id?: string | string[];
-}
 
 const Text = (props: TextProps) => {
-    const [id, setId] = useState({} as string);
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        props.onChange?.(event);
-    };
+  const [defaultValue, setDefaultValue] = useState("");
+  const [placeholder, setPlaceholder] = useState("");
+  const [value, setValue] = useState("");
+  const [id, setId] = useState("");
 
-    //some of the data sets have multiple answers for 1 question, and answers r stored in the ids, but ids cant be array
-    useEffect(() => {
-        if (props.id) {
-            if (Array.isArray(props.id)) {
-                let stringForm = props.id.join(",");
-                console.log(stringForm);
-                setId(stringForm);
-            } else {   
-                setId(props.id);
-            }
-        }
-    });
+  //handles arrays as inputs
+  useEffect(() => {
+    if (props.id) {
+      if (Array.isArray(props.id)) {
+        setId(props.id.join(","));
+      } else {
+        setId(props.id);
+      }
+    } else {
+      setId("");
+    }
 
-    return (
-        <>
-            <input type="text" placeholder={props.placeholder} className={`${styles.input} ${props.class}`} onChange={onChange} id={id}/>
-        </>
-    );
-}
+    if (props.placeholder) {
+      if (Array.isArray(props.placeholder)) {
+        setPlaceholder(props.placeholder.join(", "));
+      } else {
+        setPlaceholder(props.placeholder);
+      }
+    } else {
+      setPlaceholder("");
+    }
+
+    if (props.value) {
+      if (Array.isArray(props.value)) {
+        setValue(props.value.join(", "));
+      } else {
+        setValue(props.value);
+      }
+    } else {
+      setValue("");
+    }
+  }, [props.id, props.placeholder, props.value]);
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.onChange?.(event);
+    setDefaultValue(event.target.value);
+  };
+
+  return (
+    <input
+      type="text"
+      placeholder={placeholder}
+      className={`${styles.input} ${props.class}`}
+      onChange={onChange}
+      value={props.value? value : defaultValue}
+      id={id}
+    />
+  );
+};
 
 export default Text;

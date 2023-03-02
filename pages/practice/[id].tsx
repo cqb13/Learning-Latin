@@ -1,16 +1,18 @@
 import personalPronouns from "../../lib/data/practice/personal-pronouns";
 import relativePronouns from "../../lib/data/practice/relative-pronouns";
 import personalEndings from "../../lib/data/practice/personal-endings";
+import ChartFooter from "../../components/chartFooter/chartFooter";
+import chartStyles from "../../components/chart/chart.module.css";
 import futureTense from "../../lib/data/practice/future-tense";
 import declensions from "../../lib/data/practice/declensions";
-import utilStyles from "../../styles/utils.module.css";
-import Layout from "../../components/layout/layout";
-import ChartData from "../../lib/types/chart";
-import Button from "../../components/button/button";
 import arrowHandler from "../../lib/utils/arrowHandler";
-import { useState, useEffect } from "react";
-import Chart from "../../components/chart/chart";
+import utilStyles from "../../styles/utils.module.css";
 import styles from "../../styles/practice.module.css";
+import Layout from "../../components/layout/layout";
+import Button from "../../components/button/button";
+import Chart from "../../components/chart/chart";
+import ChartData from "../../lib/types/chart";
+import { useState, useEffect } from "react";
 
 export async function getStaticPaths() {
   const paths = [
@@ -48,6 +50,7 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
 }
 
 const PracticeChart = ({ data }: { data: ChartData }) => {
+  const [showAnswers, setShowAnswers] = useState(false);
   const [currentChart, setCurrentChart] = useState(1);
   const [linkedChartIndex] = useState([] as number[]);
   const [chartIndex, setChartIndex] = useState(0);
@@ -103,19 +106,20 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
         }
       }
     }
-    
+
     clearChart();
   };
 
   const clearChart = () => {
+    if (showAnswers) return;
     const inputs = document.querySelectorAll("input");
     for (let i = 0; i < inputs.length; i++) {
-      inputs[i].classList.remove(utilStyles.right);
-      inputs[i].classList.remove(utilStyles.wrong);
+      inputs[i].classList.remove(chartStyles.right);
+      inputs[i].classList.remove(chartStyles.wrong);
       (inputs[i] as HTMLInputElement).value = "";
     }
   };
-  
+
   const switchToLinkedChart = (event: { target: { innerHTML: string } }) => {
     for (let i = 0; i < data.chart.length; i++) {
       if (data.chart[i].name === event.target.innerHTML) {
@@ -124,11 +128,17 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
     }
   };
 
+  const toggleAnswers = () => {
+    setShowAnswers(!showAnswers);
+    clearChart();
+  };
+
   /*
   - add an options popup, that saves settings in browser storage
     - options to check check chart as you go, or after you finish
   */
 
+  //prettier-ignore
   return (
     <Layout title={data.name}>
       <section className={utilStyles.container}>
@@ -149,14 +159,15 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
           </div>
           <p>{currentChart} / {data.chartCount}</p>
 
-          <Chart data={data} chartIndex={chartIndex}/>
-          {/*make bellow a components called chart footer, add show answer option, check button, and switch chart option*/}
-          {data.chart[chartIndex].link || data.chart[chartIndex].returnLink
-            ? <Button onClick={switchToLinkedChart}>
-                {data.chart[chartIndex].link ||
-                  data.chart[chartIndex].returnLink}
-              </Button>
-            : null}
+          <Chart data={data} chartIndex={chartIndex} answers={showAnswers}/>
+
+          <ChartFooter 
+            data={data} 
+            chartIndex={chartIndex} 
+            switchToLinkedChart={switchToLinkedChart} 
+            clearChart={clearChart}
+            toggleAnswers={toggleAnswers}
+            />
         </section>
       </section>
     </Layout>

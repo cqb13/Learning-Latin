@@ -1,6 +1,6 @@
-import Head from "next/head";
 import styles from "./layout.module.css";
 import NavBar from "../nav/nav";
+import Head from "next/head";
 
 const Layout = ({ children, title }: { children: React.ReactNode, title?: string }) => {
   if (!title) {

@@ -1,0 +1,37 @@
+.chart {
+  border-collapse: collapse;
+}
+
+.chart th {
+  background-color: #f6f6f6;
+  border: 2px solid #ddd;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.chart td p {
+  margin: 0;
+}
+
+.chart td {
+  border: 2px solid #ddd;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.chart td input {
+  border: 2px solid #ddd;
+  font-size: 1rem;
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 0;
+  width: 90%;
+}
+
+.chart td input.right {
+  border-color: green;
+}
+
+.chart td input.wrong {
+  border-color: red;
+}
