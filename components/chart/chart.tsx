@@ -1,14 +1,12 @@
 import macronHandler, { checkForMacrons } from "../../lib/utils/macronHandler";
 import ChartData from "../../lib/types/chart";
 import styles from "./chart.module.css";
-import { useState } from "react";
 import Text from "../text/text";
  
+//!!! after showing answers then going back to normal, correct & wrong answers are no longer highlighted
 const Chart = ({ data, chartIndex, answers }: { data: ChartData, chartIndex: number, answers: boolean }) => {
-  const [value, setValue] = useState("");
 
   const checkAnswer = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
     const id = event.target.id;
     const answer = event.target.value.toLowerCase();
     const hasMacron = checkForMacrons(answer);

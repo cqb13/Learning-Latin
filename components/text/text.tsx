@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import styles from "./text.module.css";
 
 const Text = (props: TextProps) => {
-  const [defaultValue, setDefaultValue] = useState("");
   const [placeholder, setPlaceholder] = useState("");
   const [value, setValue] = useState("");
   const [id, setId] = useState("");
@@ -39,11 +38,12 @@ const Text = (props: TextProps) => {
     } else {
       setValue("");
     }
+
   }, [props.id, props.placeholder, props.value]);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.onChange?.(event);
-    setDefaultValue(event.target.value);
+    setValue(event.target.value);
   };
 
   return (
@@ -52,7 +52,7 @@ const Text = (props: TextProps) => {
       placeholder={placeholder}
       className={`${styles.input} ${props.class}`}
       onChange={onChange}
-      value={props.value? value : defaultValue}
+      value={value}
       id={id}
     />
   );
