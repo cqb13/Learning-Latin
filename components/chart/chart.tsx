@@ -3,9 +3,7 @@ import ChartData from "../../lib/types/chart";
 import styles from "./chart.module.css";
 import Text from "../text/text";
  
-//!!! after showing answers then going back to normal, correct & wrong answers are no longer highlighted
 const Chart = ({ data, chartIndex, answers }: { data: ChartData, chartIndex: number, answers: boolean }) => {
-
   const checkAnswer = (event: React.ChangeEvent<HTMLInputElement>) => {
     const id = event.target.id;
     const answer = event.target.value.toLowerCase();
@@ -59,8 +57,7 @@ const Chart = ({ data, chartIndex, answers }: { data: ChartData, chartIndex: num
       event.target.classList.add(styles.wrong);
     }
   };
-
-  //TODO: find a better way to store answers, so they are not the id
+  
   //prettier-ignore
   return (
     <table className={styles.chart}>

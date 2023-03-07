@@ -12,7 +12,7 @@ const chartFooter = ({
   chartIndex: number;
   clearChart: () => void;
   toggleAnswers: () => void;
-  switchToLinkedChart: (event: { target: { innerHTML: string } }) => void;
+  switchToLinkedChart: (link: string | undefined) => void;
 }) => {
   //TODO: replace names with icons, add info popup on hover
   return (
@@ -23,7 +23,7 @@ const chartFooter = ({
 
       {/*Switches between linked charts*/}
       {data.chart[chartIndex].link || data.chart[chartIndex].returnLink
-        ? <Button onClick={switchToLinkedChart}>
+        ? <Button onClick={() => switchToLinkedChart(data.chart[chartIndex].link || data.chart[chartIndex].returnLink)}>
             {data.chart[chartIndex].link || data.chart[chartIndex].returnLink}
           </Button>
         : null}

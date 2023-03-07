@@ -67,6 +67,8 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
     }
   }, []);
 
+  // when switching from a linked chart to a non linked chart, the data index is out of sync
+  // when going from third declension neuter down, chart goes to third declension instead of second
   const handleSwitchChart = (event: { target: { innerHTML: string } }) => {
     let cleanInput = arrowHandler(event.target.innerHTML);
 
@@ -97,6 +99,12 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
         prevIndex--;
       }
 
+      if (linkedChartIndex.includes(chartIndex)) {
+        setChartIndex(prevIndex - 1);
+        setCurrentChart(currentChart - 1);
+        return;
+      }
+
       if (prevIndex >= 0) {
         setChartIndex(prevIndex);
         if (currentChart > 1) {
@@ -120,9 +128,9 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
     }
   };
 
-  const switchToLinkedChart = (event: { target: { innerHTML: string } }) => {
+  const switchToLinkedChart = (link: string | undefined) => {
     for (let i = 0; i < data.chart.length; i++) {
-      if (data.chart[i].name === event.target.innerHTML) {
+      if (data.chart[i].name === link) {
         setChartIndex(i);
       }
     }

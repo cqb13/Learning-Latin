@@ -43,6 +43,9 @@ const Text = (props: TextProps) => {
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.onChange?.(event);
+    //allows for not having a value input, while being able to change the value (needed bc of chart answers)
+    //if causes problem, create a new prop (editable) instead of using value
+    if (props.value) return;
     setValue(event.target.value);
   };
 
