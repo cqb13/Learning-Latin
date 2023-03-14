@@ -1,15 +1,21 @@
 .button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   background-color: var(--color-primary);
   border: none;
   color: white;
   padding: 15px 32px;
-  text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  font-size: 1rem;
   border-radius: 0.5rem;
   transition: 0.25s;
   cursor: pointer;
+}
+
+.button > * {
+  pointer-events: none;
 }
 
 .button:hover {

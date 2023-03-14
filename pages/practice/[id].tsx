@@ -5,7 +5,6 @@ import ChartFooter from "../../components/chartFooter/chartFooter";
 import chartStyles from "../../components/chart/chart.module.css";
 import futureTense from "../../lib/data/practice/future-tense";
 import declensions from "../../lib/data/practice/declensions";
-import arrowHandler from "../../lib/utils/arrowHandler";
 import utilStyles from "../../styles/utils.module.css";
 import styles from "../../styles/practice.module.css";
 import Layout from "../../components/layout/layout";
@@ -13,6 +12,8 @@ import Button from "../../components/button/button";
 import Chart from "../../components/chart/chart";
 import ChartData from "../../lib/types/chart";
 import { useState, useEffect } from "react";
+import ArrowLeft from "../../lib/images/arrowLeft";
+import ArrowRight from "../../lib/images/arrowRight";
 
 export async function getStaticPaths() {
   const paths = [
@@ -67,12 +68,11 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
     }
   }, []);
 
-  // when switching from a linked chart to a non linked chart, the data index is out of sync
-  // when going from third declension neuter down, chart goes to third declension instead of second
-  const handleSwitchChart = (event: { target: { innerHTML: string } }) => {
-    let cleanInput = arrowHandler(event.target.innerHTML);
+  const handleSwitchChart = (event: { target: { id: string } }) => {
+    let input = event.target.id;
+    clearChart();
 
-    if (cleanInput === ">") {
+    if (input === ">") {
       let nextIndex = chartIndex + 1;
       while (linkedChartIndex.includes(nextIndex)) {
         nextIndex++;
@@ -89,7 +89,7 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
       }
     }
 
-    if (cleanInput === "<") {
+    if (input === "<") {
       let prevIndex = chartIndex - 1;
       if (prevIndex < 0) {
         prevIndex = data.chart.length - 1;
@@ -114,10 +114,9 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
         }
       }
     }
-
-    clearChart();
   };
 
+  //!!! same value wont clear
   const clearChart = () => {
     if (showAnswers) return;
     const inputs = document.querySelectorAll("input");
@@ -134,6 +133,7 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
         setChartIndex(i);
       }
     }
+    return;
   };
 
   const toggleAnswers = () => {
@@ -158,12 +158,18 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
 
         <section className={utilStyles.container}>
           <div className={styles.chartTitleContainer}>
-            {data.chartCount > 1? <Button onClick={handleSwitchChart}>{"<"}</Button>: null}
+            {data.chartCount > 1? <Button onClick={handleSwitchChart} id="<">
+              <ArrowLeft />
+            </Button>: null}
+
             <div className={utilStyles.centerText}>
               <h1>{data.chart[chartIndex].name}</h1>
               {data.chart[chartIndex].note? <p>{data.chart[chartIndex].note}</p>: null}
             </div>
-            {data.chartCount > 1? <Button onClick={handleSwitchChart}>{">"}</Button>: null}
+
+            {data.chartCount > 1? <Button onClick={handleSwitchChart} id=">">
+              <ArrowRight />
+            </Button>: null}
           </div>
           <p>{currentChart} / {data.chartCount}</p>
 
@@ -175,6 +181,7 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
             switchToLinkedChart={switchToLinkedChart} 
             clearChart={clearChart}
             toggleAnswers={toggleAnswers}
+            answers={showAnswers}
             />
         </section>
       </section>

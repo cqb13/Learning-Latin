@@ -12,7 +12,7 @@ const Button = (props: ButtonProps) => {
   if (props.link) {
     return (
       <>
-        <Link onClick={handleClick} className={`${style.button} ${props.class}`} href={props.link.toString()}>
+        <Link onClick={handleClick} className={`${style.button} ${props.class}`} href={props.link.toString()} id={props.id}>
           {props.children}
         </Link> 
       </>
@@ -25,6 +25,7 @@ const Button = (props: ButtonProps) => {
       className={`${style.button} ${props.class}`}
       target={props.target}
       href={props.href}
+      id={props.id}
     >
       {props.children}
     </a>

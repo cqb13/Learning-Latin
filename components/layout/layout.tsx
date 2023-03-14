@@ -9,11 +9,12 @@ const Layout = ({ children, title }: { children: React.ReactNode, title?: string
     title = `Latin | ${title}`;
   }
 
+  //TODO: give each page the ability to pass a name into the nav bar that will be shown on the right side of nav, used for practice
   return (
     <div className={styles.container}>
       <Head>
         <title>{title}</title>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.svg' />
         <meta
           name='description'
           content='Learn how to build a personal website using Next.js'

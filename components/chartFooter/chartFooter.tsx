@@ -1,30 +1,46 @@
+import utilStyles from "../../styles/utils.module.css";
+import Question from "../../lib/images/question";
 import ChartData from "../../lib/types/chart";
+import Answer from "../../lib/images/answer";
+import Clear from "../../lib/images/clear";
+import Flip from "../../lib/images/flip";
 import Button from "../button/button";
 
 const chartFooter = ({
-  data,
-  chartIndex,
-  clearChart,
+  switchToLinkedChart,
   toggleAnswers,
-  switchToLinkedChart
+  clearChart,
+  chartIndex,
+  answers,
+  data
 }: {
-  data: ChartData;
-  chartIndex: number;
-  clearChart: () => void;
-  toggleAnswers: () => void;
   switchToLinkedChart: (link: string | undefined) => void;
+  toggleAnswers: () => void;
+  clearChart: () => void;
+  chartIndex: number;
+  answers: boolean;
+  data: ChartData;
 }) => {
-  //TODO: replace names with icons, add info popup on hover
+  //TODO: give all buttons same dimensions
   return (
-    <section>
-      <Button onClick={toggleAnswers}>Answers</Button>
+    <section className={utilStyles.horizontalContainer}>
+      <Button onClick={toggleAnswers}>
+        {answers ? <Question /> : <Answer />}
+      </Button>
 
-      <Button onClick={clearChart}>Clear</Button>
+      <Button onClick={clearChart}>
+        <Clear />
+      </Button>
 
       {/*Switches between linked charts*/}
       {data.chart[chartIndex].link || data.chart[chartIndex].returnLink
-        ? <Button onClick={() => switchToLinkedChart(data.chart[chartIndex].link || data.chart[chartIndex].returnLink)}>
-            {data.chart[chartIndex].link || data.chart[chartIndex].returnLink}
+        ? <Button
+            onClick={() =>
+              switchToLinkedChart(
+                data.chart[chartIndex].link || data.chart[chartIndex].returnLink
+              )}
+          >
+            <Flip />
           </Button>
         : null}
     </section>
