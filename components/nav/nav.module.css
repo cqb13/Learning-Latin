@@ -29,3 +29,14 @@
   border: 2px solid rgb(68, 68, 68, 0.1);
   border-radius: 0.5rem;
 }
+
+.pageTitleContainer {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 100%;
+}
+
+.pageTitle {
+  padding: 0.3rem;
+}

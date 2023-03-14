@@ -9,8 +9,9 @@ import Text from "../components/text/text";
 import { useState } from "react";
 
 const Translate = () => {
-  const [query, setQuery] = useState("");
   const [translations, setTranslations] = useState<any[]>([]);
+  const [query, setQuery] = useState("");
+  const [label, setLabel] = useState("");
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -19,6 +20,8 @@ const Translate = () => {
   const getTranslation = async (
     type: "latin-to-english" | "english-to-latin"
   ) => {
+    setLabel("");
+    setLabel(query);
     setQuery("");
     try {
       let cleanQuery = macronHandler(query);
@@ -35,11 +38,12 @@ const Translate = () => {
 
   const removeCard = (word: string) => {
     setTranslations(translations.filter(t => t.word !== word));
+    setLabel(label.replace(word, ""));
   };
 
   //TODO: add a clear button with a switch inside, the switch will toggle auto clear, if true the translations will be cleared after a new translation is made, if false the translations will stay until the user clears them
   return (
-    <Layout title="Translator">
+    <Layout title="Translator" label={label}>
       <section className={utilStyles.container}>
         <div className={utilStyles.heading2Xl}>
           <h1>Translator</h1>

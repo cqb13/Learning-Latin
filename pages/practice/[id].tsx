@@ -148,14 +148,8 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
 
   //prettier-ignore
   return (
-    <Layout title={data.name}>
+    <Layout label={data.name}>
       <section className={utilStyles.container}>
-        <div className={utilStyles.heading2Xl}>
-          <h1>
-            {data.name}
-          </h1>
-        </div>
-
         <section className={utilStyles.container}>
           <div className={styles.chartTitleContainer}>
             {data.chartCount > 1? <Button onClick={handleSwitchChart} id="<">
