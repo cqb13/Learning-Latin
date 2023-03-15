@@ -32,7 +32,6 @@ const NavBar = ({ title, back }: { title?: string, back?: boolean }) => {
         </Link>
       )}
       <div className={styles.pageTitleContainer}>
-            {/*optional button to return to previous page (use for practice)*/}
         {back && (
           <Button onClick={() => router.back()}>
             <Image
