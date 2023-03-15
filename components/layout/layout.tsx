@@ -5,9 +5,11 @@ import Head from "next/head";
 const Layout = ({
   children,
   title,
-  label
+  label,
+  back
 }: {
   children: React.ReactNode;
+  back?: boolean;
   title?: string;
   label?: string;
 }) => {
@@ -31,7 +33,7 @@ const Layout = ({
         <meta property="og:image" />
         <meta name="og:title" content={title} />
       </Head>
-      <NavBar title={label} />
+      <NavBar title={label} back={back}/>
       <header className={styles.header} />
       <main>
         {children}

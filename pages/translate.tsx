@@ -1,4 +1,5 @@
 import TranslationCard from "../components/cards/translationCard/translationCard";
+import removeExtraSpaces from "../lib/utils/removeExtraSpaces";
 import cardStyles from "../components/cards/cards.module.css";
 import macronHandler from "../lib/utils/macronHandler";
 import styles from "../styles/translate.module.css";
@@ -23,8 +24,11 @@ const Translate = () => {
     setLabel("");
     setLabel(query);
     setQuery("");
+
     try {
       let cleanQuery = macronHandler(query);
+      //if there are extra spaces, empty cards will be created
+      cleanQuery = removeExtraSpaces(cleanQuery);
       const response = await fetch(`/api/${type}?word=${cleanQuery}`);
       const data = await response.json();
       const newTranslations = Object.entries(

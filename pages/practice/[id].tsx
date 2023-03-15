@@ -12,8 +12,7 @@ import Button from "../../components/button/button";
 import Chart from "../../components/chart/chart";
 import ChartData from "../../lib/types/chart";
 import { useState, useEffect } from "react";
-import ArrowLeft from "../../lib/images/arrowLeft";
-import ArrowRight from "../../lib/images/arrowRight";
+import Image from "next/image";
 
 export async function getStaticPaths() {
   const paths = [
@@ -148,12 +147,17 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
 
   //prettier-ignore
   return (
-    <Layout label={data.name}>
+    <Layout label={data.name} back={true}>
       <section className={utilStyles.container}>
         <section className={utilStyles.container}>
           <div className={styles.chartTitleContainer}>
             {data.chartCount > 1? <Button onClick={handleSwitchChart} id="<">
-              <ArrowLeft />
+              <Image
+                src="/arrowLeft.svg"
+                alt="arrow left"
+                width={20}
+                height={20}
+              />
             </Button>: null}
 
             <div className={utilStyles.centerText}>
@@ -162,7 +166,12 @@ const PracticeChart = ({ data }: { data: ChartData }) => {
             </div>
 
             {data.chartCount > 1? <Button onClick={handleSwitchChart} id=">">
-              <ArrowRight />
+            <Image
+                src="/arrowRight.svg"
+                alt="arrow left"
+                width={20}
+                height={20}
+              />
             </Button>: null}
           </div>
           <p>{currentChart} / {data.chartCount}</p>

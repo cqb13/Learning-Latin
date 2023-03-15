@@ -1,10 +1,7 @@
 import utilStyles from "../../styles/utils.module.css";
-import Question from "../../lib/images/question";
 import ChartData from "../../lib/types/chart";
-import Answer from "../../lib/images/answer";
-import Clear from "../../lib/images/clear";
-import Flip from "../../lib/images/flip";
 import Button from "../button/button";
+import Image from "next/image";
 
 const chartFooter = ({
   switchToLinkedChart,
@@ -25,11 +22,29 @@ const chartFooter = ({
   return (
     <section className={utilStyles.horizontalContainer}>
       <Button onClick={toggleAnswers}>
-        {answers ? <Question /> : <Answer />}
+        {answers ? 
+        <Image
+          src="/question.svg"
+          alt="question"
+          width={20}
+          height={20}
+        /> : 
+        <Image
+          src="/answer.svg"
+          alt="answer"
+          width={20}
+          height={20}
+        />
+        }
       </Button>
 
       <Button onClick={clearChart}>
-        <Clear />
+        <Image
+          src="/clear.svg"
+          alt="clear"
+          width={20}
+          height={20}
+        />
       </Button>
 
       {/*Switches between linked charts*/}
@@ -40,7 +55,12 @@ const chartFooter = ({
                 data.chart[chartIndex].link || data.chart[chartIndex].returnLink
               )}
           >
-            <Flip />
+            <Image
+              src="/flip.svg"
+              alt="flip"
+              width={20}
+              height={20}
+            />
           </Button>
         : null}
     </section>
