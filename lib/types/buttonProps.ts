@@ -1,6 +1,6 @@
 import { Url } from "url";
 
-type ButtonProps = {
+type buttonProps = {
   class?: string;
   href?: string;
   link?: Url | string;
@@ -10,4 +10,4 @@ type ButtonProps = {
   children?: any;
 };
 
-export default ButtonProps;
+export default buttonProps;

@@ -1,8 +1,8 @@
-import ButtonProps from '../../lib/types/buttonProps'
+import buttonProps from '../../lib/types/buttonProps';
 import style from './button.module.css'
 import Link from 'next/link'
 
-const Button = (props: ButtonProps) => {
+const Button = (props: buttonProps) => {
   const handleClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {

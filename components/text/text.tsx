@@ -1,8 +1,8 @@
-import TextProps from "../../lib/types/TextProps";
+import textProps from "../../lib/types/TextProps";
 import { useState, useEffect } from "react";
 import styles from "./text.module.css";
 
-const Text = (props: TextProps) => {
+const Text = (props: textProps) => {
   const [placeholder, setPlaceholder] = useState("");
   const [value, setValue] = useState("");
   const [id, setId] = useState("");

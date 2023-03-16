@@ -9,14 +9,13 @@
   left: 50%;
   transform: translateX(-50%);
   padding: 6px;
-  color: white;
+  color: #b6b3b3;
   background: black;
   font-size: 14px;
   font-family: sans-serif;
   line-height: 1;
   z-index: 100;
   white-space: nowrap;
-  margin-top: 2px;
 }
 
 .toolTip::before {
@@ -27,4 +26,25 @@
   width: 0;
   position: absolute;
   pointer-events: none;
+}
+
+.toolTip.top {
+  bottom: 100%;
+  margin-bottom: 2px;
+}
+
+.toolTip.bottom {
+  margin-top: 2px;
+}
+
+.toolTip.left {
+  top: 50%;
+  transform: translateY(-50%);
+  left: calc(-50% - 2px);
+}
+
+.toolTip.right {
+  top: 50%;
+  transform: translateY(-50%);
+  left: calc(100% + 2px);
 }

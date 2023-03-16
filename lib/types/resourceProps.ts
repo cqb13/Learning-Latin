@@ -1,7 +1,7 @@
-type resource = {
+type resourceProps = {
   name: string;
   description: string;
   url: string;
 };
 
-export default resource;
+export default resourceProps;

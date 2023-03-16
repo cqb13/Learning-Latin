@@ -1,8 +1,8 @@
-import resource from "../../../lib/types/resource";
+import resourceProps from "../../../lib/types/resourceProps";
 import Button from "../../button/button";
 import styles from "../cards.module.css";
 
-const ResourceCard = (props: resource) => {
+const ResourceCard = (props: resourceProps) => {
   return (
     <section className={styles.card}>
       <h2>

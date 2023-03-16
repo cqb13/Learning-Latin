@@ -1,8 +1,8 @@
 import utilStyles from "../../styles/utils.module.css";
-import ChartData from "../../lib/types/chart";
+import chartProps from "../../lib/types/chartProps";
+import ToolTip from "../toolTip/toolTip";
 import Button from "../button/button";
 import Image from "next/image";
-import ToolTip from "../toolTip/toolTip";
 
 const chartFooter = ({
   switchToLinkedChart,
@@ -17,11 +17,11 @@ const chartFooter = ({
   clearChart: () => void;
   chartIndex: number;
   answers: boolean;
-  data: ChartData;
+  data: chartProps;
 }) => {
   return (
     <section className={utilStyles.horizontalContainer}>
-      <ToolTip direction="bottom" content={answers? "questions" : "answers"}>
+      <ToolTip direction="bottom" content={answers? "questions" : "answers"} delay={20}>
         <Button onClick={toggleAnswers}>
           {answers ? 
           <Image
@@ -40,7 +40,7 @@ const chartFooter = ({
         </Button>
       </ToolTip>
 
-      <ToolTip direction="bottom" content="clear">
+      <ToolTip direction="bottom" content="clear" delay={20}>
         <Button onClick={clearChart}>
           <Image
             src="/clear.svg"
@@ -54,7 +54,7 @@ const chartFooter = ({
       {/*Switches between linked charts*/}
       {data.chart[chartIndex].link || data.chart[chartIndex].returnLink
         ? 
-        <ToolTip direction="bottom" content={data.chart[chartIndex].link || data.chart[chartIndex].returnLink}> 
+        <ToolTip direction="bottom" content={data.chart[chartIndex].link || data.chart[chartIndex].returnLink} delay={20}> 
           <Button
               onClick={() =>
                 switchToLinkedChart(

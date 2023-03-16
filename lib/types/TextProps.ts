@@ -1,4 +1,4 @@
-type TextProps = {
+type textProps = {
   placeholder: string | string[];
   value?: any;
   id?: string | string[];
@@ -6,4 +6,4 @@ type TextProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default TextProps;
+export default textProps;

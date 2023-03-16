@@ -1,9 +1,9 @@
 import macronHandler, { checkForMacrons } from "../../lib/utils/macronHandler";
-import ChartData from "../../lib/types/chart";
+import chartProps from "../../lib/types/chartProps";
 import styles from "./chart.module.css";
 import Text from "../text/text";
  
-const Chart = ({ data, chartIndex, answers }: { data: ChartData, chartIndex: number, answers: boolean }) => {
+const Chart = ({ data, chartIndex, answers }: { data: chartProps, chartIndex: number, answers: boolean }) => {
   const checkAnswer = (event: React.ChangeEvent<HTMLInputElement>) => {
     const id = event.target.id;
     const answer = event.target.value.toLowerCase();

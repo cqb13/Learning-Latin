@@ -13,6 +13,7 @@ const ToolTip = ({
   children: any;
 }) => {
   let timeout: any;
+  const [directionClass] = useState(styles[direction]);
   const [active, setActive] = useState(false);
 
   const showTip = () => {
@@ -27,6 +28,7 @@ const ToolTip = ({
     setActive(false);
   };
 
+  //!!! direction class is undefined
   return (
     <div
       className={styles.toolTipWrapper}
@@ -35,7 +37,7 @@ const ToolTip = ({
     >
       {children}
       {active &&
-        <div className={`${styles.toolTip} ${direction}`}>
+        <div className={`${styles.toolTip} ${directionClass}`}>
           {content}
         </div>}
     </div>
