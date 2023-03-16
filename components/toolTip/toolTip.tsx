@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./toolTip.module.css";
 
+//TODO: better types
 const ToolTip = ({
   delay,
   direction,

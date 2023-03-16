@@ -9,8 +9,8 @@ import utilStyles from "../../styles/utils.module.css";
 import styles from "../../styles/practice.module.css";
 import Layout from "../../components/layout/layout";
 import Button from "../../components/button/button";
+import chartProps from "../../lib/types/chartProps";
 import Chart from "../../components/chart/chart";
-import ChartData from "../../lib/types/chart";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
@@ -49,7 +49,7 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
   };
 }
 
-const PracticeChart = ({ data }: { data: ChartData }) => {
+const PracticeChart = ({ data }: { data: chartProps }) => {
   const [showAnswers, setShowAnswers] = useState(false);
   const [currentChart, setCurrentChart] = useState(1);
   const [linkedChartIndex] = useState([] as number[]);

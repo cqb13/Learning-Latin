@@ -1,6 +1,6 @@
-import ChartData from "../../types/chart";
+import chartProps from "../../types/chartProps";
 
-const futureTense: ChartData = {
+const futureTense: chartProps = {
   chartCount: 2,
   name: "Future Tense",
   chart: [

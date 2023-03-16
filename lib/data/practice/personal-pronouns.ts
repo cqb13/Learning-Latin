@@ -1,6 +1,6 @@
-import ChartData from "../../types/chart";
+import chartProps from "../../types/chartProps";
 
-const personalPronouns: ChartData = {
+const personalPronouns: chartProps = {
   chartCount: 4,
   name: "Personal Pronouns",
   chart: [

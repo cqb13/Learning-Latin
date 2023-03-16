@@ -1,6 +1,6 @@
-import ChartData from "../../types/chart";
+import chartProps from "../../types/chartProps";
 
-const declensions: ChartData = {
+const declensions: chartProps = {
   chartCount: 5,
   name: "Declension Endings",
   chart: [

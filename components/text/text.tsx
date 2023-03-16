@@ -1,4 +1,4 @@
-import textProps from "../../lib/types/TextProps";
+import textProps from "../../lib/types/textProps";
 import { useState, useEffect } from "react";
 import styles from "./text.module.css";
 

@@ -1,6 +1,6 @@
-import resource from "../types/resource";
+import resourceProps from "../types/resourceProps";
 
-const resources: resource[] = [
+const resources: resourceProps[] = [
   {
     name: "Magistrula",
     description:
