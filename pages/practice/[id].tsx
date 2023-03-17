@@ -56,6 +56,7 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
   const [chartIndex, setChartIndex] = useState(0);
 
   useEffect(() => {
+    //Finds all charts that are accessed by a link, so they can be skipped when switching charts
     for (let i = 0; i < data.chart.length; i++) {
       if (data.chart[i].link) {
         for (let j = 0; j < data.chart.length; j++) {
@@ -69,7 +70,6 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
 
   const handleSwitchChart = (event: { target: { id: string } }) => {
     let input = event.target.id;
-    clearChart();
 
     if (input === ">") {
       let nextIndex = chartIndex + 1;
@@ -115,7 +115,6 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
     }
   };
 
-  //!!! same value wont clear
   const clearChart = () => {
     if (showAnswers) return;
     const inputs = document.querySelectorAll("input");
@@ -138,9 +137,20 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
   const toggleAnswers = () => {
     setShowAnswers(!showAnswers);
     clearChart();
+    const inputs = document.querySelectorAll("input");
+    if (!showAnswers === true) {
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].classList.add(chartStyles.right);
+      }
+    } else {
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].classList.remove(chartStyles.right);
+      }
+    }
   };
 
   /*
+  TODO:
   - add an options popup, that saves settings in browser storage
     - options to check check chart as you go, or after you finish
   */
@@ -176,7 +186,7 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
           </div>
           <p>{currentChart} / {data.chartCount}</p>
 
-          <Chart data={data} chartIndex={chartIndex} answers={showAnswers}/>
+          <Chart data={data} chartIndex={chartIndex} answers={showAnswers} clearChart={clearChart}/>
 
           <ChartFooter 
             data={data} 

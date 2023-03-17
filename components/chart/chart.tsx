@@ -1,9 +1,28 @@
 import macronHandler, { checkForMacrons } from "../../lib/utils/macronHandler";
 import chartProps from "../../lib/types/chartProps";
 import styles from "./chart.module.css";
+import { useEffect } from "react";
 import Text from "../text/text";
- 
-const Chart = ({ data, chartIndex, answers }: { data: chartProps, chartIndex: number, answers: boolean }) => {
+
+const Chart = ({
+  data,
+  chartIndex,
+  answers,
+  clearChart
+}: {
+  data: chartProps;
+  chartIndex: number;
+  answers: boolean;
+  clearChart: () => void;
+}) => {
+  useEffect(
+    () => {
+      //if clearing chart when in id.tsx, if the current chart and next chart had the same value it would not be cleared
+      clearChart();
+    },
+    [chartIndex]
+  );
+
   const checkAnswer = (event: React.ChangeEvent<HTMLInputElement>) => {
     const id = event.target.id;
     const answer = event.target.value.toLowerCase();
@@ -57,7 +76,7 @@ const Chart = ({ data, chartIndex, answers }: { data: chartProps, chartIndex: nu
       event.target.classList.add(styles.wrong);
     }
   };
-  
+
   //prettier-ignore
   return (
     <table className={styles.chart}>

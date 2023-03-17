@@ -18,7 +18,6 @@ const ToolTip = ({
   const [active, setActive] = useState(false);
 
   const showTip = () => {
-    console.log("showing tip")
     timeout = setTimeout(() => {
       setActive(true);
     }, delay || 400);
@@ -29,7 +28,6 @@ const ToolTip = ({
     setActive(false);
   };
 
-  //!!! direction class is undefined
   return (
     <div
       className={styles.toolTipWrapper}
