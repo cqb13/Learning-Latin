@@ -6,7 +6,6 @@ import styles from "./chart.module.css";
 import { useEffect } from "react";
 import Text from "../text/text";
 
-//!!!: when answers are shown and switching charts, the right class is not added to new inputs
 const Chart = ({
   data,
   answers,
@@ -22,6 +21,14 @@ const Chart = ({
 }) => {
   useEffect(
     () => {
+      if (answers) {
+        const inputs = document.querySelectorAll("input");
+        for (let i = 0; i < inputs.length; i++) {
+          inputs[i].classList.add(styles.right);
+        }
+        return;
+      }
+      if (answers) return;
       clearChart();
     },
     [chartIndex]
