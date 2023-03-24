@@ -3,18 +3,19 @@ import chartProps from "../../lib/types/chartProps";
 import ToolTip from "../toolTip/toolTip";
 import Button from "../button/button";
 import Image from "next/image";
+import clearChart from "../../lib/utils/clearChart";
 
 const chartFooter = ({
   switchToLinkedChart,
+  chartClearable,
   toggleAnswers,
-  clearChart,
   chartIndex,
   answers,
   data
 }: {
   switchToLinkedChart: (link: string | undefined) => void;
   toggleAnswers: () => void;
-  clearChart: () => void;
+  chartClearable: boolean;
   chartIndex: number;
   answers: boolean;
   data: chartProps;
@@ -41,7 +42,7 @@ const chartFooter = ({
       </ToolTip>
 
       <ToolTip direction="bottom" content="clear" delay={20}>
-        <Button onClick={clearChart}>
+        <Button onClick={clearChart} locked={!chartClearable}>
           <Image
             src="/clear.svg"
             alt="clear"

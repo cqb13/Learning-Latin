@@ -18,6 +18,15 @@
   pointer-events: none;
 }
 
+.locked {
+  cursor: auto;
+  background-color: #444444;
+}
+
+.locked:hover {
+  background-color: #444444 !important;
+}
+
 .button:hover {
   text-decoration: none;
   background-color: var(--color-secondary);

@@ -10,6 +10,7 @@ import styles from "../../styles/practice.module.css";
 import Layout from "../../components/layout/layout";
 import Button from "../../components/button/button";
 import chartProps from "../../lib/types/chartProps";
+import clearChart from "../../lib/utils/clearChart";
 import Chart from "../../components/chart/chart";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -53,6 +54,7 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
   const [showAnswers, setShowAnswers] = useState(false);
   const [currentChart, setCurrentChart] = useState(1);
   const [linkedChartIndex] = useState([] as number[]);
+  const [clearable, setClearable] = useState(false);
   const [chartIndex, setChartIndex] = useState(0);
 
   useEffect(() => {
@@ -68,8 +70,13 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
     }
   }, []);
 
+  const updateClearable = (status: boolean) => {
+    setClearable(status);
+  };
+
   const handleSwitchChart = (event: { target: { id: string } }) => {
     let input = event.target.id;
+    setClearable(false);
 
     if (input === ">") {
       let nextIndex = chartIndex + 1;
@@ -115,16 +122,6 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
     }
   };
 
-  const clearChart = () => {
-    if (showAnswers) return;
-    const inputs = document.querySelectorAll("input");
-    for (let i = 0; i < inputs.length; i++) {
-      inputs[i].classList.remove(chartStyles.right);
-      inputs[i].classList.remove(chartStyles.wrong);
-      inputs[i].value = "";
-    }
-  };
-
   const switchToLinkedChart = (link: string | undefined) => {
     for (let i = 0; i < data.chart.length; i++) {
       if (data.chart[i].name === link) {
@@ -147,6 +144,7 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
         inputs[i].classList.remove(chartStyles.right);
       }
     }
+    updateClearable(false);
   };
 
   /*
@@ -170,7 +168,7 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
               />
             </Button>: null}
 
-            <div className={utilStyles.centerText}>
+            <div className={`${utilStyles.centerText} ${styles.chartTitle}`}>
               <h1>{data.chart[chartIndex].name}</h1>
               {data.chart[chartIndex].note? <p>{data.chart[chartIndex].note}</p>: null}
             </div>
@@ -186,16 +184,22 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
           </div>
           <p>{currentChart} / {data.chartCount}</p>
 
-          <Chart data={data} chartIndex={chartIndex} answers={showAnswers} clearChart={clearChart}/>
+          <Chart 
+            updateClearable={updateClearable}
+            clearChart={clearChart} 
+            chartIndex={chartIndex} 
+            answers={showAnswers} 
+            data={data} 
+          />
 
           <ChartFooter 
-            data={data} 
-            chartIndex={chartIndex} 
             switchToLinkedChart={switchToLinkedChart} 
-            clearChart={clearChart}
             toggleAnswers={toggleAnswers}
+            chartClearable={clearable}
+            chartIndex={chartIndex} 
             answers={showAnswers}
-            />
+            data={data} 
+          />
         </section>
       </section>
     </Layout>

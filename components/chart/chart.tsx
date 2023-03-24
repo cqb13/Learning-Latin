@@ -1,23 +1,27 @@
 import macronHandler, { checkForMacrons } from "../../lib/utils/macronHandler";
+import changeTextAccuracyState from "../../lib/utils/changeTextAccuracyState";
+import chartClearable from "../../lib/utils/chartClearable";
 import chartProps from "../../lib/types/chartProps";
 import styles from "./chart.module.css";
 import { useEffect } from "react";
 import Text from "../text/text";
 
+//!!!: when answers are shown and switching charts, the right class is not added to new inputs
 const Chart = ({
   data,
-  chartIndex,
   answers,
-  clearChart
+  chartIndex,
+  clearChart,
+  updateClearable
 }: {
+  answers: boolean;
   data: chartProps;
   chartIndex: number;
-  answers: boolean;
   clearChart: () => void;
+  updateClearable: (clearable: boolean) => void;
 }) => {
   useEffect(
     () => {
-      //if clearing chart when in id.tsx, if the current chart and next chart had the same value it would not be cleared
       clearChart();
     },
     [chartIndex]
@@ -34,14 +38,16 @@ const Chart = ({
       return;
     }
 
+    updateClearable(chartClearable());
+
     if (answer === id) {
-      changeAccuracyState(event, true);
+      changeTextAccuracyState(event, true);
       return;
     }
 
     //makes macrons in answers optional
     if (!hasMacron && answer === macronHandler(id)) {
-      changeAccuracyState(event, true);
+      changeTextAccuracyState(event, true);
       return;
     }
 
@@ -56,25 +62,12 @@ const Chart = ({
         list.every(element => answer.includes(element)) &&
         list.length === value.length
       ) {
-        changeAccuracyState(event, true);
+        changeTextAccuracyState(event, true);
         return;
       }
     }
 
-    changeAccuracyState(event, false);
-  };
-
-  const changeAccuracyState = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    right: boolean
-  ) => {
-    if (right) {
-      event.target.classList.remove(styles.wrong);
-      event.target.classList.add(styles.right);
-    } else {
-      event.target.classList.remove(styles.right);
-      event.target.classList.add(styles.wrong);
-    }
+    changeTextAccuracyState(event, false);
   };
 
   //prettier-ignore

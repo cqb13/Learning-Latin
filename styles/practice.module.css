@@ -16,3 +16,7 @@
   align-items: center;
   gap: 10px;
 }
+
+.chartTitle > * {
+  margin: 0;
+}

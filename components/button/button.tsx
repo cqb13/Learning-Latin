@@ -6,6 +6,7 @@ const Button = (props: buttonProps) => {
   const handleClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
+    if (props.locked) return;
     props.onClick?.(event);
   };
 
@@ -22,7 +23,7 @@ const Button = (props: buttonProps) => {
   return (
     <a
       onClick={handleClick}
-      className={`${style.button} ${props.class}`}
+      className={`${props.locked? style.locked : ''} ${style.button} ${props.class}`}
       target={props.target}
       href={props.href}
       id={props.id}
