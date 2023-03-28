@@ -54,3 +54,9 @@ nav {
   margin-top: 10px;
   gap: 10px;
 }
+
+@media (max-width: 650px) {
+  .button-container {
+    flex-direction: column;
+  }
+}

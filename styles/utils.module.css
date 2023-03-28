@@ -97,3 +97,21 @@
   gap: 10px;
   margin: 10px;
 }
+
+.margin {
+  margin: 10px
+}
+
+@media (max-width: 600px) {
+  .heading2Xl {
+    font-size: 2rem;
+  }
+
+  .headingXl {
+    font-size: 1.5rem;
+  }
+
+  .headingLg {
+    font-size: 1.2rem;
+  }
+}

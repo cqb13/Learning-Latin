@@ -9,6 +9,10 @@
   width: 80%;
 }
 
+.practiceLink {
+  text-align: center;
+}
+
 .chartTitleContainer {
   display: flex;
   flex-direction: row;

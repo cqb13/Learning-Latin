@@ -38,7 +38,7 @@ const Layout = ({
         <meta name="og:type" content="website" />
         <meta
           name="og:keywords"
-          content="cqb13, cqb13 github, learning latin, latin, learning, latin language, latin charts, learn latin, learn latin live"
+          content="cqb13, cqb13 github, learning latin, latin, learning, latin language, latin charts, learn latin, learn latin live, learninglatin, translate latin, whitakers words, latin translation"
         />
         <meta name="og:url" content="https://learninglatin.net/" />
         <meta name="og:site_name" content="Learning Latin" />

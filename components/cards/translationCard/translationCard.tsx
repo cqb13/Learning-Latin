@@ -7,11 +7,9 @@ import Image from "next/image";
 //TODO: Icons
 const TranslationCard = (props: any) => {
   const [isMinimized, setIsMinimized] = useState<boolean>(false);
-  const [switchVisibilitySign, setSwitchVisibilitySign] = useState<string>("-");
 
   const changeVisibility = () => {
     setIsMinimized(!isMinimized);
-    setSwitchVisibilitySign(switchVisibilitySign === "-" ? "+" : "-");
   };
 
   const deleteCard = () => {

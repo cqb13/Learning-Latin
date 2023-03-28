@@ -1,7 +1,6 @@
 .nav {
   display: flex;
   padding: 0.5rem;
-  gap: 0.5rem;
 }
 
 .active {
@@ -36,4 +35,32 @@
   align-items: center;
   gap: 10px;
   width: 100%;
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 800px) {
+  .nav {
+    flex-direction: column;
+  }
+
+  .pageTitleContainer {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .linkContainer {
+    gap: 2px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .linkContainer > * {
+  }
 }

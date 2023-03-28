@@ -21,16 +21,18 @@ const NavBar = ({ title, back }: { title?: string, back?: boolean }) => {
         ? styles.scrolled
         : ""}`}
     >
-      {routes.map(([name, path]) =>
-        <Link
-          href={path}
-          className={`${router.pathname === path
-            ? styles.active
-            : ""} ${styles.link}`}
-        >
-          {name}
-        </Link>
-      )}
+      <div className={styles.linkContainer}>
+        {routes.map(([name, path]) =>
+          <Link
+            href={path}
+            className={`${router.pathname === path
+              ? styles.active
+              : ""} ${styles.link}`}
+          >
+            {name}
+          </Link>
+        )}
+      </div>
       <div className={styles.pageTitleContainer}>
         {back && (
           <Button onClick={() => router.back()}>

@@ -5,8 +5,8 @@ import Button from "../components/button/button";
 const Home = () => {
   return (
     <Layout>
-      <section className={utilStyles.container}>
-        <div className={utilStyles.heading2Xl}>
+      <section className={`${utilStyles.container} ${utilStyles.centered} ${utilStyles.red}`}>
+        <div className={`${utilStyles.heading2Xl} ${utilStyles.centered}`}>
           <h1>Learning Latin</h1>
         </div>
         <p className={`${utilStyles.centered} ${utilStyles.sevenWidth}`}>
@@ -20,7 +20,7 @@ const Home = () => {
         <Button
           href="https://github.com/cqb13"
           target="_blank"
-          class={`button-container ${utilStyles.oneWidth}`}
+          class={utilStyles.margin}
         >
           View Github
         </Button>

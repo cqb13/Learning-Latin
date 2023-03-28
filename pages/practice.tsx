@@ -22,7 +22,7 @@ const Practice = () => {
           {practiceRoutes.map(route =>
             <Button
               link={`/practice/${route[0].toLowerCase().replace(" ", "-")}`}
-              class={utilStyles.twoWidth}
+              class={`${utilStyles.twoWidth} ${styles.practiceLink}`}
             >
               {route[0]}
             </Button>

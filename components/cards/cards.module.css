@@ -53,3 +53,34 @@
   flex-direction: row;
   gap: 10px;
 }
+
+@media (max-width: 1280px) {
+  .translationCardContainer {
+    max-width: 90%;
+  }
+
+  .translationCard {
+    width: 100%;
+  }
+
+  .translationCard > * {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+  }
+}
+
+@media (max-width: 801px) {
+  .card {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 90%;
+  }
+}
