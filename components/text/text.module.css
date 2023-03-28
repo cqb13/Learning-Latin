@@ -14,3 +14,9 @@
 .input::placeholder {
   color: var(--color-primary);
 }
+
+@media (max-width: 450px) {
+  .input {
+    text-align: center;
+  }
+}
