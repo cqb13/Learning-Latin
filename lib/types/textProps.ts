@@ -3,6 +3,8 @@ type textProps = {
   value?: any;
   id?: string | string[];
   class?: string;
+  onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  keyName?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 

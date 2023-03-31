@@ -2,6 +2,7 @@ import textProps from "../../lib/types/textProps";
 import { useState, useEffect } from "react";
 import styles from "./text.module.css";
 
+//TODO: multi key trigger options
 const Text = (props: textProps) => {
   const [placeholder, setPlaceholder] = useState("");
   const [value, setValue] = useState("");
@@ -49,12 +50,19 @@ const Text = (props: textProps) => {
     setValue(event.target.value);
   };
 
+  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key=== props.keyName) {
+      props.onKeyPress?.(event);
+    }
+  };
+
   return (
     <input
       type="text"
       placeholder={placeholder}
       className={`${styles.input} ${props.class}`}
       onChange={onChange}
+      onKeyDown={onKeyDown}
       value={value}
       id={id}
     />

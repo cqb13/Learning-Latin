@@ -6,17 +6,40 @@ import styles from "../styles/translate.module.css";
 import utilStyles from "../styles/utils.module.css";
 import Layout from "../components/layout/layout";
 import Button from "../components/button/button";
+import DetectLanguage from "detectlanguage";
 import Text from "../components/text/text";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Translate = () => {
   const [translations, setTranslations] = useState<any[]>([]);
+  const [apiKey, setApiKey] = useState("");
   const [query, setQuery] = useState("");
   const [label, setLabel] = useState("");
+
+  useEffect(() => {
+    const key = process.env.NEXT_PUBLIC_LANGUAGE_API_KEY;
+    if (key) {
+      setApiKey(key);
+    }
+  });
+
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
+
+  const onEnter = () => {
+    const detectLanguage = new DetectLanguage(apiKey);
+    detectLanguage.detect(query).then(function(result) {
+      if (result[0].language === "en") {
+        getTranslation("english-to-latin");
+      } else if (result[0].language != "en") {
+        getTranslation("latin-to-english");
+      } else {
+        return;
+      }
+    });
+  }
 
   const getTranslation = async (
     type: "latin-to-english" | "english-to-latin"
@@ -53,7 +76,13 @@ const Translate = () => {
           <h1>Translator</h1>
         </div>
         <section className={styles.searchContainer}>
-          <Text placeholder="Enter a word" onChange={onChange} value={query} />
+          <Text 
+            placeholder="Enter a word" 
+            onChange={onChange} 
+            onKeyPress={onEnter} 
+            keyName="Enter" 
+            value={query} 
+          />
           <div className="button-container">
             <Button
               onClick={() => getTranslation("latin-to-english")}
