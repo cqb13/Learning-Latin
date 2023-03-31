@@ -53,14 +53,11 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 430px) {
   .linkContainer {
     gap: 2px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-  }
-
-  .linkContainer > * {
   }
 }

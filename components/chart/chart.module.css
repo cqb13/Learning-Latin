@@ -9,10 +9,6 @@
   text-align: center;
 }
 
-.chart td p {
-  margin: 0;
-}
-
 .chart td {
   border: 2px solid #ddd;
   padding: 0.5rem;
@@ -22,7 +18,6 @@
 .chart td input {
   border: 2px solid #ddd;
   font-size: 1rem;
-  padding: 0.5rem;
   text-align: center;
   border-radius: 0;
   width: 90%;
@@ -34,4 +29,16 @@
 
 .chart td input.wrong {
   border-color: red;
+}
+
+@media (max-width: 550px) {
+  .chart td input {
+    width: 80%;
+  }
+}
+
+@media (max-width: 450px) {
+  .chart td input {
+    width: 60%;
+  }
 }

@@ -4,7 +4,6 @@ import Button from "../../button/button";
 import { useState } from "react";
 import Image from "next/image";
 
-//TODO: Icons
 const TranslationCard = (props: any) => {
   const [isMinimized, setIsMinimized] = useState<boolean>(false);
 
