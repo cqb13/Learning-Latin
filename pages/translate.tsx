@@ -23,7 +23,6 @@ const Translate = () => {
     }
   });
 
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
@@ -39,7 +38,7 @@ const Translate = () => {
         return;
       }
     });
-  }
+  };
 
   const getTranslation = async (
     type: "latin-to-english" | "english-to-latin"
@@ -76,12 +75,12 @@ const Translate = () => {
           <h1>Translator</h1>
         </div>
         <section className={styles.searchContainer}>
-          <Text 
-            placeholder="Enter a word" 
-            onChange={onChange} 
-            onKeyPress={onEnter} 
-            keyName="Enter" 
-            value={query} 
+          <Text
+            placeholder="Enter a word"
+            onChange={onChange}
+            onKeyPress={onEnter}
+            keyName="Enter"
+            value={query}
           />
           <div className="button-container">
             <Button
