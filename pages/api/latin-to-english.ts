@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fetch from "node-fetch";
 
+//TODO: combine this with the english-to-latin api, pass in a parameter to determine which way to translate
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { word } = req.query;
 

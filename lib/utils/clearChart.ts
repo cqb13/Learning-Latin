@@ -1,4 +1,4 @@
-import chartStyles from "../../components/chart/chart.module.css"
+import chartStyles from "../../components/chart/chart.module.css";
 
 const clearChart = () => {
   const inputs = document.querySelectorAll("input");

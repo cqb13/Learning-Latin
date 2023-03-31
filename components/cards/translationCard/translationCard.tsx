@@ -22,21 +22,25 @@ const TranslationCard = (props: any) => {
           {props.word}
         </h2>
         <div className={styles.visibilityButtonContainer}>
-          <ToolTip direction="bottom" content={isMinimized ? "expand card" : "shrink card"} delay={20}>
+          <ToolTip
+            direction="bottom"
+            content={isMinimized ? "expand card" : "shrink card"}
+            delay={20}
+          >
             <Button onClick={changeVisibility}>
-              {isMinimized ?               
-              <Image
-                  src="/plus.svg"
-                  alt="expand card"
-                  width={20}
-                  height={20}
-                /> :               
-              <Image
-                src="/minus.svg"
-                alt="shrink card"
-                width={20}
-                height={20}
-              />}
+              {isMinimized
+                ? <Image
+                    src="/plus.svg"
+                    alt="expand card"
+                    width={20}
+                    height={20}
+                  />
+                : <Image
+                    src="/minus.svg"
+                    alt="shrink card"
+                    width={20}
+                    height={20}
+                  />}
             </Button>
           </ToolTip>
           <ToolTip direction="bottom" content={"remove card"} delay={20}>

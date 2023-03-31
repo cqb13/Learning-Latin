@@ -5,7 +5,9 @@ import Button from "../components/button/button";
 const Home = () => {
   return (
     <Layout>
-      <section className={`${utilStyles.container} ${utilStyles.centered} ${utilStyles.red}`}>
+      <section
+        className={`${utilStyles.container} ${utilStyles.centered} ${utilStyles.red}`}
+      >
         <div className={`${utilStyles.heading2Xl} ${utilStyles.centered}`}>
           <h1>Learning Latin</h1>
         </div>

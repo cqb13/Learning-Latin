@@ -12,7 +12,6 @@
 
 <h2>TODO:</h2>
 <pre>
-- Mobile friendly
 - Sentence translation practice
 - Word analysis
 - Fill in missing data

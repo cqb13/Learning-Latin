@@ -147,12 +147,6 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
     updateClearable(false);
   };
 
-  /*
-  TODO:
-  - add an options popup, that saves settings in browser storage
-    - options to check check chart as you go, or after you finish
-  */
-
   //prettier-ignore
   return (
     <Layout label={data.name} back={true}>

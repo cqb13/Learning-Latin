@@ -1,8 +1,8 @@
 type textProps = {
-  placeholder: string | string[];
-  value?: any;
-  id?: string | string[];
   class?: string;
+  id?: string | string[];
+  value?: any;
+  placeholder: string | string[];
   onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   keyName?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;

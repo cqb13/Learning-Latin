@@ -21,7 +21,6 @@ const Chart = ({
 }) => {
   useEffect(
     () => {
-      // when switching from a chart with less inputs to 1 with more inputs, adds right class to new answers
       if (answers) {
         const inputs = document.querySelectorAll("input");
         for (let i = 0; i < inputs.length; i++) {

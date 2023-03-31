@@ -5,7 +5,7 @@ import Button from "../button/button";
 import Image from "next/image";
 import Link from "next/link";
 
-const NavBar = ({ title, back }: { title?: string, back?: boolean }) => {
+const NavBar = ({ title, back }: { title?: string; back?: boolean }) => {
   const routes = [
     ["Home", "/"],
     ["Practice", "/practice"],
@@ -34,7 +34,7 @@ const NavBar = ({ title, back }: { title?: string, back?: boolean }) => {
         )}
       </div>
       <div className={styles.pageTitleContainer}>
-        {back && (
+        {back &&
           <Button onClick={() => router.back()}>
             <Image
               src="/arrowLeft.svg"
@@ -42,9 +42,10 @@ const NavBar = ({ title, back }: { title?: string, back?: boolean }) => {
               width={20}
               height={20}
             />
-          </Button>
-        )}
-        <h2 className={styles.pageTitle}>{title}</h2>
+          </Button>}
+        <h2 className={styles.pageTitle}>
+          {title}
+        </h2>
       </div>
     </nav>
   );

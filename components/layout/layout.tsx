@@ -27,10 +27,7 @@ const Layout = ({
           {title}
         </title>
         <link rel="icon" href="/favicon.svg" />
-        <meta 
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
           content="A website with many resources to help you learn Latin."
@@ -59,12 +56,7 @@ const Layout = ({
         <footer className={styles.footer}>
           <p>Learning Latin | By: cqb13</p>
           <a href="https://github.com/cqb13" target="_blank">
-            <Image
-              src="/github.svg"
-              alt="github"
-              width={30}
-              height={30}
-            />
+            <Image src="/github.svg" alt="github" width={30} height={30} />
           </a>
         </footer>
       </div>

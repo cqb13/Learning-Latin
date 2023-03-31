@@ -2,7 +2,6 @@ import textProps from "../../lib/types/textProps";
 import { useState, useEffect } from "react";
 import styles from "./text.module.css";
 
-//TODO: multi key trigger options
 const Text = (props: textProps) => {
   const [placeholder, setPlaceholder] = useState("");
   const [value, setValue] = useState("");
