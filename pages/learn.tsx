@@ -1,27 +1,27 @@
 import utilStyles from "../styles/utils.module.css";
-import styles from "../styles/practice.module.css";
 import Layout from "../components/layout/layout";
 import Button from "../components/button/button";
+import styles from "../styles/learn.module.css";
 
 const Practice = () => {
   const practiceRoutes = [
-    ["Declension Endings", "/practice/declension-endings"],
-    ["Future Tense", "/practice/future-tense"],
-    ["Personal Endings", "/practice/personal-endings"],
-    ["Personal Pronouns", "/practice/personal-pronouns"],
-    ["Relative Pronouns", "/practice/relative-pronouns"]
+    ["Declension Endings", "/learn/declension-endings"],
+    ["Future Tense", "/learn/future-tense"],
+    ["Personal Endings", "/learn/personal-endings"],
+    ["Personal Pronouns", "/learn/personal-pronouns"],
+    ["Relative Pronouns", "/learn/relative-pronouns"]
   ];
 
   return (
-    <Layout title="Practice">
+    <Layout title="Learn">
       <section className={utilStyles.container}>
         <div className={utilStyles.heading2Xl}>
-          <h1>Practice</h1>
+          <h1>Learn</h1>
         </div>
         <section className={styles.practiceNav}>
           {practiceRoutes.map(route =>
             <Button
-              link={`/practice/${route[0].toLowerCase().replace(" ", "-")}`}
+              link={`/learn/${route[0].toLowerCase().replace(" ", "-")}`}
               class={`${utilStyles.twoWidth} ${styles.practiceLink}`}
             >
               {route[0]}

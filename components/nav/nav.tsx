@@ -8,7 +8,7 @@ import Link from "next/link";
 const NavBar = ({ title, back }: { title?: string; back?: boolean }) => {
   const routes = [
     ["Home", "/"],
-    ["Practice", "/practice"],
+    ["Learn", "/learn"],
     ["Translate", "/translate"],
     ["Resources", "/resources"]
   ];
