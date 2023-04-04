@@ -7,8 +7,8 @@ import utilStyles from "../styles/utils.module.css";
 import Layout from "../components/layout/layout";
 import Button from "../components/button/button";
 import DetectLanguage from "detectlanguage";
-import Text from "../components/text/text";
 import { useState, useEffect } from "react";
+import Text from "../components/text/text";
 
 const Translate = () => {
   const [translations, setTranslations] = useState<any[]>([]);
@@ -51,7 +51,7 @@ const Translate = () => {
       let cleanQuery = macronHandler(query);
       //if there are extra spaces, empty cards will be created
       cleanQuery = removeExtraSpaces(cleanQuery);
-      const response = await fetch(`/api/${type}?word=${cleanQuery}`);
+      const response = await fetch(`/api/translate?word=${cleanQuery}&lang=${type}`);
       const data = await response.json();
       const newTranslations = Object.entries(
         data
