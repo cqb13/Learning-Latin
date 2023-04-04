@@ -24,3 +24,13 @@
 .chartTitle > * {
   margin: 0;
 }
+
+@media (max-width: 600px) {
+  .practiceNav {
+    flex-direction: column;
+  }
+
+  .practiceLink {
+    width: 80%;
+  }
+}

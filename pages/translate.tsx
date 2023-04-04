@@ -67,7 +67,6 @@ const Translate = () => {
     setLabel(label.replace(word, ""));
   };
 
-  //TODO: add a clear button with a switch inside, the switch will toggle auto clear, if true the translations will be cleared after a new translation is made, if false the translations will stay until the user clears them
   return (
     <Layout title="Translator" label={label}>
       <section className={utilStyles.container}>

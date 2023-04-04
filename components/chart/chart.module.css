@@ -1,6 +1,7 @@
 /*TODO: make size of all inputs the same*/
 .chart {
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .chart th {
@@ -21,7 +22,6 @@
   font-size: 1rem;
   text-align: center;
   border-radius: 0;
-  width: 90%;
 }
 
 .chart td input.right {
