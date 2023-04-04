@@ -6,6 +6,7 @@
     "begin": "next start"
   },
   "dependencies": {
+    "@vercel/analytics": "^0.1.11",
     "date-fns": "^2.29.3",
     "detectlanguage": "^2.1.0",
     "gray-matter": "^4.0.3",
