@@ -14,7 +14,7 @@ const Practice = () => {
   ];
 
   return (
-    <Layout title="practice">
+    <Layout title="Practice">
       <section className={utilStyles.container}>
         <div className={utilStyles.heading2Xl}>
           <h1>Practice</h1>
