@@ -1,17 +1,20 @@
 .nav {
   display: flex;
-  padding: 0.5rem;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+}
+
+.logo {
+  margin-right: 10px;
 }
 
 .active {
-  border-radius: 0.5rem;
-  background-color: rgb(68, 68, 68, 0.1);
-  backdrop-filter: blur(10px);
+  background-color: rgb(73, 107, 190, 0.1);
 }
 
 .scrolled {
-  border-bottom: 2px solid rgb(68, 68, 68, 0.1);
   backdrop-filter: blur(10px);
+  box-shadow: rgb(68, 68, 68, 0.1) 0px 2px 0px;
 }
 
 .link {
@@ -19,14 +22,18 @@
   font-size: 1.3rem;
   font-weight: 500;
   padding: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   border: 2px solid rgb(68, 68, 68, 0);
   transition: 0.25s;
 }
 
 .link:hover {
   text-decoration: none;
-  border: 2px solid rgb(68, 68, 68, 0.1);
-  border-radius: 0.5rem;
+}
+
+.link:hover {
+  background-color: rgb(73, 107, 190, 0.1);
 }
 
 .pageTitleContainer {
@@ -40,7 +47,6 @@
 .linkContainer {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 @media (max-width: 800px) {

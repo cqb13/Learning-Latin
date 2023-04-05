@@ -8,7 +8,7 @@ import Link from "next/link";
 const NavBar = ({ title, back }: { title?: string; back?: boolean }) => {
   const routes = [
     ["Home", "/"],
-    ["Learn", "/learn"],
+    ["Practice", "/practice"],
     ["Translate", "/translate"],
     ["Resources", "/resources"]
   ];
@@ -22,6 +22,13 @@ const NavBar = ({ title, back }: { title?: string; back?: boolean }) => {
         : ""}`}
     >
       <div className={styles.linkContainer}>
+        <Image
+          src="/favicon.svg"
+          alt="icon"
+          width={50}
+          height={50}
+          className={styles.logo}
+        />
         {routes.map(([name, path]) =>
           <Link
             href={path}
@@ -30,6 +37,7 @@ const NavBar = ({ title, back }: { title?: string; back?: boolean }) => {
               : ""} ${styles.link}`}
           >
             {name}
+            {router.pathname === path && <div className={styles.slide} />}
           </Link>
         )}
       </div>

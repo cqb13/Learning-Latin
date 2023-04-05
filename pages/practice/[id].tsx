@@ -1,16 +1,17 @@
-import personalPronouns from "../../lib/data/learn/personal-pronouns";
-import relativePronouns from "../../lib/data/learn/relative-pronouns";
-import personalEndings from "../../lib/data/learn/personal-endings";
+import personalPronouns from "../../lib/data/practice/personal-pronouns";
+import relativePronouns from "../../lib/data/practice/relative-pronouns";
+import personalEndings from "../../lib/data/practice/personal-endings";
 import ChartFooter from "../../components/chartFooter/chartFooter";
+import imperfectTense from "../../lib/data/practice/imperfect-tense";
 import chartStyles from "../../components/chart/chart.module.css";
-import futureTense from "../../lib/data/learn/future-tense";
-import declensions from "../../lib/data/learn/declensions";
+import futureTense from "../../lib/data/practice/future-tense";
+import declensions from "../../lib/data/practice/declensions";
 import utilStyles from "../../styles/utils.module.css";
 import Layout from "../../components/layout/layout";
 import Button from "../../components/button/button";
 import chartProps from "../../lib/types/chartProps";
 import clearChart from "../../lib/utils/clearChart";
-import styles from "../../styles/learn.module.css";
+import styles from "../../styles/practice.module.css";
 import Chart from "../../components/chart/chart";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -19,6 +20,7 @@ export async function getStaticPaths() {
   const paths = [
     { params: { id: "declension-endings" } },
     { params: { id: "future-tense" } },
+    { params: { id: "imperfect-tense" } },
     { params: { id: "personal-endings" } },
     { params: { id: "personal-pronouns" } },
     { params: { id: "relative-pronouns" } }
@@ -35,6 +37,8 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
     data = declensions;
   } else if (id === "future-tense") {
     data = futureTense;
+  } else if (id === "imperfect-tense") {
+    data = imperfectTense;
   } else if (id === "personal-pronouns") {
     data = personalPronouns;
   } else if (id === "relative-pronouns") {
