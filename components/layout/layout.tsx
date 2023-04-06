@@ -43,7 +43,7 @@ const Layout = ({
           name="og:description"
           content="A website with many resources to help you learn Latin."
         />
-        <meta name="og:image" content="https://learninglatin.net/favicon.png" />
+        <meta name="og:image" content="https://learninglatin.net/favicon.svg" />
         <meta property="og:image" />
         <meta name="og:title" content={title} />
       </Head>
