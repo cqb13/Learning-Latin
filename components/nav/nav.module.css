@@ -9,11 +9,17 @@
 
 .active {
   background-color: rgb(73, 107, 190, 0.1);
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 }
 
 .scrolled {
   backdrop-filter: blur(10px);
   box-shadow: rgb(68, 68, 68, 0.1) 0px 2px 0px;
+}
+
+.scrolled .linkContainer .active {
+  border-radius: 0;
 }
 
 .link {
@@ -28,11 +34,14 @@
 }
 
 .link:hover {
+  background-color: rgb(73, 107, 190, 0.1);
   text-decoration: none;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 }
 
-.link:hover {
-  background-color: rgb(73, 107, 190, 0.1);
+.scrolled .linkContainer .link:hover {
+  border-radius: 0;
 }
 
 .pageTitleContainer {
