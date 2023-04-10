@@ -2,11 +2,6 @@
   display: flex;
 }
 
-.logo {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 .active {
   background-color: rgb(73, 107, 190, 0.1);
   border-bottom-right-radius: 0.5rem;
