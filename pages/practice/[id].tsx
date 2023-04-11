@@ -2,8 +2,8 @@ import personalPronouns from "../../lib/data/practice/personal-pronouns";
 import relativePronouns from "../../lib/data/practice/relative-pronouns";
 import personalEndings from "../../lib/data/practice/personal-endings";
 import ChartFooter from "../../components/chartFooter/chartFooter";
-import imperfectTense from "../../lib/data/practice/imperfect-tense";
 import chartStyles from "../../components/chart/chart.module.css";
+import perfectTense from "../../lib/data/practice/perfect-tense";
 import futureTense from "../../lib/data/practice/future-tense";
 import declensions from "../../lib/data/practice/declensions";
 import utilStyles from "../../styles/utils.module.css";
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
   const paths = [
     { params: { id: "declension-endings" } },
     { params: { id: "future-tense" } },
-    { params: { id: "imperfect-tense" } },
+    { params: { id: "perfect-tense" } },
     { params: { id: "personal-endings" } },
     { params: { id: "personal-pronouns" } },
     { params: { id: "relative-pronouns" } }
@@ -37,8 +37,8 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
     data = declensions;
   } else if (id === "future-tense") {
     data = futureTense;
-  } else if (id === "imperfect-tense") {
-    data = imperfectTense;
+  } else if (id === "perfect-tense") {
+    data = perfectTense;
   } else if (id === "personal-pronouns") {
     data = personalPronouns;
   } else if (id === "relative-pronouns") {
@@ -180,7 +180,8 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
               />
             </Button>: null}
           </div>
-          <p>{currentChart} / {data.chartCount}</p>
+
+          {data.chartCount > 1? <p>{currentChart} / {data.chartCount}</p> : null}
 
           <Chart 
             updateClearable={updateClearable}

@@ -7,7 +7,7 @@ const Practice = () => {
   const practiceRoutes = [
     ["Declension Endings", "/practice/declension-endings"],
     ["Future Tense", "/practice/future-tense"],
-    ["Imperfect Tense", "/practice/imperfect-tense"],
+    ["Perfect Tense", "/practice/perfect-tense"],
     ["Personal Endings", "/practice/personal-endings"],
     ["Personal Pronouns", "/practice/personal-pronouns"],
     ["Relative Pronouns", "/practice/relative-pronouns"]
