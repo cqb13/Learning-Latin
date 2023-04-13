@@ -43,6 +43,7 @@ const Chart = ({
     if (answer === "") {
       event.target.classList.remove(styles.right);
       event.target.classList.remove(styles.wrong);
+      updateClearable(chartClearable());
       return;
     }
 
