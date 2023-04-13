@@ -1,6 +1,7 @@
-import macronHandler, { checkForMacrons } from "../../lib/utils/macronHandler";
 import changeTextAccuracyState from "../../lib/utils/changeTextAccuracyState";
+import checkForMacrons from "../../lib/utils/checkForMacrons";
 import chartClearable from "../../lib/utils/chartClearable";
+import macronHandler from "../../lib/utils/macronHandler";
 import chartProps from "../../lib/types/chartProps";
 import styles from "./chart.module.css";
 import { useEffect } from "react";
