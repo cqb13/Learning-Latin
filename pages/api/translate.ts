@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   let url: string;
   if (lang === "latin-to-english") {
-    url = "http://www.archives.nd.edu/cgi-bin/wordz.pl?keyword=";
+    url = "https://archives.nd.edu/cgi-bin/wordz.pl?keyword=";
   } else if (lang === "english-to-latin") {
     url = "https://archives.nd.edu/cgi-bin/wordz.pl?english=";
   } else {
