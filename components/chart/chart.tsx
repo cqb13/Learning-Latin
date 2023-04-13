@@ -6,6 +6,8 @@ import styles from "./chart.module.css";
 import { useEffect } from "react";
 import Text from "../text/text";
 
+import textStyles from "../text/text.module.css"
+
 const Chart = ({
   data,
   answers,
@@ -76,6 +78,14 @@ const Chart = ({
     changeTextAccuracyState(event, false);
   };
 
+  const formatID = (id: string | string[]) => {
+      if (Array.isArray(id)) {
+        return id.join(",");
+      } else {
+        return id;
+      }
+  }
+
   //prettier-ignore
   return (
     <table className={styles.chart}>
@@ -99,7 +109,22 @@ const Chart = ({
                 {answers ? (
                   <Text placeholder="" value={content}/>
                 ) : (
-                  <Text placeholder="Answer" id={content} onChange={checkAnswer}/>
+                  <>
+                    {/*
+                    TODO: make the text component support this
+                    <Text placeholder="Answer" id={content} onChange={checkAnswer}/> */}
+
+                    {/** 
+                     * the issue is that the clearChart function clears the value, but not the state value in the text component
+                    */}
+                    <input
+                    type="text"
+                    placeholder="Answer"
+                    onChange={checkAnswer}
+                    className={textStyles.input}
+                    id={formatID(content)}
+                  />
+                  </>
                 )}
               </td>
             )}

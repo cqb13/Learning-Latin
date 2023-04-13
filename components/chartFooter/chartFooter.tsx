@@ -1,3 +1,4 @@
+import chartStyles from "../../components/chart/chart.module.css";
 import utilStyles from "../../styles/utils.module.css";
 import chartProps from "../../lib/types/chartProps";
 import clearChart from "../../lib/utils/clearChart";
@@ -7,6 +8,7 @@ import Image from "next/image";
 
 const chartFooter = ({
   switchToLinkedChart,
+  updateClearable,
   chartClearable,
   toggleAnswers,
   chartIndex,
@@ -14,12 +16,19 @@ const chartFooter = ({
   data
 }: {
   switchToLinkedChart: (link: string | undefined) => void;
+  updateClearable: (clearable: boolean) => void;
   toggleAnswers: () => void;
   chartClearable: boolean;
   chartIndex: number;
   answers: boolean;
   data: chartProps;
 }) => {
+  //needed so button becomes locked after clear
+  const clear = () => {
+    clearChart();
+    updateClearable(false);
+  }
+
   return (
     <section className={utilStyles.horizontalContainer}>
       <ToolTip
@@ -38,9 +47,9 @@ const chartFooter = ({
             : <Image src="/answer.svg" alt="answer" width={20} height={20} />}
         </Button>
       </ToolTip>
-
+      
       <ToolTip direction="bottom" content="clear" delay={20}>
-        <Button onClick={clearChart} locked={!chartClearable}>
+        <Button onClick={clear} locked={!chartClearable}>
           <Image src="/clear.svg" alt="clear" width={20} height={20} />
         </Button>
       </ToolTip>

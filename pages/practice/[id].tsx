@@ -7,11 +7,11 @@ import perfectTense from "../../lib/data/practice/perfect-tense";
 import futureTense from "../../lib/data/practice/future-tense";
 import declensions from "../../lib/data/practice/declensions";
 import utilStyles from "../../styles/utils.module.css";
+import styles from "../../styles/practice.module.css";
 import Layout from "../../components/layout/layout";
 import Button from "../../components/button/button";
 import chartProps from "../../lib/types/chartProps";
 import clearChart from "../../lib/utils/clearChart";
-import styles from "../../styles/practice.module.css";
 import Chart from "../../components/chart/chart";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -193,6 +193,7 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
 
           <ChartFooter 
             switchToLinkedChart={switchToLinkedChart} 
+            updateClearable = {updateClearable}
             toggleAnswers={toggleAnswers}
             chartClearable={clearable}
             chartIndex={chartIndex} 
