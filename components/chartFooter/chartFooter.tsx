@@ -1,7 +1,5 @@
-import chartStyles from "../../components/chart/chart.module.css";
 import utilStyles from "../../styles/utils.module.css";
 import chartProps from "../../lib/types/chartProps";
-import clearChart from "../../lib/utils/clearChart";
 import ToolTip from "../toolTip/toolTip";
 import Button from "../button/button";
 import Image from "next/image";
@@ -13,7 +11,9 @@ const chartFooter = ({
   toggleAnswers,
   chartIndex,
   answers,
-  data
+  data,
+
+  clearChart,
 }: {
   switchToLinkedChart: (link: string | undefined) => void;
   updateClearable: (clearable: boolean) => void;
@@ -22,6 +22,8 @@ const chartFooter = ({
   chartIndex: number;
   answers: boolean;
   data: chartProps;
+
+  clearChart: () => void;
 }) => {
   //needed so button becomes locked after clear
   const clear = () => {

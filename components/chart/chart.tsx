@@ -1,54 +1,68 @@
 import changeTextAccuracyState from "../../lib/utils/changeTextAccuracyState";
+import createValueArrayMap from "../../lib/utils/createValueArrayMap";
 import checkForMacrons from "../../lib/utils/checkForMacrons";
 import chartClearable from "../../lib/utils/chartClearable";
 import macronHandler from "../../lib/utils/macronHandler";
 import chartProps from "../../lib/types/chartProps";
+import { useEffect, useState } from "react";
 import styles from "./chart.module.css";
-import { useEffect } from "react";
 import Text from "../text/text";
-
-import textStyles from "../text/text.module.css"
 
 const Chart = ({
   data,
+  clear,
   answers,
   chartIndex,
   clearChart,
   updateClearable
 }: {
+  clear: boolean;
   answers: boolean;
   data: chartProps;
   chartIndex: number;
-  clearChart: () => void;
+  clearChart: (chart: string[][]) => {};
   updateClearable: (clearable: boolean) => void;
 }) => {
-  useEffect(
-    () => {
+  const [valueArrayMap, setValueArrayMap] = useState(createValueArrayMap(data, chartIndex));
+
+  useEffect(() => {
       if (answers) {
         const inputs = document.querySelectorAll("input");
         for (let i = 0; i < inputs.length; i++) {
+          inputs[i].classList.remove(styles.wrong);
           inputs[i].classList.add(styles.right);
         }
         return;
       }
-      clearChart();
-    },
-    [chartIndex]
-  );
 
-  const checkAnswer = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValueArrayMap(clearChart(valueArrayMap))
+      setValueArrayMap(createValueArrayMap(data, chartIndex));
+  },[chartIndex, answers]);
+
+  useEffect(() => {
+    clearChart(valueArrayMap);
+    setValueArrayMap(createValueArrayMap(data, chartIndex));
+  }, [clear]);
+
+  useEffect(() => {
+    updateClearable(chartClearable(valueArrayMap));
+  }, [valueArrayMap]);
+
+  const checkAnswer = (event: React.ChangeEvent<HTMLInputElement>, rowIndex: number, index: number) => {
     const id = event.target.id;
     const answer = event.target.value.toLowerCase();
     const hasMacron = checkForMacrons(answer);
 
+    let tempValueMap = [...valueArrayMap];
+
+    tempValueMap[rowIndex][index] = answer;
+    setValueArrayMap(tempValueMap);
+
     if (answer === "") {
       event.target.classList.remove(styles.right);
       event.target.classList.remove(styles.wrong);
-      updateClearable(chartClearable());
-      return;
+      return
     }
-
-    updateClearable(chartClearable());
 
     if (answer === id) {
       changeTextAccuracyState(event, true);
@@ -80,14 +94,6 @@ const Chart = ({
     changeTextAccuracyState(event, false);
   };
 
-  const formatID = (id: string | string[]) => {
-      if (Array.isArray(id)) {
-        return id.join(",");
-      } else {
-        return id;
-      }
-  }
-
   //prettier-ignore
   return (
     <table className={styles.chart}>
@@ -101,7 +107,7 @@ const Chart = ({
         </tr>
       </thead>
       <tbody>
-        {data.chart[chartIndex].rows.map(row =>
+        {data.chart[chartIndex].rows.map((row, rowIndex) =>
           <tr>
             <td>
               {row.rowTitle}
@@ -111,22 +117,12 @@ const Chart = ({
                 {answers ? (
                   <Text placeholder="" value={content}/>
                 ) : (
-                  <>
-                    {/*
-                    TODO: make the text component support this
-                    <Text placeholder="Answer" id={content} onChange={checkAnswer}/> */}
-
-                    {/** 
-                     * the issue is that the clearChart function clears the value, but not the state value in the text component
-                    */}
-                    <input
-                    type="text"
-                    placeholder="Answer"
-                    onChange={checkAnswer}
-                    className={textStyles.input}
-                    id={formatID(content)}
+                  <Text 
+                    placeholder="Answer" 
+                    id={content}
+                    onChange={(event) => checkAnswer(event, rowIndex, index)}
+                    value={valueArrayMap[rowIndex][index]}
                   />
-                  </>
                 )}
               </td>
             )}

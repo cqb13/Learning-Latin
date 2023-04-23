@@ -55,6 +55,7 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
 }
 
 const PracticeChart = ({ data }: { data: chartProps }) => {
+  const [triggerClear, setTriggerClear] = useState(false); //used to trigger clearChart in chart
   const [showAnswers, setShowAnswers] = useState(false);
   const [currentChart, setCurrentChart] = useState(1);
   const [linkedChartIndex] = useState([] as number[]);
@@ -73,6 +74,11 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
       }
     }
   }, []);
+
+  //triggers a useEffect within chart component which calls clearChart function
+  const updateTrigger = () => {
+    setTriggerClear(!triggerClear);
+  }
 
   const updateClearable = (status: boolean) => {
     setClearable(status);
@@ -137,7 +143,6 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
 
   const toggleAnswers = () => {
     setShowAnswers(!showAnswers);
-    clearChart();
     const inputs = document.querySelectorAll("input");
     if (!showAnswers === true) {
       for (let i = 0; i < inputs.length; i++) {
@@ -188,6 +193,7 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
             clearChart={clearChart} 
             chartIndex={chartIndex} 
             answers={showAnswers} 
+            clear={triggerClear}
             data={data} 
           />
 
@@ -196,6 +202,7 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
             updateClearable = {updateClearable}
             toggleAnswers={toggleAnswers}
             chartClearable={clearable}
+            clearChart={updateTrigger}
             chartIndex={chartIndex} 
             answers={showAnswers}
             data={data} 

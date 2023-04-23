@@ -1,4 +1,4 @@
-type textProps = {
+interface textProps {
   class?: string;
   id?: string | string[];
   value?: any;
