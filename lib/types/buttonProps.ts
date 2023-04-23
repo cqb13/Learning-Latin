@@ -7,7 +7,7 @@ interface buttonProps {
   href?: string;
   link?: Url | string;
   target?: "_blank" | "_self" | "_parent" | "_top";
-  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+  onClick?: (event: any) => void;
   children?: React.ReactNode;
 };
 
