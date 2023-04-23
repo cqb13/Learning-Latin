@@ -14,8 +14,10 @@ interface chart {
   rows: row[];
 }
 
-export default interface chartProps {
+interface chartProps {
   chartCount: number;
   name: string;
   chart: chart[];
 }
+
+export default chartProps;

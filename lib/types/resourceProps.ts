@@ -1,4 +1,4 @@
-type resourceProps = {
+interface resourceProps {
   name: string;
   description: string;
   url: string;
