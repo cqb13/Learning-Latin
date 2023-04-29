@@ -73,6 +73,11 @@ const Translate = () => {
         <div className={utilStyles.heading2Xl}>
           <h1>Translator</h1>
         </div>
+        <span>
+        Due to changes to Whitaker's Words, translation services are currently unavailable.
+        <br />
+        Sorry for the inconvenience, a solution is being worked on.
+        </span>
         <section className={styles.searchContainer}>
           <Text
             placeholder="Enter a word"
@@ -85,12 +90,14 @@ const Translate = () => {
             <Button
               onClick={() => getTranslation("latin-to-english")}
               class={utilStyles.fullWidth}
+              locked={true}
             >
               Latin To English
             </Button>
             <Button
               onClick={() => getTranslation("english-to-latin")}
               class={utilStyles.fullWidth}
+              locked={true}
             >
               English To Latin
             </Button>

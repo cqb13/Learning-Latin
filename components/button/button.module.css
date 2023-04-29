@@ -12,6 +12,7 @@
   border-radius: 0.5rem;
   transition: 0.25s;
   cursor: pointer;
+  user-select: none;
 }
 
 .button > * {
@@ -19,7 +20,7 @@
 }
 
 .locked {
-  cursor: auto;
+  cursor: default;
   background-color: #444444;
 }
 
@@ -32,6 +33,6 @@
   background-color: var(--color-secondary);
 }
 
-.button:active {
+.button:active:not(.locked) {
   letter-spacing: 0.1rem;
 }
