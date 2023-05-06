@@ -17,6 +17,39 @@
   padding: 1rem;
 }
 
+.translationCardHighlight {
+  background-color: rgb(73, 107, 190, 0.1);
+  border-radius: 0.2rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+}
+
+.translationCardOrthList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.translationCardOrthList > p {
+  display: flex;
+}
+
+.translationCardDefinitionContainer h3{
+  margin: 0;
+}
+
+.translationCardDefinitionContainer div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.translationCardDefinitionContainer div > p {
+  margin: 0;
+}
+
 .buttonBottom {
   align-self: stretch;
   margin-top: auto;

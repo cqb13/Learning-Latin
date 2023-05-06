@@ -53,10 +53,7 @@ const Translate = () => {
       cleanQuery = removeExtraSpaces(cleanQuery);
       const response = await fetch(`/api/translate?word=${cleanQuery}&lang=${type}`);
       const data = await response.json();
-      const newTranslations = Object.entries(
-        data
-      ).map(([word, translation]) => ({ word, translation }));
-      setTranslations(newTranslations);
+      setTranslations(data);
     } catch (error) {
       console.error(error);
     }
@@ -73,11 +70,6 @@ const Translate = () => {
         <div className={utilStyles.heading2Xl}>
           <h1>Translator</h1>
         </div>
-        <span>
-        Due to changes to Whitaker's Words, translation services are currently unavailable.
-        <br />
-        Sorry for the inconvenience, a solution is being worked on.
-        </span>
         <section className={styles.searchContainer}>
           <Text
             placeholder="Enter a word"
@@ -90,14 +82,12 @@ const Translate = () => {
             <Button
               onClick={() => getTranslation("latin-to-english")}
               class={utilStyles.fullWidth}
-              locked={true}
             >
               Latin To English
             </Button>
             <Button
               onClick={() => getTranslation("english-to-latin")}
               class={utilStyles.fullWidth}
-              locked={true}
             >
               English To Latin
             </Button>
@@ -106,13 +96,12 @@ const Translate = () => {
 
         {translations.length > 0 &&
           <section className={cardStyles.translationCardContainer}>
-            {translations.map(({ word, translation }) =>
+            {translations.map((t) => (
               <TranslationCard
-                word={word}
-                translation={translation}
-                removeCard={() => removeCard(word)}
+                data={t}
+                removeCard={() => removeCard(t.word)}
               />
-            )}
+            ))}
           </section>}
       </section>
     </Layout>

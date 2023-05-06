@@ -1,0 +1,3 @@
+[submodule "pages/api/Open-Words-TS"]
+	path = pages/api/Open-Words-TS
+	url = https://github.com/Templar-Development/Open-Words-TS.git

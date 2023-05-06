@@ -15,11 +15,17 @@ const TranslationCard = (props: any) => {
     props.removeCard();
   };
 
+  const data = () => {
+    console.log(props.data);
+  };
+
+  //data();
+
   return (
     <section className={styles.translationCard} key={props.word}>
       <section className={styles.visibilityOptions}>
         <h2 className={styles.cardTitle}>
-          {props.word}
+          {props.data.word}
         </h2>
         <div className={styles.visibilityButtonContainer}>
           <ToolTip
@@ -56,9 +62,23 @@ const TranslationCard = (props: any) => {
         </div>
       </section>
       <section className={isMinimized ? "hidden" : ""}>
-        <pre>
-          {props.translation}
-        </pre>
+        <section className={styles.translationCardOrthList}>
+          {props.data.defs[0].orth.map((o: string) => (
+            <p className={styles.translationCardHighlight}>
+              {o}
+            </p>
+          ))}
+        </section>
+        <section className={styles.translationCardDefinitionContainer}>
+          <h3>Definitions:</h3>
+          <div>
+            {props.data.defs[0].senses.map((s: string) => (
+              <p className={styles.translationCardHighlight}>
+                {s}
+              </p>
+            ))}
+          </div>
+        </section>
       </section>
     </section>
   );
