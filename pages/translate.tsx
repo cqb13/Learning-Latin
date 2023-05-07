@@ -103,6 +103,8 @@ const Translate = () => {
               />
             ))}
           </section>}
+        <p>Translation functionality is in early development, if you find an issue, please open an issue on my github</p>
+        <a href="https://github.com/Templar-Development/Open-Words-TS/issues/new/choose" target="_blank">Github Issue</a>
       </section>
     </Layout>
   );

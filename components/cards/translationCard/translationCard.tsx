@@ -87,7 +87,7 @@ const TranslationCard = (props: any) => {
             <p>Sorry, your word was not found</p>
             <p>Please double check spelling, confirm words existence</p>
             <p>You believe that program should have found you word, please open in issue in our github repo</p>
-            <a href="https://github.com/Templar-Development/Open-Words-TS/issues">Open Words TS</a>
+            <a href="https://github.com/Templar-Development/Open-Words-TS/issues/new/choose">Open Words TS</a>
           </>
         )}
       </section>
