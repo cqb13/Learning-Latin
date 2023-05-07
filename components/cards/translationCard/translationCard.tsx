@@ -22,7 +22,7 @@ const TranslationCard = (props: any) => {
   //data();
 
   return (
-    <section className={styles.translationCard} key={props.word}>
+    <section className={styles.translationCard} key={props.data.word}>
       <section className={styles.visibilityOptions}>
         <h2 className={styles.cardTitle}>
           {props.data.word}
@@ -62,23 +62,34 @@ const TranslationCard = (props: any) => {
         </div>
       </section>
       <section className={isMinimized ? "hidden" : ""}>
-        <section className={styles.translationCardOrthList}>
-          {props.data.defs[0].orth.map((o: string) => (
-            <p className={styles.translationCardHighlight}>
-              {o}
-            </p>
-          ))}
-        </section>
-        <section className={styles.translationCardDefinitionContainer}>
-          <h3>Definitions:</h3>
-          <div>
-            {props.data.defs[0].senses.map((s: string) => (
-              <p className={styles.translationCardHighlight}>
-                {s}
-              </p>
-            ))}
-          </div>
-        </section>
+        {props.data.defs.length > 0 ? (
+          <>
+            <section className={styles.translationCardOrthList}>
+              {props.data.defs[0].orth.map((o: string) => (
+                <p className={styles.translationCardHighlight}>
+                  {o}
+                </p>
+              ))}
+            </section>
+            <section className={styles.translationCardDefinitionContainer}>
+            <h3>Definitions:</h3>
+            <div>
+              {props.data.defs[0].senses.map((s: string) => (
+                <p className={styles.translationCardHighlight}>
+                  {s}
+                </p>
+              ))}
+            </div>
+            </section>
+          </>
+        ) : (
+          <>
+            <p>Sorry, your word was not found</p>
+            <p>Please double check spelling, confirm words existence</p>
+            <p>You believe that program should have found you word, please open in issue in our github repo</p>
+            <a href="https://github.com/Templar-Development/Open-Words-TS/issues">Open Words TS</a>
+          </>
+        )}
       </section>
     </section>
   );
