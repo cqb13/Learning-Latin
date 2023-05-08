@@ -21,7 +21,9 @@ const Translate = () => {
     if (key) {
       setApiKey(key);
     }
-  });
+    // speeds up user search
+    getTranslation("latin-to-english");
+  }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
