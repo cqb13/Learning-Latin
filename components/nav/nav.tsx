@@ -1,11 +1,9 @@
 import useScroll from "../../lib/hooks/useScroll";
 import { useRouter } from "next/router";
 import styles from "./nav.module.css";
-import Button from "../button/button";
-import Image from "next/image";
 import Link from "next/link";
 
-const NavBar = ({ title, back }: { title?: string; back?: boolean }) => {
+const NavBar = () => {
   const routes = [
     ["Home", "/"],
     ["Practice", "/practice"],
@@ -32,20 +30,6 @@ const NavBar = ({ title, back }: { title?: string; back?: boolean }) => {
             {name}
           </Link>
         )}
-      </div>
-      <div className={styles.pageTitleContainer}>
-        {back &&
-          <Button onClick={() => router.back()}>
-            <Image
-              src="/arrowLeft.svg"
-              alt="arrow left"
-              width={20}
-              height={20}
-            />
-          </Button>}
-        <h2 className={styles.pageTitle}>
-          {title}
-        </h2>
       </div>
     </nav>
   );

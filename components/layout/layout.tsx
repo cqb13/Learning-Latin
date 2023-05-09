@@ -7,10 +7,8 @@ const Layout = ({
   children,
   title,
   label,
-  back
 }: {
   children: React.ReactNode;
-  back?: boolean;
   title?: string;
   label?: string;
 }) => {
@@ -48,7 +46,7 @@ const Layout = ({
         <meta name="og:title" content={title} />
       </Head>
       <div className={styles.wrapper}>
-        <NavBar title={label} back={back} />
+        <NavBar/>
         <header className={styles.header} />
         <main className={styles.content}>
           {children}

@@ -23,9 +23,12 @@ const Chart = ({
   clearChart: (chart: string[][]) => {};
   updateClearable: (clearable: boolean) => void;
 }) => {
-  const [valueArrayMap, setValueArrayMap] = useState(createValueArrayMap(data, chartIndex));
+  const [valueArrayMap, setValueArrayMap] = useState(
+    createValueArrayMap(data, chartIndex)
+  );
 
-  useEffect(() => {
+  useEffect(
+    () => {
       if (answers) {
         const inputs = document.querySelectorAll("input");
         for (let i = 0; i < inputs.length; i++) {
@@ -35,20 +38,32 @@ const Chart = ({
         return;
       }
 
-      setValueArrayMap(clearChart(valueArrayMap))
+      setValueArrayMap(clearChart(valueArrayMap));
       setValueArrayMap(createValueArrayMap(data, chartIndex));
-  },[chartIndex, answers]);
+    },
+    [chartIndex, answers]
+  );
 
-  useEffect(() => {
-    clearChart(valueArrayMap);
-    setValueArrayMap(createValueArrayMap(data, chartIndex));
-  }, [clear]);
+  useEffect(
+    () => {
+      clearChart(valueArrayMap);
+      setValueArrayMap(createValueArrayMap(data, chartIndex));
+    },
+    [clear]
+  );
 
-  useEffect(() => {
-    updateClearable(chartClearable(valueArrayMap));
-  }, [valueArrayMap]);
+  useEffect(
+    () => {
+      updateClearable(chartClearable(valueArrayMap));
+    },
+    [valueArrayMap]
+  );
 
-  const checkAnswer = (event: React.ChangeEvent<HTMLInputElement>, rowIndex: number, index: number) => {
+  const checkAnswer = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    rowIndex: number,
+    index: number
+  ) => {
     const id = event.target.id;
     const answer = event.target.value.toLowerCase();
     const hasMacron = checkForMacrons(answer);
@@ -61,7 +76,7 @@ const Chart = ({
     if (answer === "") {
       event.target.classList.remove(styles.right);
       event.target.classList.remove(styles.wrong);
-      return
+      return;
     }
 
     if (answer === id) {
@@ -120,6 +135,7 @@ const Chart = ({
                   <Text 
                     placeholder="Answer" 
                     id={content}
+                    class={styles.right}
                     onChange={(event) => checkAnswer(event, rowIndex, index)}
                     value={valueArrayMap[rowIndex][index]}
                   />

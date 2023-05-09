@@ -158,7 +158,7 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
 
   //prettier-ignore
   return (
-    <Layout label={data.name} back={true}>
+    <Layout label={data.name}>
       <section className={utilStyles.container}>
         <section className={utilStyles.container}>
           <div className={styles.chartTitleContainer}>
