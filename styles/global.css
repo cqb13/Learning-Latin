@@ -3,6 +3,8 @@
   --color-secondary: #2a4b8c;
 }
 
+/*change black text to #222*/
+
 html,
 body {
   padding: 0;
@@ -14,12 +16,19 @@ body {
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 3rem;
+}
+
 h1 {
   margin: 0;
+  color: #333333;
 }
 
 h2 {
   margin: 0;
+  color: #333333;
 }
 
 a {

@@ -12,7 +12,7 @@
 
 <h2>TODO:</h2>
 <pre>
-- Sentence translation practice
-- Word analysis
 - Fill in missing data
+- Docs with grammar info
+- Games page, (hangman, wordle, crosswords, etc.)
 </pre>
