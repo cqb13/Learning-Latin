@@ -19,7 +19,7 @@ const TranslationCard = (props: any) => {
     console.log(props.data);
   };
 
-  //data();
+  data();
 
   return (
     <section className={styles.translationCard} key={props.data.word}>
@@ -64,23 +64,31 @@ const TranslationCard = (props: any) => {
       <section className={isMinimized ? "hidden" : ""}>
         {props.data.defs.length > 0 ? (
           <>
-            <section className={styles.translationCardOrthList}>
-              {props.data.defs[0].orth.map((o: string) => (
-                <p className={styles.translationCardHighlight}>
-                  {o}
-                </p>
-              ))}
-            </section>
-            <section className={styles.translationCardDefinitionContainer}>
-            <h3>Definitions:</h3>
-            <div>
-              {props.data.defs[0].senses.map((s: string) => (
-                <p className={styles.translationCardHighlight}>
-                  {s}
-                </p>
-              ))}
-            </div>
-            </section>
+            {props.data.defs.map((def: any) => {
+              return (
+                <div className={styles.shadowCard}>
+                  <div className={styles.translationCardOrthList}>
+                  {def.orth.map((orth: string) => {
+                    return (
+                      <p>
+                        {orth}
+                      </p>
+                    )
+                  })}
+                  </div>
+                  <div className={styles.translationCardDefinitionContainer}>
+                  {def.senses.map((sense: string) => {
+                    return (
+                      <p className={styles.translationCardHighlight}>
+                        {sense}
+                      </p>
+                    )
+                  })}
+                  </div>
+                </div>
+              );
+            })
+            }
           </>
         ) : (
           <>
