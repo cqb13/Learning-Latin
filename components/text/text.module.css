@@ -1,7 +1,7 @@
 .input {
   padding: 0.5rem;
-  border: 2px solid var(--color-primary);
-  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   font-size: 1.3rem;
   transition: 0.25s;
 }

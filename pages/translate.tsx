@@ -67,7 +67,7 @@ const Translate = () => {
   };
 
   return (
-    <Layout title="Translator" label={label}>
+    <Layout title="Translator" label={label} backgroundClass={styles.background}>
       <section className={utilStyles.container}>
         <div className={utilStyles.heading2Xl}>
           <h1>Translator</h1>

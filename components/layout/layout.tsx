@@ -5,10 +5,12 @@ import Head from "next/head";
 
 const Layout = ({
   children,
+  backgroundClass,
   title,
   label,
 }: {
   children: React.ReactNode;
+  backgroundClass?: string;
   title?: string;
   label?: string;
 }) => {
@@ -18,8 +20,10 @@ const Layout = ({
     title = `Latin | ${title ? title : label}`;
   }
 
+  console.log(backgroundClass)
+
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${backgroundClass}`}>
       <Head>
         <title>
           {title}

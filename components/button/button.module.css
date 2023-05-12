@@ -9,7 +9,7 @@
   padding: 15px 32px;
   text-decoration: none;
   font-size: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 4px;
   transition: 0.25s;
   cursor: pointer;
   user-select: none;

@@ -1,40 +1,35 @@
-.card {
-  background-color: #fff;
+.translationCard {
+  background-color: #ffffff60;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  width: 30%;
 }
 
 .shadowCard {
-  background-color: #fff;
+  background-color: #ffffff60;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 0.5rem;
 }
 
-.translationCard {
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.wordContainer {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  gap: 10px;
 }
 
 .translationCardHighlight {
-  background-color: rgb(73, 107, 190, 0.1);
+  background-color: rgba(73, 107, 190, 0.1);
   border-radius: 0.2rem;
-  padding-left: 0.3rem;
-  padding-right: 0.3rem;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
   width: fit-content;
 }
 
 .translationCardOrthList {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
 }
@@ -45,15 +40,8 @@
   margin: 0;
 }
 
-.translationCardDefinitionContainer h3{
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin: 0;
-}
-
 .translationCardDefinitionContainer {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
 }
@@ -62,9 +50,35 @@
   margin: 2px;
 }
 
-.buttonBottom {
-  align-self: stretch;
-  margin-top: auto;
+.translationCardDefinitionContainer h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.cardTitle {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.visibilityOptions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.visibilityButtonContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.card {
+  background-color: #ffffff60;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 30%;
 }
 
 .resourceCardContainer {
@@ -82,21 +96,9 @@
   min-width: 60%;
 }
 
-.cardTitle {
-  font-size: 1.9rem;
-  font-weight: 700;
-}
-
-.visibilityOptions {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.visibilityButtonContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
+.buttonBottom {
+  align-self: stretch;
+  margin-top: auto;
 }
 
 @media (max-width: 1280px) {
@@ -115,9 +117,6 @@
   .translationCard > * {
     overflow-x: auto;
     white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
     word-wrap: break-word;
   }
 }
