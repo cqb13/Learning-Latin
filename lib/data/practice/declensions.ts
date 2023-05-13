@@ -1,4 +1,4 @@
-import chartProps from "../../types/chartProps";
+import chartProps from "@prop-types/chartProps";
 
 const declensions: chartProps = {
   chartCount: 5,

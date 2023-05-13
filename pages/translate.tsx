@@ -1,14 +1,14 @@
-import TranslationCard from "../components/cards/translationCard/translationCard";
-import removeExtraSpaces from "../lib/utils/removeExtraSpaces";
-import cardStyles from "../components/cards/cards.module.css";
-import macronHandler from "../lib/utils/macronHandler";
-import styles from "../styles/translate.module.css";
-import utilStyles from "../styles/utils.module.css";
-import Layout from "../components/layout/layout";
-import Button from "../components/button/button";
+import TranslationCard from "@components/cards/translationCard/translationCard";
+import cardStyles from "@components/cards/cards.module.css";
+import removeExtraSpaces from "@utils/removeExtraSpaces";
+import styles from "@styles/translate.module.css";
+import utilStyles from "@styles/utils.module.css";
+import macronHandler from "@utils/macronHandler";
+import Layout from "@components/layout/layout";
+import Button from "@components/button/button";
 import DetectLanguage from "detectlanguage";
 import { useState, useEffect } from "react";
-import Text from "../components/text/text";
+import Text from "@components/text/text";
 
 const Translate = () => {
   const [translations, setTranslations] = useState<any[]>([]);

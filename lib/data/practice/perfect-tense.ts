@@ -1,4 +1,4 @@
-import chartProps from "../../types/chartProps";
+import chartProps from "@prop-types/chartProps";
 
 const perfectTense: chartProps = {
   chartCount: 1,

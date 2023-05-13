@@ -1,5 +1,5 @@
-import textProps from "../../lib/types/textProps";
 import { useState, useEffect } from "react";
+import textProps from "@prop-types/textProps";
 import styles from "./text.module.css";
 
 const Text = (props: textProps) => {

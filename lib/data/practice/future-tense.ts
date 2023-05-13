@@ -1,4 +1,4 @@
-import chartProps from "../../types/chartProps";
+import chartProps from "@prop-types/chartProps";
 
 const futureTense: chartProps = {
   chartCount: 2,

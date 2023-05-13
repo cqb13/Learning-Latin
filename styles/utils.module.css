@@ -118,6 +118,10 @@
   animation: bounce 2s infinite;
 }
 
+.hidden {
+  display: none;
+}
+
 @keyframes bounce {
   0%,
   20%,

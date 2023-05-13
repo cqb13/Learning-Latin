@@ -1,4 +1,4 @@
-import buttonProps from '../../lib/types/buttonProps';
+import buttonProps from '@prop-types/buttonProps';
 import style from './button.module.css'
 import Link from 'next/link'
 

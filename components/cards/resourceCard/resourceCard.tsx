@@ -1,4 +1,4 @@
-import resourceProps from "../../../lib/types/resourceProps";
+import resourceProps from "@prop-types/resourceProps";
 import Button from "../../button/button";
 import styles from "../cards.module.css";
 

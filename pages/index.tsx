@@ -1,7 +1,7 @@
-import utilStyles from "../styles/utils.module.css";
-import Layout from "../components/layout/layout";
-import Button from "../components/button/button";
-import styles from "../styles/index.module.css";
+import utilStyles from "@styles/utils.module.css";
+import Layout from "@components/layout/layout";
+import Button from "@components/button/button";
+import styles from "@styles/index.module.css";
 import Image from "next/image";
 
 const Home = () => {

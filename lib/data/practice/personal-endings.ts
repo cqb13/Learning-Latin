@@ -1,4 +1,4 @@
-import chartProps from "../../types/chartProps";
+import chartProps from "@prop-types/chartProps";
 
 const personalEndings: chartProps = {
   chartCount: 1,

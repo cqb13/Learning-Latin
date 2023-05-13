@@ -1,4 +1,4 @@
-import chartStyles from "../../components/chart/chart.module.css";
+import chartStyles from "@components/chart/chart.module.css";
 
 const changeTextAccuracyState = (
   event: React.ChangeEvent<HTMLInputElement>,

@@ -1,4 +1,4 @@
-import resourceProps from "../types/resourceProps";
+import resourceProps from "@prop-types/resourceProps";
 
 const resources: resourceProps[] = [
   {

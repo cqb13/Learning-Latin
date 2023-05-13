@@ -1,5 +1,5 @@
-import utilStyles from "../../styles/utils.module.css";
-import chartProps from "../../lib/types/chartProps";
+import utilStyles from "@styles/utils.module.css";
+import chartProps from "@prop-types/chartProps";
 import ToolTip from "../toolTip/toolTip";
 import Button from "../button/button";
 import Image from "next/image";

@@ -1,9 +1,9 @@
-import changeTextAccuracyState from "../../lib/utils/changeTextAccuracyState";
-import createValueArrayMap from "../../lib/utils/createValueArrayMap";
-import checkForMacrons from "../../lib/utils/checkForMacrons";
-import chartClearable from "../../lib/utils/chartClearable";
-import macronHandler from "../../lib/utils/macronHandler";
-import chartProps from "../../lib/types/chartProps";
+import changeTextAccuracyState from "@utils/changeTextAccuracyState";
+import createValueArrayMap from "@utils/createValueArrayMap";
+import checkForMacrons from "@utils/checkForMacrons";
+import chartClearable from "@utils/chartClearable";
+import macronHandler from "@utils/macronHandler";
+import chartProps from "@prop-types/chartProps";
 import { useEffect, useState } from "react";
 import styles from "./chart.module.css";
 import Text from "../text/text";

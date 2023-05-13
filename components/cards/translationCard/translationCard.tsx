@@ -1,3 +1,4 @@
+import utilStyles from "@styles/utils.module.css";
 import ToolTip from "../../toolTip/toolTip";
 import styles from "../cards.module.css";
 import Button from "../../button/button";
@@ -61,7 +62,7 @@ const TranslationCard = (props: any) => {
           </ToolTip>
         </div>
       </section>
-      <section className={`${isMinimized ? styles.hidden : ""} ${styles.wordContainer}`}>
+      <section className={`${isMinimized ? utilStyles.hidden : ""} ${styles.wordContainer}`}>
         {props.data.defs.length > 0 ? (
           <>
             {props.data.defs.map((def: any) => {

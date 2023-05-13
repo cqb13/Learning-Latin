@@ -1,7 +1,7 @@
-import utilStyles from "../styles/utils.module.css";
-import Layout from "../components/layout/layout";
-import Button from "../components/button/button";
-import styles from "../styles/practice.module.css";
+import utilStyles from "@styles/utils.module.css";
+import styles from "@styles/practice.module.css";
+import Layout from "@components/layout/layout";
+import Button from "@components/button/button";
 
 const Practice = () => {
   const practiceRoutes = [
