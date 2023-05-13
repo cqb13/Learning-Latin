@@ -61,7 +61,7 @@ const TranslationCard = (props: any) => {
           </ToolTip>
         </div>
       </section>
-      <section className={`${isMinimized ? "hidden" : ""} ${styles.wordContainer}`}>
+      <section className={`${isMinimized ? styles.hidden : ""} ${styles.wordContainer}`}>
         {props.data.defs.length > 0 ? (
           <>
             {props.data.defs.map((def: any) => {

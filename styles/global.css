@@ -49,10 +49,6 @@ nav {
   top: 0;
 }
 
-.hidden {
-  display: none;
-}
-
 .button-container {
   display: flex;
   flex-direction: row;
