@@ -16,6 +16,6 @@
 - Add options to see translated words in context
 - Add background styles to pages
 - Bring back user accounts
-- Docs with grammar info
+- Notes page with grammar info
 - Games page, (hangman, wordle, crosswords, etc.)
 </pre>

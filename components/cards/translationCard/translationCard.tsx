@@ -68,6 +68,22 @@ const TranslationCard = (props: any) => {
             {props.data.defs.map((def: any) => {
               return (
                 <div className={styles.shadowCard}>
+                  {def.infls ? (
+                    <div>
+                      {def.infls.map((infl: any) => {
+                        return (
+                          <p>{`${infl.stem}.${infl.ending} | ${infl.pos} -> ${infl.pos == "verb" ? (
+                              `${infl.form.tense} - ${infl.form.number} - ${infl.form.voice} - ${infl.form.mood}`
+                          ) : (
+                            `${infl.form.declension} - ${infl.form.gender} ${infl.form.number}`
+                          )}`}</p>
+                        )
+                      })}
+                    </div>
+                      
+                  ) : (
+                    null
+                  )}
                   <div className={styles.translationCardOrthList}>
                   {def.orth.map((orth: string) => {
                     return (
