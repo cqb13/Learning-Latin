@@ -1,10 +1,8 @@
-import chartStyles from "@components/chart/chart.module.css";
-
 const clearChart = (chart: string[][]) => {
   const inputs = document.querySelectorAll("input");
   for (let i = 0; i < inputs.length; i++) {
-    inputs[i].classList.remove(chartStyles.right);
-    inputs[i].classList.remove(chartStyles.wrong);
+    inputs[i].classList.remove("border-red-500", "border-green-500");
+    inputs[i].classList.add("border-neutral-300");
   }
 
   let emptyChart = chart

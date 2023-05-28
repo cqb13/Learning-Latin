@@ -1,19 +1,16 @@
-import TranslationCard from "@components/cards/translationCard/translationCard";
-import cardStyles from "@components/cards/cards.module.css";
+import TranslationCard from "@components/translationCard";
 import removeExtraSpaces from "@utils/removeExtraSpaces";
-import styles from "@styles/translate.module.css";
-import utilStyles from "@styles/utils.module.css";
 import macronHandler from "@utils/macronHandler";
-import Layout from "@components/layout/layout";
-import Button from "@components/button/button";
-import DetectLanguage from "detectlanguage";
+import Layout from "@components/layout";
+import Button from "@components/button";
 import { useState, useEffect } from "react";
-import Text from "@components/text/text";
+import Text from "@components/text";
+import { NextPage } from "next";
 
-const Translate = () => {
+const Translate: NextPage = () => {
   const [translations, setTranslations] = useState<any[]>([]);
   const [apiKey, setApiKey] = useState("");
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("cur");
   const [label, setLabel] = useState("");
 
   useEffect(() => {
@@ -22,7 +19,7 @@ const Translate = () => {
       setApiKey(key);
     }
     // speeds up user search
-    getTranslation("latin-to-english");
+    getTranslation("latin-to-english", false);
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,20 +27,21 @@ const Translate = () => {
   };
 
   const onEnter = () => {
-    const detectLanguage = new DetectLanguage(apiKey);
-    detectLanguage.detect(query).then(function(result) {
-      if (result[0].language === "en") {
-        getTranslation("english-to-latin");
-      } else if (result[0].language != "en") {
-        getTranslation("latin-to-english");
-      } else {
-        return;
-      }
-    });
+    //const detectLanguage = new DetectLanguage(apiKey);
+    //detectLanguage.detect(query).then(function(result: any) {
+    //  if (result[0].language === "en") {
+    //    getTranslation("english-to-latin");
+    //  } else if (result[0].language != "en") {
+    //    getTranslation("latin-to-english");
+    //  } else {
+    //    return;
+    //  }
+    //});
   };
 
   const getTranslation = async (
-    type: "latin-to-english" | "english-to-latin"
+    type: "latin-to-english" | "english-to-latin",
+    set: Boolean
   ) => {
     setLabel("");
     setLabel(query);
@@ -53,8 +51,11 @@ const Translate = () => {
       let cleanQuery = macronHandler(query);
       //if there are extra spaces, empty cards will be created
       cleanQuery = removeExtraSpaces(cleanQuery);
-      const response = await fetch(`/api/translate?word=${cleanQuery}&lang=${type}`);
+      const response = await fetch(
+        `/api/translate?word=${cleanQuery}&lang=${type}`
+      );
       const data = await response.json();
+      if (!set) return;
       setTranslations(data);
     } catch (error) {
       console.error(error);
@@ -67,29 +68,34 @@ const Translate = () => {
   };
 
   return (
-    <Layout title="Translator" label={label} backgroundClass={styles.background}>
-      <section className={utilStyles.container}>
-        <div className={utilStyles.heading2Xl}>
-          <h1>Translator</h1>
-        </div>
-        <section className={styles.searchContainer}>
+    <Layout
+      title="Translator"
+      label={label}
+      backgroundClass="bg-translate-gradient"
+    >
+      <section className="flex flex-col items-center">
+        <h1 className="text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">
+          Translator
+        </h1>
+        <section className="flex flex-col w-3/5 mt-2">
           <Text
             placeholder="Enter a word"
             onChange={onChange}
             onKeyPress={onEnter}
+            class=" bg-white bg-opacity-30 backdrop-blur-sm"
             keyName="Enter"
             value={query}
           />
-          <div className="button-container">
+          <div className="flex gap-2 mt-2 max-sm:flex-col">
             <Button
-              onClick={() => getTranslation("latin-to-english")}
-              class={utilStyles.fullWidth}
+              onClick={() => getTranslation("latin-to-english", true)}
+              class="w-full"
             >
               Latin To English
             </Button>
             <Button
-              onClick={() => getTranslation("english-to-latin")}
-              class={utilStyles.fullWidth}
+              onClick={() => getTranslation("english-to-latin", true)}
+              class="w-full"
             >
               English To Latin
             </Button>
@@ -97,16 +103,22 @@ const Translate = () => {
         </section>
 
         {translations.length > 0 &&
-          <section className={cardStyles.translationCardContainer}>
-            {translations.map((t) => (
-              <TranslationCard
-                data={t}
-                removeCard={() => removeCard(t.word)}
-              />
-            ))}
+          <section className="flex flex-col justify-center gap-3 w-3/5 mt-3">
+            {translations.map(t =>
+              <TranslationCard data={t} removeCard={() => removeCard(t.word)} />
+            )}
           </section>}
-        <p>Translation functionality is in early development, if you find an issue, please open an issue on my github</p>
-        <a href="https://github.com/Templar-Development/Open-Words-TS/issues/new/choose" target="_blank">Github Issue</a>
+        <p className="text-center">
+          Translation functionality is in early development, if you find an
+          issue, please open an issue on my github
+        </p>
+        <a
+          className=" text-blue-500 hover:underline"
+          href="https://github.com/Templar-Development/Open-Words-TS/issues/new/choose"
+          target="_blank"
+        >
+          Github Issue
+        </a>
       </section>
     </Layout>
   );

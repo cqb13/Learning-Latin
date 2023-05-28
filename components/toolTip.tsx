@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-import styles from "./toolTip.module.css";
 
 const ToolTip = ({
   delay,
-  direction,
   content,
   children
 }: {
   delay?: number;
-  direction: "top" | "right" | "left" | "bottom";
   content: any;
   children: any;
 }) => {
   let timeout: any;
-  const [directionClass] = useState(styles[direction]);
   const [active, setActive] = useState(false);
 
   const showTip = () => {
@@ -29,13 +25,21 @@ const ToolTip = ({
 
   return (
     <div
-      className={styles.toolTipWrapper}
+      className="inline-block relative"
       onMouseEnter={showTip}
       onMouseLeave={hideTip}
     >
       {children}
       {active &&
-        <div className={`${styles.toolTip} ${directionClass}`}>
+        <div
+          className={`mt-1 absolute text-xs border-solid border-transparent rounded left-1/2 -translate-x-1/2 p-1 text-gray-200 bg-black font-sans leading-tight z-50 whitespace-nowrap`}
+          style={{
+            top: "100%",
+            transformOrigin: "top",
+            borderWidth: "0 2px 2px",
+            transform: "translateX(-50%)"
+          }}
+        >
           {content}
         </div>}
     </div>

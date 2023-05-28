@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import textProps from "@prop-types/textProps";
-import styles from "./text.module.css";
 
 const Text = (props: textProps) => {
   const [placeholder, setPlaceholder] = useState("");
@@ -43,8 +42,6 @@ const Text = (props: textProps) => {
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.onChange?.(event);
-    //allows for not having a value input, while being able to change the value (needed bc of chart answers)
-    //if causes problem, create a new prop (editable) instead of using value
     if (props.value) return;
     setValue(event.target.value);
   };
@@ -59,7 +56,7 @@ const Text = (props: textProps) => {
     <input
       type="text"
       placeholder={placeholder}
-      className={`${styles.input} ${props.class}`}
+      className={`max-sm:text-center text-xl p-2 border border-neutral-300 rounded focus:outline-none focus:ring-0 focus:border-primary-color-dark placeholder:text-primary-color ${props.class}`}
       onChange={onChange}
       onKeyDown={onKeyDown}
       value={value}

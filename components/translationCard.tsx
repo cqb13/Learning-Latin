@@ -1,8 +1,6 @@
-import utilStyles from "@styles/utils.module.css";
-import ToolTip from "../../toolTip/toolTip";
-import styles from "../cards.module.css";
-import Button from "../../button/button";
+import Button from "./button";
 import { useState } from "react";
+import ToolTip from "./toolTip";
 import Image from "next/image";
 
 const TranslationCard = (props: any) => {
@@ -23,18 +21,17 @@ const TranslationCard = (props: any) => {
   data();
 
   return (
-    <section className={styles.translationCard} key={props.data.word}>
-      <section className={styles.visibilityOptions}>
-        <h2 className={styles.cardTitle}>
+    <section className="bg-slate-50 bg-opacity-10 rounded flex flex-col p-4 shadow-card" key={props.data.word}>
+      <section className="flex justify-between mb-3">
+        <h2 className="text-3xl font-bold">
           {props.data.word}
         </h2>
-        <div className={styles.visibilityButtonContainer}>
+        <div className="flex gap-3">
           <ToolTip
-            direction="bottom"
             content={isMinimized ? "expand card" : "shrink card"}
             delay={20}
           >
-            <Button onClick={changeVisibility}>
+            <Button onClick={changeVisibility} class="h-full">
               {isMinimized
                 ? <Image
                     src="/plus.svg"
@@ -50,8 +47,8 @@ const TranslationCard = (props: any) => {
                   />}
             </Button>
           </ToolTip>
-          <ToolTip direction="bottom" content={"remove card"} delay={20}>
-            <Button onClick={deleteCard}>
+          <ToolTip content={"remove card"} delay={20}>
+            <Button onClick={deleteCard} class="h-full">
               <Image
                 src="/clear.svg"
                 alt="remove card"
@@ -62,21 +59,33 @@ const TranslationCard = (props: any) => {
           </ToolTip>
         </div>
       </section>
-      <section className={`${isMinimized ? utilStyles.hidden : ""} ${styles.wordContainer}`}>
+      <section className={`${isMinimized ? "hidden" : ""} flex flex-col gap-3`}>
         {props.data.defs.length > 0 ? (
           <>
             {props.data.defs.map((def: any) => {
               return (
-                <div className={styles.shadowCard}>
+                <div className="bg-slate-50 bg-opacity-25 rounded shadow-card p-2">
+                  <div className="flex gap-3 text-2xl font-semibold">
+                    {def.orth.map((orth: string) => {
+                      return (
+                        <p>
+                          {orth}
+                        </p>
+                      )
+                    })}
+                  </div>
                   {def.infls ? (
-                    <div>
+                    <div className="flex flex-col gap-2 my-3 w-fit">
                       {def.infls.map((infl: any) => {
                         return (
-                          <p>{`${infl.stem}.${infl.ending} | ${infl.pos} -> ${infl.pos == "verb" ? (
-                              `${infl.form.tense} - ${infl.form.number} - ${infl.form.voice} - ${infl.form.mood}`
-                          ) : (
-                            `${infl.form.declension} - ${infl.form.gender} ${infl.form.number}`
-                          )}`}</p>
+                          <span className="bg-opacity-10 rounded px-2">
+                            {infl.stem}{infl.ending? `.${infl.ending}` : ""}
+                            {infl.stem? ` | ` : ""}
+                            {" "}{infl.pos} 
+                            {infl.form.declension && infl.form.declension != "unknown"? ` ${infl.form.declension}` : ""}
+                            {infl.form.gender && infl.form.gender != "unknown"? ` ${infl.form.gender}` : ""}
+                            {infl.form.number && infl.form.number != "unknown"? ` ${infl.form.number}` : ""}
+                          </span>
                         )
                       })}
                     </div>
@@ -84,19 +93,10 @@ const TranslationCard = (props: any) => {
                   ) : (
                     null
                   )}
-                  <div className={styles.translationCardOrthList}>
-                  {def.orth.map((orth: string) => {
-                    return (
-                      <p>
-                        {orth}
-                      </p>
-                    )
-                  })}
-                  </div>
-                  <div className={styles.translationCardDefinitionContainer}>
+                  <div className="flex flex-wrap gap-3">
                   {def.senses.map((sense: string) => {
                     return (
-                      <p className={styles.translationCardHighlight}>
+                      <p className=" bg-primary-color bg-opacity-10 rounded px-2">
                         {sense}
                       </p>
                     )
@@ -108,12 +108,12 @@ const TranslationCard = (props: any) => {
             }
           </>
         ) : (
-          <>
+          <div>
             <p>Sorry, your word was not found</p>
             <p>Please double check spelling, confirm words existence</p>
             <p>You believe that program should have found you word, please open in issue in our github repo</p>
             <a href="https://github.com/Templar-Development/Open-Words-TS/issues/new/choose">Open Words TS</a>
-          </>
+          </div>
         )}
       </section>
     </section>

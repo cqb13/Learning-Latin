@@ -1,9 +1,8 @@
-import utilStyles from "@styles/utils.module.css";
-import styles from "@styles/practice.module.css";
-import Layout from "@components/layout/layout";
-import Button from "@components/button/button";
+import Layout from "@components/layout";
+import Button from "@components/button";
+import { NextPage } from "next";
 
-const Practice = () => {
+const Practice: NextPage = () => {
   const practiceRoutes = [
     ["Declension Endings", "/practice/declension-endings"],
     ["Future Tense", "/practice/future-tense"],
@@ -15,15 +14,13 @@ const Practice = () => {
 
   return (
     <Layout title="Practice">
-      <section className={utilStyles.container}>
-        <div className={utilStyles.heading2Xl}>
-          <h1>Practice</h1>
-        </div>
-        <section className={styles.practiceNav}>
+      <section className="flex flex-col items-center">
+        <h1 className="text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">Practice Charts</h1>
+        <section className="mt-6 flex flex-wrap justify-center items-center gap-3 w-4/5 text-center">
           {practiceRoutes.map(route =>
             <Button
               link={`/practice/${route[0].toLowerCase().replace(" ", "-")}`}
-              class={`${utilStyles.twoWidth} ${styles.practiceLink}`}
+              class=" w-1/4"
             >
               {route[0]}
             </Button>

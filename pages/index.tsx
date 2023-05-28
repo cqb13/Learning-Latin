@@ -1,44 +1,41 @@
-import utilStyles from "@styles/utils.module.css";
-import Layout from "@components/layout/layout";
-import Button from "@components/button/button";
-import styles from "@styles/index.module.css";
+import Layout from "@components/layout";
+import Button from "@components/button";
+import { NextPage } from "next";
 import Image from "next/image";
 
-const Home = () => {
+const Home: NextPage = () => {
   return (
     <Layout>
-      <section className={`${utilStyles.container} ${utilStyles.centered}`}>
-        <section className={`${utilStyles.centered} ${styles.hero}`}>
-          <div className={`${utilStyles.heading2Xl} ${styles.shadow}`}>
-            <h1>Learning Latin</h1>
-          </div>
-          <sub
-            className={`${utilStyles.noMargin} ${utilStyles.sub} ${styles.shadow}`}
-          >
+      <section className="flex flex-col items-center text-center mx-auto">
+        <section className="flex flex-col items-center pt-40 pb-4 h-[calc(100vh_-_2rem)] bg-gradient-radiant bg-hero-gradient w-screen">
+          <h1 className="text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">
+            Learning Latin
+          </h1>
+          <sub className="font-semibold text-2xl text-zinc-700 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">
             A modern tool with many resources for learning Latin.
           </sub>
-          <Button locked={false} class={styles.callToActionButton}>
+          <Button class=" mt-4 w-fit">
             Start Learning Now!
           </Button>
           <a
             href="#about"
-            className={`${styles.learnMoreButton} ${utilStyles.bounce}`}
+            className="flex flex-col items-center justify-center text-md text-white animate-bounce mt-5 hover:[text-shadow:0_1px_1px_rgba(0,0,0,0.2)]"
           >
             Learn More
-            <div className={styles.learnMoreArrow}>
+            <div className="-rotate-90">
               <Image
                 src="/arrowLeft.svg"
                 alt="arrow left"
-                width={40}
-                height={40}
+                width={25}
+                height={25}
               />
             </div>
           </a>
         </section>
         <br />
-        <section className={styles.sectionContainer} id="about">
-          <h2>Welcome!</h2>
-          <div className={styles.featureContainer}>
+        <article className="my-12 text-zinc-900" id="about">
+          <h2 className="m-1 text-3xl font-bold">Welcome!</h2>
+          <div className="mb-8 mx-auto rounded-xl w-11/12 sm:w-[calc(75vw)] px-8 py-4 drop-shadow-lg bg-slate-50">
             <p>
               Welcome to Learning Latin! Our goal is to provide a modern tool to
               help you learn Latin. We have a wide variety of resources
@@ -50,11 +47,11 @@ const Home = () => {
             </p>
           </div>
           <br />
-        </section>
-        <section className={styles.sectionContainer} id="data">
-          <h2>Features &amp; Benefits</h2>
-          <div className={styles.featureContainer}>
-            <h3>Interactive Exercises</h3>
+        </article>
+        <article className="my-12 text-zinc-900" id="data">
+          <h2 className="m-1 text-3xl font-bold">Features &amp; Benefits</h2>
+          <div className="mb-8 mx-auto rounded-xl w-11/12 sm:w-[calc(75vw)] px-8 py-4 drop-shadow-lg bg-slate-50">
+            <h3 className="m-1 text-xl font-bold">Interactive Exercises</h3>
             <p>
               Learning Latin includes a wide variety of interactive exercises
               that will help you practice and reinforce what you've learned.
@@ -63,8 +60,8 @@ const Home = () => {
               effective.
             </p>
           </div>
-          <div className={styles.featureContainer}>
-            <h3>Open Source!</h3>
+          <div className="mb-8 mx-auto rounded-xl w-11/12 sm:w-[calc(75vw)] px-8 py-4 drop-shadow-lg bg-slate-50">
+            <h3 className="m-1 text-xl font-bold">Open Source!</h3>
             <p>
               learning Latin is open source, which means that the code is freely
               available for anyone to modify. This has many benefits for our
@@ -77,7 +74,7 @@ const Home = () => {
               accessible and enjoyable for learners of all levels.
             </p>
           </div>
-        </section>
+        </article>
       </section>
     </Layout>
   );

@@ -1,17 +1,14 @@
 import personalPronouns from "@data/practice/personal-pronouns";
 import relativePronouns from "@data/practice/relative-pronouns";
 import personalEndings from "@data/practice/personal-endings";
-import ChartFooter from "@components/chartFooter/chartFooter";
-import chartStyles from "@components/chart/chart.module.css";
+import ChartFooter from "@components/chartFooter";
 import perfectTense from "@data/practice/perfect-tense";
 import futureTense from "@data/practice/future-tense";
 import declensions from "@data/practice/declensions";
-import utilStyles from "@styles/utils.module.css";
-import styles from "@styles/practice.module.css";
 import chartProps from "@prop-types/chartProps";
-import Layout from "@components/layout/layout";
-import Button from "@components/button/button";
-import Chart from "@components/chart/chart";
+import Layout from "@components/layout";
+import Button from "@components/button";
+import Chart from "@components/chart";
 import { useState, useEffect } from "react";
 import clearChart from "@utils/clearChart";
 import Image from "next/image";
@@ -146,11 +143,11 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
     const inputs = document.querySelectorAll("input");
     if (!showAnswers === true) {
       for (let i = 0; i < inputs.length; i++) {
-        inputs[i].classList.add(chartStyles.right);
+        inputs[i].classList.add("text-green-500");
       }
     } else {
       for (let i = 0; i < inputs.length; i++) {
-        inputs[i].classList.remove(chartStyles.right);
+        inputs[i].classList.remove("text-green-500");
       }
     }
     updateClearable(false);
@@ -159,55 +156,48 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
   //prettier-ignore
   return (
     <Layout label={data.name}>
-      <section className={utilStyles.container}>
-        <section className={utilStyles.container}>
-          <div className={styles.chartTitleContainer}>
-            {data.chartCount > 1? <Button onClick={handleSwitchChart} id="<">
-              <Image
-                src="/arrowLeft.svg"
-                alt="arrow left"
-                width={20}
-                height={20}
-              />
-            </Button>: null}
-
-            <div className={`${utilStyles.centerText} ${styles.chartTitle}`}>
-              <h1>{data.chart[chartIndex].name}</h1>
-              {data.chart[chartIndex].note? <p>{data.chart[chartIndex].note}</p>: null}
-            </div>
-
-            {data.chartCount > 1? <Button onClick={handleSwitchChart} id=">">
+      <section className="flex flex-col items-center">
+        <div className="flex justify-center items-center gap-3">
+          {data.chartCount > 1? <Button onClick={handleSwitchChart} class="child:w-5 child:h-5" id="<">
             <Image
-                src="/arrowRight.svg"
-                alt="arrow left"
-                width={20}
-                height={20}
-              />
-            </Button>: null}
+              src="/arrowLeft.svg"
+              alt="arrow left"
+              width={20}
+              height={20}
+            />
+          </Button>: null}
+          <div className="text-center">
+            <h1 className=" text-xl font-semibold">{data.chart[chartIndex].name}</h1>
+            {data.chart[chartIndex].note? <p>{data.chart[chartIndex].note}</p>: null}
           </div>
-
-          {data.chartCount > 1? <p>{currentChart} / {data.chartCount}</p> : null}
-
-          <Chart 
-            updateClearable={updateClearable}
-            clearChart={clearChart} 
-            chartIndex={chartIndex} 
-            answers={showAnswers} 
-            clear={triggerClear}
-            data={data} 
-          />
-
-          <ChartFooter 
-            switchToLinkedChart={switchToLinkedChart} 
-            updateClearable = {updateClearable}
-            toggleAnswers={toggleAnswers}
-            chartClearable={clearable}
-            clearChart={updateTrigger}
-            chartIndex={chartIndex} 
-            answers={showAnswers}
-            data={data} 
-          />
-        </section>
+          {data.chartCount > 1? <Button onClick={handleSwitchChart} class="child:w-5 child:h-5" id=">">
+          <Image
+              src="/arrowRight.svg"
+              alt="arrow left"
+              width={20}
+              height={20}
+            />
+          </Button>: null}
+        </div>
+        {data.chartCount > 1? <p className="text-lg font-medium">{currentChart} / {data.chartCount}</p> : null}
+        <Chart 
+          updateClearable={updateClearable}
+          clearChart={clearChart} 
+          chartIndex={chartIndex} 
+          answers={showAnswers} 
+          clear={triggerClear}
+          data={data} 
+        />
+        <ChartFooter 
+          switchToLinkedChart={switchToLinkedChart} 
+          updateClearable = {updateClearable}
+          toggleAnswers={toggleAnswers}
+          chartClearable={clearable}
+          clearChart={updateTrigger}
+          chartIndex={chartIndex} 
+          answers={showAnswers}
+          data={data} 
+        />
       </section>
     </Layout>
   );

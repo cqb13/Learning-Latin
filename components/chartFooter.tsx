@@ -1,7 +1,6 @@
-import utilStyles from "@styles/utils.module.css";
 import chartProps from "@prop-types/chartProps";
-import ToolTip from "../toolTip/toolTip";
-import Button from "../button/button";
+import ToolTip from "./toolTip";
+import Button from "./button";
 import Image from "next/image";
 
 const chartFooter = ({
@@ -32,13 +31,12 @@ const chartFooter = ({
   }
 
   return (
-    <section className={utilStyles.horizontalContainer}>
+    <section className="flex items-center gap-3">
       <ToolTip
-        direction="bottom"
         content={answers ? "questions" : "answers"}
         delay={20}
       >
-        <Button onClick={toggleAnswers}>
+        <Button onClick={toggleAnswers} class="child:w-5 child:h-5">
           {answers
             ? <Image
                 src="/question.svg"
@@ -50,8 +48,8 @@ const chartFooter = ({
         </Button>
       </ToolTip>
       
-      <ToolTip direction="bottom" content="clear" delay={20}>
-        <Button onClick={clear} locked={!chartClearable}>
+      <ToolTip content="clear" delay={20}>
+        <Button onClick={clear} locked={!chartClearable} class="child:w-5 child:h-5">
           <Image src="/clear.svg" alt="clear" width={20} height={20} />
         </Button>
       </ToolTip>
@@ -59,13 +57,13 @@ const chartFooter = ({
       {/*Switches between linked charts*/}
       {data.chart[chartIndex].link || data.chart[chartIndex].returnLink
         ? <ToolTip
-            direction="bottom"
             content={
               data.chart[chartIndex].link || data.chart[chartIndex].returnLink
             }
             delay={20}
           >
             <Button
+              class="child:w-5 child:h-5"
               onClick={() =>
                 switchToLinkedChart(
                   data.chart[chartIndex].link ||

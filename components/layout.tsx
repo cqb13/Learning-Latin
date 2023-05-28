@@ -1,5 +1,4 @@
-import styles from "./layout.module.css";
-import NavBar from "../nav/nav";
+import NavBar from "./nav";
 import Image from "next/image";
 import Head from "next/head";
 
@@ -20,10 +19,8 @@ const Layout = ({
     title = `Latin | ${title ? title : label}`;
   }
 
-  console.log(backgroundClass)
-
   return (
-    <div className={`${styles.container} ${backgroundClass}`}>
+    <div className={`${backgroundClass}`}>
       <Head>
         <title>
           {title}
@@ -49,13 +46,12 @@ const Layout = ({
         <meta property="og:image" />
         <meta name="og:title" content={title} />
       </Head>
-      <div className={styles.wrapper}>
+      <div className="flex flex-col min-h-screen">
         <NavBar/>
-        <header className={styles.header} />
-        <main className={styles.content}>
+        <main className="flex-1">
           {children}
         </main>
-        <footer className={styles.footer}>
+        <footer className="flex shrink-0 justify-between items-center px-2 mb-1">
           <p>Learning Latin | By: cqb13</p>
           <a href="https://github.com/cqb13" target="_blank">
             <Image src="/github.svg" alt="github" width={30} height={30} />

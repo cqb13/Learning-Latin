@@ -5,8 +5,7 @@ import chartClearable from "@utils/chartClearable";
 import macronHandler from "@utils/macronHandler";
 import chartProps from "@prop-types/chartProps";
 import { useEffect, useState } from "react";
-import styles from "./chart.module.css";
-import Text from "../text/text";
+import Text from "./text";
 
 const Chart = ({
   data,
@@ -32,8 +31,8 @@ const Chart = ({
       if (answers) {
         const inputs = document.querySelectorAll("input");
         for (let i = 0; i < inputs.length; i++) {
-          inputs[i].classList.remove(styles.wrong);
-          inputs[i].classList.add(styles.right);
+          inputs[i].classList.remove("border-red-500", "border-neutral-300");
+          inputs[i].classList.add("border-green-500");
         }
         return;
       }
@@ -74,8 +73,8 @@ const Chart = ({
     setValueArrayMap(tempValueMap);
 
     if (answer === "") {
-      event.target.classList.remove(styles.right);
-      event.target.classList.remove(styles.wrong);
+      event.target.classList.remove("text-red-500", "text-green-500");
+      event.target.classList.add("border-neutral-300");
       return;
     }
 
@@ -111,42 +110,45 @@ const Chart = ({
 
   //prettier-ignore
   return (
-    <table className={styles.chart}>
-      <thead>
-        <tr>
-          {data.chart[chartIndex].labels.map((label, index) =>
-            <th key={index}>
-              {label}
-            </th>
-          )}
-        </tr>
-      </thead>
-      <tbody>
-        {data.chart[chartIndex].rows.map((row, rowIndex) =>
+    <div className="flex items-center justify-center my-1 p-3">
+      <table className="w-1/2 max-lg:w-4/5 max-md:w-11/12 table-fixed shadow-card">
+        <thead>
           <tr>
-            <td>
-              {row.rowTitle}
-            </td>
-            {row.rowContent.map((content, index) =>
-              <td key={index}>
-                {answers ? (
-                  <Text placeholder="" value={content}/>
-                ) : (
-                  <Text 
-                    placeholder="Answer" 
-                    id={content}
-                    class={styles.right}
-                    onChange={(event) => checkAnswer(event, rowIndex, index)}
-                    value={valueArrayMap[rowIndex][index]}
-                  />
-                )}
-              </td>
+            {data.chart[chartIndex].labels.map((label, index) =>
+              <th key={index} className="py-2 px-4">
+                {label}
+              </th>
             )}
           </tr>
-        )}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.chart[chartIndex].rows.map((row, rowIndex) =>
+            <tr key={rowIndex}>
+              <td className="py-2 px-4 text-center">
+                {row.rowTitle}
+              </td>
+              {row.rowContent.map((content, index) =>
+                <td key={index} className="py-2 px-4">
+                  {answers ? (
+                    <Text placeholder="" value={content} class="w-full"/>
+                  ) : (
+                    <Text 
+                      placeholder="Answer" 
+                      id={content}
+                      class="w-full text-center"
+                      onChange={(event) => checkAnswer(event, rowIndex, index)}
+                      value={valueArrayMap[rowIndex][index]}
+                    />
+                  )}
+                </td>
+                )}
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
   );
+  
 };
 
 export default Chart;
