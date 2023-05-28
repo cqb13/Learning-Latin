@@ -51,7 +51,7 @@ const Layout = ({
         <main className="flex-1">
           {children}
         </main>
-        <footer className="flex shrink-0 justify-between items-center px-2 mb-1">
+        <footer className="flex shrink-0 justify-between items-center px-2 my-1">
           <p>Learning Latin | By: cqb13</p>
           <a href="https://github.com/cqb13" target="_blank">
             <Image src="/github.svg" alt="github" width={30} height={30} />
