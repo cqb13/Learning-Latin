@@ -143,11 +143,11 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
     const inputs = document.querySelectorAll("input");
     if (!showAnswers === true) {
       for (let i = 0; i < inputs.length; i++) {
-        inputs[i].classList.add("text-green-500");
+        inputs[i].classList.add("border-green-500");
       }
     } else {
       for (let i = 0; i < inputs.length; i++) {
-        inputs[i].classList.remove("text-green-500");
+        inputs[i].classList.remove("border-green-500");
       }
     }
     updateClearable(false);
@@ -155,7 +155,7 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
 
   //prettier-ignore
   return (
-    <Layout label={data.name}>
+    <Layout label={data.name} backgroundClass="bg-practice-gradient">
       <section className="flex flex-col items-center">
         <div className="flex justify-center items-center gap-3">
           {data.chartCount > 1? <Button onClick={handleSwitchChart} class="child:w-5 child:h-5" id="<">

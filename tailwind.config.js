@@ -19,7 +19,7 @@ module.exports = {
         md: "0 2px 4px rgba(0, 0, 0, 0.2)"
       },
       boxShadow: {
-        "card": "0 0 10px rgba(0, 0, 0, 0.1)"
+        card: "0 0 10px rgba(0, 0, 0, 0.1)"
       },
       colors: {
         "primary-color": "#496bbe",
@@ -33,7 +33,9 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "hero-gradient": "radial-gradient(ellipse, #87cefa 20%, #fff 70%)",
         "translate-gradient":
-          "radial-gradient(circle at top right, #87cefa 15rem, #d9c0f3 40rem, #fff 50rem);"
+          "radial-gradient(circle at top right, #87cefa 15rem, #d9c0f3 40rem, #fff 50rem)",
+        "practice-gradient": "linear-gradient(232deg, rgba(255,255,255,1) 23%, rgba(135,206,250,1) 37%, rgba(217,192,243,1) 53%, rgba(255,255,255,1) 69%)",
+        "practice-nav-gradient": "radial-gradient(circle, rgba(148,187,233,0.8) 5%, rgba(148,187,233,0.5) 34%, rgba(255,255,255,1) 100%)",
       },
       height: {
         "slide-image-height": "calc(100vh - 2rem)"

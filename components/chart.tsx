@@ -73,7 +73,7 @@ const Chart = ({
     setValueArrayMap(tempValueMap);
 
     if (answer === "") {
-      event.target.classList.remove("text-red-500", "text-green-500");
+      event.target.classList.remove("border-red-500", "border-green-500");
       event.target.classList.add("border-neutral-300");
       return;
     }
@@ -111,7 +111,7 @@ const Chart = ({
   //prettier-ignore
   return (
     <div className="flex items-center justify-center my-1 p-3">
-      <table className="w-1/2 max-lg:w-4/5 max-md:w-11/12 table-fixed shadow-card">
+      <table className="w-1/2 max-lg:w-4/5 max-md:w-11/12 table-fixed shadow-card bg-slate-50 bg-opacity-60 rounded">
         <thead>
           <tr>
             {data.chart[chartIndex].labels.map((label, index) =>
@@ -130,12 +130,12 @@ const Chart = ({
               {row.rowContent.map((content, index) =>
                 <td key={index} className="py-2 px-4">
                   {answers ? (
-                    <Text placeholder="" value={content} class="w-full"/>
+                    <Text placeholder="" value={content} class="w-full text-center bg-slate-50 bg-opacity-30"/>
                   ) : (
                     <Text 
                       placeholder="Answer" 
                       id={content}
-                      class="w-full text-center"
+                      class="w-full text-center bg-slate-50 bg-opacity-30"
                       onChange={(event) => checkAnswer(event, rowIndex, index)}
                       value={valueArrayMap[rowIndex][index]}
                     />

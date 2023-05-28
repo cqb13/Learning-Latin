@@ -13,7 +13,7 @@ const Practice: NextPage = () => {
   ];
 
   return (
-    <Layout title="Practice">
+    <Layout title="Practice" backgroundClass="bg-practice-nav-gradient">
       <section className="flex flex-col items-center">
         <h1 className="text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">Practice Charts</h1>
         <section className="mt-6 flex flex-wrap justify-center items-center gap-3 w-4/5 text-center">

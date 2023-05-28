@@ -35,7 +35,7 @@ const Home: NextPage = () => {
         <br />
         <article className="my-12 text-zinc-900" id="about">
           <h2 className="m-1 text-3xl font-bold">Welcome!</h2>
-          <div className="mb-8 mx-auto rounded-xl w-11/12 sm:w-[calc(75vw)] px-8 py-4 drop-shadow-lg bg-slate-50">
+          <div className="mb-8 mx-auto rounded-xl w-11/12 sm:w-[calc(75vw)] px-8 py-4 shadow-card bg-slate-50">
             <p>
               Welcome to Learning Latin! Our goal is to provide a modern tool to
               help you learn Latin. We have a wide variety of resources
@@ -50,7 +50,7 @@ const Home: NextPage = () => {
         </article>
         <article className="my-12 text-zinc-900" id="data">
           <h2 className="m-1 text-3xl font-bold">Features &amp; Benefits</h2>
-          <div className="mb-8 mx-auto rounded-xl w-11/12 sm:w-[calc(75vw)] px-8 py-4 drop-shadow-lg bg-slate-50">
+          <div className="mb-8 mx-auto rounded-xl w-11/12 sm:w-[calc(75vw)] px-8 py-4 shadow-card bg-slate-50">
             <h3 className="m-1 text-xl font-bold">Interactive Exercises</h3>
             <p>
               Learning Latin includes a wide variety of interactive exercises
@@ -60,7 +60,7 @@ const Home: NextPage = () => {
               effective.
             </p>
           </div>
-          <div className="mb-8 mx-auto rounded-xl w-11/12 sm:w-[calc(75vw)] px-8 py-4 drop-shadow-lg bg-slate-50">
+          <div className="mb-8 mx-auto rounded-xl w-11/12 sm:w-[calc(75vw)] px-8 py-4 shadow-card bg-slate-50">
             <h3 className="m-1 text-xl font-bold">Open Source!</h3>
             <p>
               learning Latin is open source, which means that the code is freely
