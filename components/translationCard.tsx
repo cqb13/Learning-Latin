@@ -81,10 +81,14 @@ const TranslationCard = (props: any) => {
                           <span className="bg-opacity-10 rounded px-2">
                             {infl.stem}{infl.ending? `.${infl.ending}` : ""}
                             {infl.stem? ` | ` : ""}
-                            {" "}{infl.pos} 
+                            {" "}{infl.form.number && infl.form.number != "unknown"? ` ${infl.form.number} ` : ""}
+                            {infl.pos} 
                             {infl.form.declension && infl.form.declension != "unknown"? ` ${infl.form.declension}` : ""}
                             {infl.form.gender && infl.form.gender != "unknown"? ` ${infl.form.gender}` : ""}
-                            {infl.form.number && infl.form.number != "unknown"? ` ${infl.form.number}` : ""}
+                            {infl.form.tense && infl.form.tense != "unknown"? ` ${infl.form.tense}` : ""}
+                            {infl.form.voice && infl.form.voice != "unknown"? ` ${infl.form.voice}` : ""}
+                            {infl.form.mood && infl.form.mood != "unknown"? ` ${infl.form.mood}` : ""}
+                            {infl.form.person && infl.form.person != "unknown"? ` ${infl.form.person}` : ""}
                           </span>
                         )
                       })}
