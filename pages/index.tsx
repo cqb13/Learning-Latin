@@ -34,7 +34,7 @@ const Home: NextPage = () => {
         </section>
         <br />
         <article className="my-12 text-zinc-900" id="about">
-          <h2 className="m-1 text-3xl font-bold">Welcome!</h2>
+          <h2 className="m-1 text-3xl font-bold">About</h2>
           <div className="mb-8 mx-auto rounded-xl w-11/12 sm:w-[calc(75vw)] px-8 py-4 shadow-card bg-slate-50">
             <p>
               Welcome to Learning Latin! Our goal is to provide a modern tool to
