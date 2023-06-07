@@ -10,16 +10,14 @@ module.exports = {
       screens: {
         xs: "470px"
       },
-      boxShadow: {
-        bar: "0px 1px 3px rgba(0, 0, 0, 0.3)"
-      },
       textShadow: {
         sm: "0 1px 1px rgba(0, 0, 0, 0.2)",
         default: "0 1px 2px rgba(0, 0, 0, 0.2)",
         md: "0 2px 4px rgba(0, 0, 0, 0.2)"
       },
       boxShadow: {
-        card: "0 0 10px rgba(0, 0, 0, 0.1)"
+        card: "0 0 10px rgba(0, 0, 0, 0.1)",
+        bar: "0px 1px 3px rgba(0, 0, 0, 0.3)"
       },
       colors: {
         "primary-color": "#496bbe",

@@ -48,7 +48,7 @@ const chartFooter = ({
         </Button>
       </ToolTip>
       
-      <ToolTip content="clear" delay={20}>
+      <ToolTip content={chartClearable ? "clear" : "locked"} delay={20}>
         <Button onClick={clear} locked={!chartClearable} class="child:w-5 child:h-5">
           <Image src="/clear.svg" alt="clear" width={20} height={20} />
         </Button>
