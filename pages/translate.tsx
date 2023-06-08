@@ -9,16 +9,9 @@ import { NextPage } from "next";
 
 const Translate: NextPage = () => {
   const [translations, setTranslations] = useState<any[]>([]);
-  const [apiKey, setApiKey] = useState("");
   const [query, setQuery] = useState("cur");
-  const [label, setLabel] = useState("");
 
   useEffect(() => {
-    const key = process.env.NEXT_PUBLIC_LANGUAGE_API_KEY;
-    if (key) {
-      setApiKey(key);
-    }
-    // speeds up user search
     getTranslation("latin-to-english", false);
   }, []);
 
@@ -26,26 +19,17 @@ const Translate: NextPage = () => {
     setQuery(e.target.value);
   };
 
-  const onEnter = () => {
-    //const detectLanguage = new DetectLanguage(apiKey);
-    //detectLanguage.detect(query).then(function(result: any) {
-    //  if (result[0].language === "en") {
-    //    getTranslation("english-to-latin");
-    //  } else if (result[0].language != "en") {
-    //    getTranslation("latin-to-english");
-    //  } else {
-    //    return;
-    //  }
-    //});
-  };
-
   const getTranslation = async (
     type: "latin-to-english" | "english-to-latin",
-    set: Boolean
+    set: boolean
   ) => {
-    setLabel("");
-    setLabel(query);
     setQuery("");
+
+    //should increase performance, and fixes weird bug, where if you search the same words, principal parts are duplicated
+    if (translations.find(t => t.word === query)) {
+      setTranslations(translations.filter(t => t.word === query));
+      return;
+    }
 
     try {
       let cleanQuery = macronHandler(query);
@@ -64,13 +48,11 @@ const Translate: NextPage = () => {
 
   const removeCard = (word: string) => {
     setTranslations(translations.filter(t => t.word !== word));
-    setLabel(label.replace(word, ""));
   };
 
   return (
     <Layout
       title="Translator"
-      label={label}
       backgroundClass="bg-translate-gradient"
     >
       <section className="flex flex-col items-center">
@@ -81,7 +63,6 @@ const Translate: NextPage = () => {
           <Text
             placeholder="Enter a word"
             onChange={onChange}
-            onKeyPress={onEnter}
             class=" bg-white bg-opacity-30 backdrop-blur-sm"
             keyName="Enter"
             value={query}
