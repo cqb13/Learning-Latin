@@ -74,6 +74,7 @@ const TranslationCard = (props: any) => {
                       )
                     })}
                   </div>
+                  <p>{def.info.gender != "unknown"? def.info.gender : ""} {def.info.pos != "POS"? def.info.pos : ""}</p>
                   {def.infls ? (
                     <div className="flex flex-col gap-2 my-3 w-fit">
                       {def.infls.map((infl: any) => {

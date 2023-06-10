@@ -25,7 +25,7 @@ const Translate: NextPage = () => {
   ) => {
     setQuery("");
 
-    //should increase performance, and fixes weird bug, where if you search the same words, principal parts are duplicated
+    //should increase performance
     if (translations.find(t => t.word === query)) {
       setTranslations(translations.filter(t => t.word === query));
       return;
