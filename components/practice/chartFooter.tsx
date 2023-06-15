@@ -1,6 +1,6 @@
+import ToolTip from "@components/shared/toolTip";
 import chartProps from "@prop-types/chartProps";
-import ToolTip from "./toolTip";
-import Button from "./button";
+import Button from "@components/shared/button";
 import Image from "next/image";
 
 const chartFooter = ({

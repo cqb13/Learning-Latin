@@ -15,10 +15,31 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.6;
   font-size: 18px;
-  
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 3rem;
+}
+
+.prose h1 {
+  text-align: center;
+  font-size: 2.1rem;
+  font-weight: 600;
+  margin: 8px;
+}
+
+.prose h2 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin: 4px;
+}
+
+.prose ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.prose table {
+  margin-bottom: 4px;
 }

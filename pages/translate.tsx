@@ -1,10 +1,10 @@
-import TranslationCard from "@components/translationCard";
+import TranslationCard from "@components/translate/translationCard";
 import removeExtraSpaces from "@utils/removeExtraSpaces";
 import macronHandler from "@utils/macronHandler";
-import Layout from "@components/layout";
-import Button from "@components/button";
+import Layout from "@components/shared/layout";
+import Button from "@components/shared/button";
 import { useState, useEffect } from "react";
-import Text from "@components/text";
+import Text from "@components/shared/text";
 import { NextPage } from "next";
 
 const Translate: NextPage = () => {

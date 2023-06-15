@@ -1,6 +1,6 @@
-import Button from "./button";
+import ToolTip from "@components/shared/toolTip";
+import Button from "@components/shared/button";
 import { useState } from "react";
-import ToolTip from "./toolTip";
 import Image from "next/image";
 
 const TranslationCard = (props: any) => {

@@ -1,8 +1,8 @@
-import Layout from "@components/layout";
-import Button from "@components/button";
+import Layout from "@components/shared/layout";
+import Button from "@components/shared/button";
 import { NextPage } from "next";
 import Image from "next/image";
-
+//!!!: X overflow, probably hero section
 const Home: NextPage = () => {
   return (
     <Layout>

@@ -1,15 +1,9 @@
-import useScroll from "../lib/hooks/useScroll";
+import useScroll from "@hooks/useScroll";
 import { useRouter } from "next/router";
+import { routes } from "@lib/routes";
 import Link from "next/link";
 
 const NavBar = () => {
-  const routes = [
-    ["Home", "/"],
-    ["Practice", "/practice"],
-    ["Translate", "/translate"],
-    ["Notes", "/notes"]
-  ];
-
   const router = useRouter();
 
   return (

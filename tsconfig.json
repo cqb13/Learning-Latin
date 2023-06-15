@@ -24,6 +24,7 @@
       "@prop-types/*": ["lib/types/*"],
       "@data/*": ["lib/data/*"],
       "@hooks/*": ["lib/hooks/*"],
+      "@lib/*": ["lib/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

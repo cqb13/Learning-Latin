@@ -5,7 +5,7 @@ import chartClearable from "@utils/chartClearable";
 import macronHandler from "@utils/macronHandler";
 import chartProps from "@prop-types/chartProps";
 import { useEffect, useState } from "react";
-import Text from "./text";
+import Text from "@components/shared/text";
 
 const Chart = ({
   data,
