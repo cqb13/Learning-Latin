@@ -44,7 +44,7 @@ The introduction is what will be shown when the topic or subtopic is first opene
 
 ## Adding a New Chapter
 
-A chapter is a file that is within a **topic** or **subtopic** folder. A chapter must be called **CHAPTER_#.md** where **#** is order of the chapter within the topic or subtopic. A chapter must contain a **h1**, that is the title that will be shown in the side nav bar.
+A chapter is a file that is within a **topic** or **subtopic** folder. A chapter must be called **CHAPTER\_#.md** where **#** is order of the chapter within the topic or subtopic. A chapter must contain a **h1**, that is the title that will be shown in the side nav bar.
 
 **Note:** A chapters title should not be the same as another chapters title within the same topic or subtopic.
 

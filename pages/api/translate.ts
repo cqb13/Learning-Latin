@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const words = word
+  const words = word;
   const parser = new Parser();
 
   let result: any;

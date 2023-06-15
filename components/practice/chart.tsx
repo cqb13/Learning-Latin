@@ -148,7 +148,6 @@ const Chart = ({
       </table>
     </div>
   );
-  
 };
 
 export default Chart;

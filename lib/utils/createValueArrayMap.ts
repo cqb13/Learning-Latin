@@ -1,4 +1,4 @@
-import chartProps from '@prop-types/chartProps';
+import chartProps from "@prop-types/chartProps";
 
 const createValueArrayMap = (data: chartProps, chartIndex: number) => {
   let arrayMap = [] as any;

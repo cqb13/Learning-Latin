@@ -4,7 +4,7 @@ const addParentName = (data: any, parentName: string): any => {
   }
 
   if (typeof data === "object" && data !== null) {
-    const newData: { [key: string]: any } = {};
+    const newData: { [key: string]: string } = {};
 
     for (const key in data) {
       let isChapter = key.includes("CHAPTER");

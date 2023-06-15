@@ -5,11 +5,13 @@ import Head from "next/head";
 const Layout = ({
   children,
   backgroundClass,
+  mainClass,
   title,
-  label,
+  label
 }: {
   children: React.ReactNode;
   backgroundClass?: string;
+  mainClass?: string;
   title?: string;
   label?: string;
 }) => {
@@ -47,8 +49,8 @@ const Layout = ({
         <meta name="og:title" content={title} />
       </Head>
       <div className="flex flex-col min-h-screen">
-        <NavBar/>
-        <main className="flex-1">
+        <NavBar />
+        <main className={`flex-1 ${mainClass}`}>
           {children}
         </main>
         <footer className="flex shrink-0 justify-between items-center px-2 my-1">

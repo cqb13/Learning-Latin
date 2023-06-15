@@ -14,9 +14,7 @@ const Home: NextPage = () => {
           <sub className="font-semibold text-2xl text-zinc-700 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">
             A modern tool with many resources for learning Latin.
           </sub>
-          <Button class=" mt-4 w-fit">
-            Start Learning Now!
-          </Button>
+          <Button class=" mt-4 w-fit">Start Learning Now!</Button>
           <a
             href="#about"
             className="flex flex-col items-center justify-center text-md text-white animate-bounce mt-5 hover:[text-shadow:0_1px_1px_rgba(0,0,0,0.2)]"

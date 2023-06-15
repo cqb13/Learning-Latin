@@ -17,10 +17,10 @@ export async function getStaticProps() {
 
 const Textbook: NextPage = ({ textbookMap }: any) => {
   const [groupedTextBookMap, setGroupedTextBookMap] = useState<any>({});
-  const [currentData, setCurrentData] = useState<any>(<h1>Test</h1>);
+  const [currentData, setCurrentData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const order = ["nouns", "adjectives"]
+  const order = ["nouns", "adjectives"];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,27 +33,27 @@ const Textbook: NextPage = ({ textbookMap }: any) => {
     fetchData();
   }, []);
 
-  const updateCurrentData = (content: any) => {
+  const updateCurrentData = (content: string) => {
     setCurrentData(convertMarkdownContentToHtml(content));
-  }
+  };
 
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
 
   return (
-    <Layout title="Textbook">
-      <section className="flex flex-col items-center min-h-5/6">
-        <h1 className="text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)] text-center">
-          Latin Grammar
-        </h1>
-        <section className="w-full flex flex-row justify-between gap-5 p-4">
-          <TextbookSideNav data={groupedTextBookMap} update={updateCurrentData} />
+    <Layout title="Textbook" mainClass="max-h-screen">
+      <section className="flex flex-col items-center">
+        <section className="w-full flex flex-row justify-between gap-5 p-4 h-[calc(100vh-7rem)]">
+          <TextbookSideNav
+            data={groupedTextBookMap}
+            update={updateCurrentData}
+          />
           <article
-            className="p-4 flex-2 w-2/3"
+            className="p-4 flex-2 w-2/3 max-h-max overflow-y-scroll"
             dangerouslySetInnerHTML={{ __html: currentData }}
           />
-          <section className="flex-auto w-3/12">
+          <section className="flex-auto w-3/12 h-fit max-lg:hidden">
             {/**Just a placeholder for now, when i have more time, will be a table of context for a chapter*/}
           </section>
         </section>

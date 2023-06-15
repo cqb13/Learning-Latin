@@ -5,7 +5,7 @@ const clearChart = (chart: string[][]) => {
     inputs[i].classList.add("border-neutral-300");
   }
 
-  let emptyChart = chart
+  let emptyChart = chart;
   for (let i = 0; i < chart.length; i++) {
     for (let j = 0; j < chart[i].length; j++) {
       emptyChart[i][j] = "";

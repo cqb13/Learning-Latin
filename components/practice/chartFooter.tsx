@@ -9,10 +9,9 @@ const chartFooter = ({
   chartClearable,
   toggleAnswers,
   chartIndex,
-  answers,
-  data,
-
   clearChart,
+  answers,
+  data
 }: {
   switchToLinkedChart: (link: string | undefined) => void;
   updateClearable: (clearable: boolean) => void;
@@ -28,14 +27,11 @@ const chartFooter = ({
   const clear = () => {
     clearChart();
     updateClearable(false);
-  }
+  };
 
   return (
     <section className="flex items-center gap-3">
-      <ToolTip
-        content={answers ? "questions" : "answers"}
-        delay={20}
-      >
+      <ToolTip content={answers ? "questions" : "answers"} delay={20}>
         <Button onClick={toggleAnswers} class="child:w-5 child:h-5">
           {answers
             ? <Image
@@ -47,9 +43,13 @@ const chartFooter = ({
             : <Image src="/answer.svg" alt="answer" width={20} height={20} />}
         </Button>
       </ToolTip>
-      
+
       <ToolTip content={chartClearable ? "clear" : "locked"} delay={20}>
-        <Button onClick={clear} locked={!chartClearable} class="child:w-5 child:h-5">
+        <Button
+          onClick={clear}
+          locked={!chartClearable}
+          class="child:w-5 child:h-5"
+        >
           <Image src="/clear.svg" alt="clear" width={20} height={20} />
         </Button>
       </ToolTip>

@@ -4,7 +4,6 @@ import { practiceRoutes } from "@lib/routes";
 import { NextPage } from "next";
 
 const Practice: NextPage = () => {
-
   return (
     <Layout title="Practice" backgroundClass="bg-practice-nav-gradient">
       <section className="flex flex-col items-center">

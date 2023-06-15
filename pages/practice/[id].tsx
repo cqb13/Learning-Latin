@@ -75,7 +75,7 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
   //triggers a useEffect within chart component which calls clearChart function
   const updateTrigger = () => {
     setTriggerClear(!triggerClear);
-  }
+  };
 
   const updateClearable = (status: boolean) => {
     setClearable(status);

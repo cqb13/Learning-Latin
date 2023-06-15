@@ -4,7 +4,7 @@ import fs from "fs";
 const getTextbookMap = async () => {
   const textbookPath = path.join(process.cwd(), "lib", "data", "textbook");
 
-  const traverseFolder = (folderPath: any, parentPath = "") => {
+  const traverseFolder = (folderPath: string, parentPath = "") => {
     const folderContent = fs.readdirSync(folderPath);
     const pages: any = [];
 
@@ -23,7 +23,7 @@ const getTextbookMap = async () => {
         pages.push({
           path: relativePath.replace(/\.md$/, ""),
           title: title,
-          content: fileContent,
+          content: fileContent
         });
       }
     });

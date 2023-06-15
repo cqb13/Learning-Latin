@@ -12,10 +12,7 @@
 
 <h2>TODO:</h2>
 <pre>
-- Use all data from Open Words TS
 - Add options to see translated words in context
-- Add background styles to pages
 - Bring back user accounts
-- Notes page with grammar info
 - Games page, (hangman, wordle, crosswords, etc.)
 </pre>
