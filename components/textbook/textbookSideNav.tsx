@@ -61,7 +61,7 @@ const TextbookSideNav = ({
   };
 
   return (
-    <section className="flex-auto w-3/12 bg-slate-50 bg-opacity-10 rounded shadow-card overflow-y-auto max-sm:w-5/12">
+    <section className="block fixed rounded z-20 inset-0 top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-3/12 max-sm:w-5/12 h-max-[calc(100vh-4.5rem)] pb-10 px-8 overflow-y-auto bg-slate-50 bg-opacity-10 shadow-card">
       <ul className="py-2">
         {renderNavItem(data)}
       </ul>

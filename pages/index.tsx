@@ -2,19 +2,21 @@ import Layout from "@components/shared/layout";
 import Button from "@components/shared/button";
 import { NextPage } from "next";
 import Image from "next/image";
-//!!!: X overflow, probably hero section
+
 const Home: NextPage = () => {
   return (
     <Layout>
       <section className="flex flex-col items-center text-center mx-auto">
-        <section className="flex flex-col items-center pt-40 pb-4 h-[calc(100vh_-_2rem)] bg-gradient-radiant bg-hero-gradient w-screen">
+        <section className="flex flex-col items-center pt-40 pb-4 h-[calc(100vh_-_2rem)] bg-gradient-radiant bg-hero-gradient w-full">
           <h1 className="text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">
             Learning Latin
           </h1>
           <sub className="font-semibold text-2xl text-zinc-700 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">
             A modern tool with many resources for learning Latin.
           </sub>
-          <Button class=" mt-4 w-fit">Start Learning Now!</Button>
+          <Button class=" mt-4 w-fit" link="/textbook">
+            Start Learning Now!
+          </Button>
           <a
             href="#about"
             className="flex flex-col items-center justify-center text-md text-white animate-bounce mt-5 hover:[text-shadow:0_1px_1px_rgba(0,0,0,0.2)]"
