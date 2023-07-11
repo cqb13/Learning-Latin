@@ -22,6 +22,14 @@ html {
   scroll-padding-top: 3rem;
 }
 
+.prose {
+  padding-left: 1rem;
+}
+
+.prose p {
+  padding-left: 1rem;
+}
+
 .prose h1 {
   text-align: center;
   font-size: 2.1rem;
@@ -35,11 +43,32 @@ html {
   margin: 4px;
 }
 
+.prose h3 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin: 4px;
+}
+
+.prose h4 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 4px;
+}
+
 .prose ul {
   list-style: disc;
+  padding-left: 2rem;
+}
+
+.prose pre {
   padding-left: 1.5rem;
 }
 
-.prose table {
+.prose > table {
+  margin-left: 2rem;
   margin-bottom: 4px;
+}
+
+.prose table thead {
+  text-align: left;
 }

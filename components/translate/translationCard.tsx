@@ -20,6 +20,7 @@ const TranslationCard = (props: any) => {
 
   data();
 
+  //!!!: On mobile icons on card control buttons are not visible
   return (
     <section className="bg-slate-50 bg-opacity-10 rounded flex flex-col p-4 shadow-card" key={props.data.word}>
       <section className="flex justify-between mb-3">

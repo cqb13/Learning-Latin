@@ -4,7 +4,7 @@
 - The **Masculine** stem ends in **us** and **neuter** stem ends **ū**
 - The genitive singular ends in **ūs**
 
-# Fourth Declension Endings
+## Fourth Declension Endings
 
 | Case       | Singular | Plural |
 | ---------- | -------- | ------ |

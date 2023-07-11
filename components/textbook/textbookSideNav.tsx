@@ -1,12 +1,19 @@
 import textBookMap from "@prop-types/textbookMap";
-import React, { useState } from "react";
+import useScreenWidth from "@hooks/useScreenWidth";
+import Button from "@components/shared/button";
+import { useState } from "react";
+import Image from "next/image";
 
 const TextbookSideNav = ({
   data,
-  update
+  open,
+  update,
+  updateSideBarVisibility,
 }: {
   data: any;
+  open: boolean;
   update: (content: string) => void;
+  updateSideBarVisibility: (newState: boolean) => void;
 }) => {
   const [activeItem, setActiveItem] = useState("INTRODUCTION");
 
@@ -61,10 +68,21 @@ const TextbookSideNav = ({
   };
 
   return (
-    <section className="block fixed rounded z-20 inset-0 top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-3/12 max-sm:w-5/12 h-max-[calc(100vh-4.5rem)] pb-10 px-8 overflow-y-auto bg-slate-50 bg-opacity-10 shadow-card">
+    <section
+      className={`shadow-card flex sticky top-14 rounded-lg rounded-tl-none rounded-bl-none h-[86vh] overflow-y-scroll animate-slideIn
+      ${useScreenWidth(800) && !open ? "hidden w-full mr-5" : ""}`}
+    >
       <ul className="py-2">
         {renderNavItem(data)}
       </ul>
+      <Button class="mdLg:hidden child:w-5 child:h-5 w-fit h-fit rounded-2xl rounded-tr-none rounded-br-none my-2" onClick={() => updateSideBarVisibility(false)}>
+        <Image
+          src="/arrowLeft.svg"
+          alt="Close"
+          width={50}
+          height={50}
+        />
+      </Button>
     </section>
   );
 };

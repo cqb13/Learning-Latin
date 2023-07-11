@@ -86,17 +86,6 @@ const Translate: NextPage = () => {
               <TranslationCard data={t} removeCard={() => removeCard(t.word)} />
             )}
           </section>}
-        <p className="text-center">
-          Translation functionality is in early development, if you find an
-          issue, please open an issue on my github
-        </p>
-        <a
-          className=" text-blue-500 hover:underline"
-          href="https://github.com/Templar-Development/Open-Words-TS/issues/new/choose"
-          target="_blank"
-        >
-          Github Issue
-        </a>
       </section>
     </Layout>
   );
