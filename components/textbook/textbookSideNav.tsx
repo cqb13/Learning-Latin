@@ -1,5 +1,5 @@
-import textBookMap from "@prop-types/textbookMap";
 import useScreenWidth from "@hooks/useScreenWidth";
+import textBookMap from "@prop-types/textbookMap";
 import Button from "@components/shared/button";
 import { useState } from "react";
 import Image from "next/image";

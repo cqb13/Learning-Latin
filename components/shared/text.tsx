@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import textProps from "@prop-types/textProps";
+import { useState, useEffect } from "react";
 
 const Text = (props: textProps) => {
   const [placeholder, setPlaceholder] = useState("");

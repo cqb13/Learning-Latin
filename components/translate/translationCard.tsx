@@ -14,11 +14,11 @@ const TranslationCard = (props: any) => {
     props.removeCard();
   };
 
-  const data = () => {
-    console.log(props.data);
-  };
+  //const data = () => {
+  //  console.log(props.data);
+  //};
 
-  data();
+  //data();
 
   //!!!: On mobile icons on card control buttons are not visible
   return (

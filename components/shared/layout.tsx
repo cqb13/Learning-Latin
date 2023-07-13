@@ -1,6 +1,6 @@
-import NavBar from "./nav";
 import Image from "next/image";
 import Head from "next/head";
+import NavBar from "./nav";
 
 const Layout = ({
   children,
