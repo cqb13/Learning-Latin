@@ -9,29 +9,29 @@ module.exports = {
     extend: {
       screens: {
         xs: "470px",
-        mdLg: "800px",
+        mdLg: "800px"
       },
       keyframes: {
         slideIn: {
-          '0%': {
-            transform: 'translateX(-100%)',
+          "0%": {
+            transform: "translateX(-100%)"
           },
-          '100%': {
-            transform: 'translateX(0)',
-          },
+          "100%": {
+            transform: "translateX(0)"
+          }
         },
         slideOut: {
-          '0%': {
-            transform: 'translateX(0)',
+          "0%": {
+            transform: "translateX(0)"
           },
-          '100%': {
-            transform: 'translateX(-100%)',
-          },
-        },
+          "100%": {
+            transform: "translateX(-100%)"
+          }
+        }
       },
       animation: {
-        slideIn: 'slideIn 0.5s ease-in-out',
-        slideOut: 'slideOut 0.5s ease-in-out',
+        slideIn: "slideIn 0.5s ease-in-out",
+        slideOut: "slideOut 0.5s ease-in-out"
       },
       textShadow: {
         sm: "0 1px 1px rgba(0, 0, 0, 0.2)",
@@ -55,8 +55,12 @@ module.exports = {
         "hero-gradient": "radial-gradient(ellipse, #87cefa 20%, #fff 70%)",
         "translate-gradient":
           "radial-gradient(circle at top right, #87cefa 15rem, #d9c0f3 40rem, #fff 50rem)",
-        "practice-gradient": "linear-gradient(232deg, rgba(255,255,255,1) 23%, rgba(135,206,250,1) 37%, rgba(217,192,243,1) 53%, rgba(255,255,255,1) 69%)",
-        "practice-nav-gradient": "radial-gradient(circle, rgba(148,187,233,0.8) 5%, rgba(148,187,233,0.5) 34%, rgba(255,255,255,1) 100%)",
+        "practice-gradient":
+          "linear-gradient(232deg, rgba(255,255,255,1) 23%, rgba(135,206,250,1) 37%, rgba(217,192,243,1) 53%, rgba(255,255,255,1) 69%)",
+        "practice-nav-gradient":
+          "radial-gradient(circle, rgba(148,187,233,0.8) 5%, rgba(148,187,233,0.5) 34%, rgba(255,255,255,1) 100%)",
+        "textbook-gradient":
+          "linear-gradient(99deg, rgba(255,255,255,0.4) 3%, rgba(135,206,250,0.5) 36%, rgba(217,192,243,0.4) 59%, rgba(255,255,255,1) 68%)"
       },
       height: {
         "slide-image-height": "calc(100vh - 2rem)"

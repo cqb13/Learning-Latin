@@ -25,6 +25,7 @@ const TextbookSideNav = ({
     if (item.path === undefined || item.content === undefined) return;
     newData(item.content);
     setActiveItem(item.path);
+    if (window.innerWidth < 800) updateSideBarVisibility(false);
   };
 
   const renderNavItem = (item: textBookMap) => {

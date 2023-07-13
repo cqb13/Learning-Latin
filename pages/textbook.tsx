@@ -11,7 +11,7 @@ import Image from "next/image";
   /*Design inspiration from: https://tailwindcss.com/docs/installation*/
 }
 
-const Textbook: NextPage = ({ textbookMap }: any) => {
+const Textbook: NextPage = () => {
   const [groupedTextBookMap, setGroupedTextBookMap] = useState<any>({});
   const [currentData, setCurrentData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -40,7 +40,7 @@ const Textbook: NextPage = ({ textbookMap }: any) => {
   }
 
   return (
-    <Layout title="Textbook">
+    <Layout title="Textbook" backgroundClass=" bg-textbook-gradient">
       <section className="flex max-mdLg:justify-center max-mdLg:flex-col">
         <Button
           class={`mdLg:hidden sticky child:w-5 child:h-5 w-fit rounded-2xl rounded-tl-none rounded-bl-none mt-2 ${sideBarOpen ? "hidden" : ""}`}
