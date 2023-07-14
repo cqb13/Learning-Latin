@@ -1,8 +1,9 @@
 # Adjectives
 
-Denote a quality of a noun. They can be used to describe the noun or to modify it.
+- Adjectives are words that describe nouns
 
-Adjectives are declined like nouns and fall into two classes:
-1. Adjectives of the First and Second Declensions.
+## Declination
 
-2. Adjectives of the Third Declension.
+- Adjectives are declined like nouns and fall into two classes:
+    - First and Second Declension Adjectives
+    - Third Declension Adjectives

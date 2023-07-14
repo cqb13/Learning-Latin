@@ -1,0 +1,1 @@
+# Third Declension Adjectives

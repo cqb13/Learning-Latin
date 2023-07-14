@@ -60,6 +60,11 @@ html {
   padding-left: 2rem;
 }
 
+.prose ol {
+  list-style: decimal;
+  padding-left: 2.5rem;
+}
+
 .prose pre {
   padding-left: 1.5rem;
 }
