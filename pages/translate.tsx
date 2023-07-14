@@ -56,7 +56,7 @@ const Translate: NextPage = () => {
         <h1 className="text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">
           Translator
         </h1>
-        <section className="flex flex-col w-3/5 mt-2">
+        <section className="flex flex-col w-3/5 mt-2 max-xs:w-4/5">
           <Text
             placeholder="Enter a word"
             onChange={onChange}
@@ -81,7 +81,7 @@ const Translate: NextPage = () => {
         </section>
 
         {translations.length > 0 &&
-          <section className="flex flex-col justify-center gap-3 w-3/5 mt-3">
+          <section className="flex flex-col justify-center gap-3 w-3/5 mt-3 max-xs:w-4/5">
             {translations.map(t =>
               <TranslationCard data={t} removeCard={() => removeCard(t.word)} />
             )}
