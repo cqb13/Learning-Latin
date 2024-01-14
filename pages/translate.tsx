@@ -9,6 +9,12 @@ const Translate: NextPage = () => {
   const [translations, setTranslations] = useState<any[]>([]);
   const [query, setQuery] = useState("");
 
+  const [maxDefinitions, setMaxDefinitions] = useState<number>(6);
+  const [useTricks, setUseTricks] = useState<boolean>(true);
+  const [sortOutput, setSortOutput] = useState<boolean>(true);
+  const [filterUncommonTranslations, setFilterUncommonTranslations] =
+    useState<boolean>(true);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
@@ -19,8 +25,8 @@ const Translate: NextPage = () => {
     try {
       const url =
         type === "latin-to-english"
-          ? `https://translator.learninglatin.net/latin_to_english?text=${query}&max_definitions=6&use_tricks=true&format_output=true&clean_output=false&sort_output=true&filter_uncommon_translations=true`
-          : `https://translator.learninglatin.net/english_to_latin?text=${query}&max_definitions=6&format_output=true&clean_output=false&sort_output=true`;
+          ? `https://translator.learninglatin.net/latin_to_english?text=${query}&max_definitions=${maxDefinitions}&use_tricks=${useTricks}&format_output=true&clean_output=false&sort_output=${sortOutput}&filter_uncommon_translations=${filterUncommonTranslations}`
+          : `https://translator.learninglatin.net/english_to_latin?text=${query}&max_definitions=${maxDefinitions}&format_output=true&clean_output=false&sort_output=${sortOutput}`;
 
       let result = await fetch(url).then((res) => res.json());
 
@@ -54,6 +60,51 @@ const Translate: NextPage = () => {
             keyName='Enter'
             value={query}
           />
+          <section className='flex justify-between mt-2 max-sm:flex-col gap-2'>
+            <div className='p-2 border border-neutral-300 rounded flex-grow bg-white bg-opacity-30 backdrop-blur-sm'>
+              <p>Max Definitions</p>
+              <div className='flex gap-2 items-center justify-center'>
+                <input
+                  type='range'
+                  className='flex-grow h-2 bg-primary-color rounded appearance-none focus:outline-none ring-1 accent-primary-color-dark hover:accent-primary-color-dark transition-colors ring-gray-300 focus:ring-gray-100'
+                  min={1}
+                  max={10}
+                  value={maxDefinitions}
+                  onChange={(e) => setMaxDefinitions(parseInt(e.target.value))}
+                />
+                <p className='w-4'>{maxDefinitions}</p>
+              </div>
+            </div>
+            <div className='flex items-center justify-center gap-2 p-2 border border-neutral-300 rounded flex-grow bg-white bg-opacity-30 backdrop-blur-sm'>
+              <p>Use Tricks</p>
+              <div
+                className={`w-5 h-5 ${
+                  useTricks ? "bg-primary-color" : ""
+                } rounded border border-primary-color cursor-pointer`}
+                onClick={() => setUseTricks(!useTricks)}
+              ></div>
+            </div>
+            <div className='flex items-center justify-center gap-2 p-2 border border-neutral-300 rounded flex-grow bg-white bg-opacity-30 backdrop-blur-sm'>
+              <p>Sort Output</p>
+              <div
+                className={`w-5 h-5 ${
+                  sortOutput ? "bg-primary-color" : ""
+                } rounded border border-primary-color cursor-pointer`}
+                onClick={() => setSortOutput(!sortOutput)}
+              ></div>
+            </div>
+            <div className='flex items-center justify-center gap-2 p-2 border border-neutral-300 rounded flex-grow bg-white bg-opacity-30 backdrop-blur-sm'>
+              <p>Filter Uncommon Translations</p>
+              <div
+                className={`w-5 h-5 ${
+                  filterUncommonTranslations ? "bg-primary-color" : ""
+                } rounded border border-primary-color cursor-pointer`}
+                onClick={() =>
+                  setFilterUncommonTranslations(!filterUncommonTranslations)
+                }
+              ></div>
+            </div>
+          </section>
           <div className='flex gap-2 mt-2 max-sm:flex-col'>
             <Button
               onClick={() => getTranslation("latin-to-english")}
