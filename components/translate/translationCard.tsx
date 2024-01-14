@@ -121,13 +121,14 @@ const TranslationCard = (props: any) => {
                             <span>{part}</span>
                           ))}
                         </>
-                      ) : (
+                      ) : null}
+                      {definition.translation ? (
                         <>
                           {definition.translation.parts.map((part: any) => (
                             <span>{part}</span>
                           ))}
                         </>
-                      )}
+                      ) : null}
                       {moreInfo ? (
                         <span className='text-primary-color'>
                           word id:{" "}
@@ -204,13 +205,18 @@ const TranslationCard = (props: any) => {
                           {sense}
                         </p>
                       ))}
+                    </>
+                  ) : null}
+                  {definition.word.extension_senses ? (
+                    <>
                       {definition.word.extension_senses.map((sense: any) => (
                         <p className=' bg-primary-color bg-opacity-10 rounded px-2'>
                           {sense}
                         </p>
                       ))}
                     </>
-                  ) : (
+                  ) : null}
+                  {definition.translation ? (
                     <>
                       {definition.translation.senses.map((sense: any) => (
                         <p className=' bg-primary-color bg-opacity-10 rounded px-2'>
@@ -218,7 +224,7 @@ const TranslationCard = (props: any) => {
                         </p>
                       ))}
                     </>
-                  )}
+                  ) : null}
                 </div>
               </div>
             ))}
