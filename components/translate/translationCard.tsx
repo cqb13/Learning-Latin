@@ -210,8 +210,7 @@ const TranslationCard = (props: any) => {
                         </p>
                       ))}
                     </>
-                  ) : null}
-                  {definition.translation.senses ? (
+                  ) : (
                     <>
                       {definition.translation.senses.map((sense: any) => (
                         <p className=' bg-primary-color bg-opacity-10 rounded px-2'>
@@ -219,7 +218,7 @@ const TranslationCard = (props: any) => {
                         </p>
                       ))}
                     </>
-                  ) : null}
+                  )}
                 </div>
               </div>
             ))}
