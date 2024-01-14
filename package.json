@@ -2,7 +2,6 @@
   "private": true,
   "scripts": {
     "start": "next dev",
-    "net-start": "next dev -H {ipv4}",
     "build": "next build",
     "prod-start": "next start"
   },
