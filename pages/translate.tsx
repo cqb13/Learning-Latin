@@ -122,7 +122,7 @@ const Translate: NextPage = () => {
             </Button>
           </div>
         </section>
-        <h1 className="text-xl text-zinc-800 font-bold text-center">Under Maintance</h1>
+        <h1 className="text-xl text-zinc-800 font-bold text-center">Under Maintenance</h1>
         {translations.length > 0 && (
           <section className='flex flex-col justify-center gap-3 w-3/5 mt-3 max-xs:w-4/5'>
             {translations.map((t) => (
