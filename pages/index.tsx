@@ -2,14 +2,25 @@ import Layout from "@components/shared/layout";
 import Button from "@components/shared/button";
 import Image from "next/image";
 import { NextPage } from "next";
+import { useEffect, useState } from "react";
+import fetchLatestCommits from "@utils/fetchLatestCommits";
+import CommitCard from "@components/home/commitCard";
+import FeatureCard from "@components/home/featureCard";
+import FaqCard from "@components/home/faqCard";
 
 const Home: NextPage = () => {
+  const [commits, setCommits] = useState([]);
+
+  useEffect(() => {
+    fetchLatestCommits().then(setCommits).catch(console.error);
+  }, []);
+
   return (
     <Layout>
       <section className='text-center mx-auto overflow-hidden'>
         <div className='relative h-[90vh] bg-cover bg-center text-white flex flex-col justify-center items-center bg-hero-gradient'>
           <h1 className='text-6xl text-zinc-800 font-bold m-0 [text-shadow:0_2px_2px_rgba(0,0,0,0.2)]'>
-            Master Latin with Modern Tools
+            Learning Latin
           </h1>
           <sub className='font-semibold text-3xl text-zinc-700 [text-shadow:0_2px_2px_rgba(0,0,0,0.2)] mt-2'>
             A comprehensive platform for both novice and seasoned Latin
@@ -59,7 +70,7 @@ const Home: NextPage = () => {
             />
           </div>
         </div>
-        <div className='bg-gray-100 py-12'>
+        <div className='bg-gray-100 py-12 px-5'>
           <h2 className='text-3xl font-bold text-center mb-8'>
             Open Source Community
           </h2>
@@ -76,30 +87,53 @@ const Home: NextPage = () => {
             </Button>
           </div>
         </div>
+        <div className='py-16 bg-white px-5' id='latest-updates'>
+          <h2 className='text-4xl font-bold text-center mb-8'>
+            Latest Updates
+          </h2>
+          <div className='flex flex-col items-center gap-2'>
+            {commits.map((commit: any) => (
+              <CommitCard key={commit.sha} commit={commit} />
+            ))}
+          </div>
+        </div>
+        <div className='py-12 bg-gray-100 px-5' id='roadmap'>
+          <h2 className='text-3xl font-bold text-center mb-8'>
+            Upcoming Features & Roadmap
+          </h2>
+          <div className='max-w-4xl mx-auto text-center'>
+            <p className='mb-6'>
+              Get a glimpse of what we're working on and what's coming next to
+              enhance your Latin learning experience.
+            </p>
+            <p className='text-lg font-semibold'>
+              - More practice charts - Q2 2024
+            </p>
+            <p className='text-lg font-semibold'>- Practice games - Q3 2024</p>
+          </div>
+        </div>
+        <div className='py-16 bg-white px-5' id='faqs'>
+          <h2 className='text-4xl font-bold text-center mb-8'>
+            Frequently Asked Questions
+          </h2>
+          <div className='max-w-4xl mx-auto flex flex-col gap-2'>
+            <FaqCard
+              question='Can I contribute to the Latin textbook?'
+              answer='Absolutely! Our project is open source, and we welcome contributions from everyone. Visit our GitHub page to get started.'
+            />
+            <FaqCard
+              question='Do I need any prior knowledge of Latin to start?'
+              answer='No, our resources are designed to accommodate beginners with no prior knowledge of Latin, guiding you through from the basics to advanced topics.'
+            />
+            <FaqCard
+              question='Are there any costs involved?'
+              answer='No, all our resources are completely free, including the Latin textbook, practice charts, and translator tool.'
+            />
+          </div>
+        </div>
       </section>
     </Layout>
   );
 };
-
-const FeatureCard = ({ title, description, icon, link, action }: any) => (
-  <div
-    className='rounded-lg shadow-lg p-6 bg-white hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer'
-    onClick={action}
-  >
-    <div className='flex items-center justify-center'>
-      <Image src={icon} alt={title} width={100} height={100} />
-    </div>
-    <h3 className='text-2xl font-bold mt-5'>{title}</h3>
-    <p className='mt-2 text-gray-600'>{description}</p>
-    {link && (
-      <a
-        className='text-blue-500 hover:underline mt-2 inline-block'
-        href={link}
-      >
-        Learn More
-      </a>
-    )}
-  </div>
-);
 
 export default Home;
