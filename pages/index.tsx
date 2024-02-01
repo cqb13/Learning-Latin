@@ -106,10 +106,11 @@ const Home: NextPage = () => {
               Get a glimpse of what we're working on and what's coming next to
               enhance your Latin learning experience.
             </p>
+            <p className='text-lg font-semibold'>- Practice games - Q2 2024</p>
+            <p className='text-lg font-semibold'>- Improved charts - Q3 2024</p>
             <p className='text-lg font-semibold'>
-              - More practice charts - Q2 2024
+              - More practice charts - Some Time 2024
             </p>
-            <p className='text-lg font-semibold'>- Practice games - Q3 2024</p>
           </div>
         </div>
         <div className='py-16 bg-white px-5' id='faqs'>

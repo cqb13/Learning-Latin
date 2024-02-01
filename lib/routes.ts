@@ -1,6 +1,7 @@
 const routes: [string, string][] = [
   ["Home", "/"],
   ["Practice", "/practice"],
+  ["Games", "/games"],
   ["Translate", "/translate"],
   ["Textbook", "/textbook"]
 ];
