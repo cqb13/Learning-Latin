@@ -14,6 +14,7 @@ const Translate: NextPage = () => {
   const [sortOutput, setSortOutput] = useState<boolean>(true);
   const [filterUncommonTranslations, setFilterUncommonTranslations] =
     useState<boolean>(true);
+  const [nothingFound, setNothingFound] = useState<boolean>(false);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -31,13 +32,20 @@ const Translate: NextPage = () => {
       let result = await fetch(url).then((res) => res.json());
 
       if (result.error) {
+        setNothingFound(true);
         throw new Error(result.error);
       } else {
-        console.log(result.translations);
+        if (result.length > 0) {
+          setNothingFound(false);
+        } else {
+          setNothingFound(true);
+        }
+
         setTranslations(result);
       }
       setQuery("");
     } catch (error) {
+      setNothingFound(true);
       console.error(error);
     }
   };
@@ -60,7 +68,14 @@ const Translate: NextPage = () => {
             keyName='Enter'
             value={query}
           />
-          <section className='flex justify-between mt-2 max-sm:flex-col gap-2'>
+          <a
+            href='https://github.com/cqb13/vocab-vault/tree/api'
+            className='text-xs my-2 hover:underline transition-all w-fit'
+            target='_blank'
+          >
+            Powered by Vocab Vault
+          </a>
+          <section className='flex justify-between max-sm:flex-col gap-2'>
             <div className='p-2 border border-neutral-300 rounded flex-grow bg-white bg-opacity-30 backdrop-blur-sm'>
               <p>Max Definitions</p>
               <div className='flex gap-2 items-center justify-center'>
@@ -122,13 +137,24 @@ const Translate: NextPage = () => {
             </Button>
           </div>
         </section>
-        {translations.length > 0 && (
-          <section className='flex flex-col justify-center gap-3 w-3/5 mt-3 max-xs:w-4/5'>
-            {translations.map((t) => (
-              <TranslationCard data={t} removeCard={() => removeCard(t.word)} />
-            ))}
-          </section>
-        )}
+        <section className='flex flex-col justify-center gap-3 w-3/5 mt-3 max-xs:w-4/5'>
+          {translations.length > 0 && (
+            <>
+              {translations.map((t) => (
+                <TranslationCard
+                  data={t}
+                  removeCard={() => removeCard(t.word)}
+                />
+              ))}
+            </>
+          )}
+
+          {nothingFound && (
+            <section className='bg-slate-50 bg-opacity-10 rounded flex flex-col p-4 shadow-card'>
+              <p className='text-center'>No translations found</p>
+            </section>
+          )}
+        </section>
       </section>
     </Layout>
   );
