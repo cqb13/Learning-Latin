@@ -13,6 +13,7 @@ const FeatureCard = ({ title, description, icon, link, action }: any) => (
     {link && (
       <a
         className='text-blue-500 hover:underline mt-2 inline-block'
+        target="_blank"
         href={link}
       >
         Learn More
