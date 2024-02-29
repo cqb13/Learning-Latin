@@ -15,16 +15,32 @@ const TranslationCard = (props: any) => {
     props.removeCard();
   };
 
-  const create_form_line = (word: any) => {
-    if (word.pos == "noun") {
-      return `${word.form.declension} ${word.form.gender} ${word.pos}`;
-    } else if (word.pos == "verb" || word.pos == "participle") {
-      return `${word.form.kind} ${word.pos}`;
-    } else if (word.pos == "adjective") {
-      return `${word.form.declension} ${word.pos}`;
-    } else {
-      return `${word.pos}`;
+  const create_form_line = (formInfo: any) => {
+    if (formInfo == "POS") {
+      return "Part of Speech";
+    } else if (formInfo == "X") {
+      return "";
     }
+
+    let form = `${
+      formInfo.comparison == "unknown" ? "" : formInfo.comparison
+    } ${formInfo.declension == "unknown" ? "" : formInfo.declension} ${
+      formInfo.declension_type == "unknown" ? "" : formInfo.declension_type
+    }
+    ${formInfo.gender == "unknown" ? "" : formInfo.gender}
+    ${formInfo.mood == "unknown" ? "" : formInfo.mood}
+    ${formInfo.noun == "unknown" ? "" : formInfo.noun}
+    ${formInfo.number == "unknown" ? "" : formInfo.number}
+    ${formInfo.numeral == "unknown" ? "" : formInfo.numeral}
+    ${formInfo.person == "unknown" ? "" : formInfo.person}
+    ${formInfo.pos == "unknown" ? "" : formInfo.pos}
+    ${formInfo.pronoun == "unknown" ? "" : formInfo.pronoun}
+    ${formInfo.tense == "unknown" ? "" : formInfo.tense}
+    ${formInfo.verb == "unknown" ? "" : formInfo.verb}
+    ${formInfo.verb_type == "unknown" ? "" : formInfo.verb_type}
+    ${formInfo.voice == "unknown" ? "" : formInfo.voice}`;
+
+    return form;
   };
 
   const create_inflection_line = (inflectionInfo: any, stemInfo: any) => {
@@ -32,29 +48,11 @@ const TranslationCard = (props: any) => {
     const ending = inflectionInfo.ending;
     const inflectionForm = inflectionInfo.form;
 
-    const declension = inflectionForm.declension;
-    const number = inflectionForm.number;
-    const gender = inflectionForm.gender;
-    const tense = inflectionForm.tense;
-    const voice = inflectionForm.voice;
-    const mood = inflectionForm.mood;
-    const verb = inflectionForm.verb;
-    const kind = inflectionForm.kind;
+    let info = create_form_line(inflectionForm);
 
-    if (
-      declension == "unknown" ||
-      number == "unknown" ||
-      gender == "unknown" ||
-      tense == "unknown" ||
-      voice == "unknown" ||
-      mood == "unknown" ||
-      verb == "unknown" ||
-      kind == "unknown"
-    ) {
-      return "";
-    }
+    let word = `${stem}.${ending}`;
 
-    return `${stem}.${ending} | ${number} ${inflectionInfo.pos} ${declension} ${gender} ${tense} ${voice} ${mood} ${verb} ${kind}`;
+    return `${word} | ${info}`;
   };
 
   return (
@@ -65,12 +63,14 @@ const TranslationCard = (props: any) => {
       <section className='flex justify-between mb-3'>
         <div>
           <h2 className='text-3xl font-bold'>{props.data.word}</h2>
-          <button
-            className='text-primary-color hover:underline active:text-primary-color-dark'
-            onClick={() => setMoreInfo(!moreInfo)}
-          >
-            {moreInfo ? "less info" : "more info"}
-          </button>
+          {!isMinimized && props.data.definitions.length > 0 ? (
+            <button
+              className='text-primary-color hover:underline active:text-primary-color-dark'
+              onClick={() => setMoreInfo(!moreInfo)}
+            >
+              {moreInfo ? "less info" : "more info"}
+            </button>
+          ) : null}
         </div>
         <div className='flex gap-3'>
           <ToolTip
@@ -175,24 +175,35 @@ const TranslationCard = (props: any) => {
                     </div>
                   </>
                 ) : null}
-                {definition.word.form ? (
-                  <p>{create_form_line(definition.word)}</p>
+                {definition.word.pos ? (
+                  <p>{definition.word.pos}</p>
                 ) : (
-                  <p>{create_form_line(definition.translation)}</p>
+                  <p>{definition.translation.pos}</p>
+                )}
+                {definition.word.form ? (
+                  <p>{create_form_line(definition.word.form)}</p>
+                ) : (
+                  <p>{create_form_line(definition.translation.form)}</p>
                 )}
                 {definition.inflections ? (
                   <div className='flex flex-col gap-2 my-3 w-fit'>
                     {definition.inflections.map((inflection: any) => (
                       <>
-                        {create_inflection_line(inflection, definition.stem) ==
-                        "" ? null : (
-                          <span className='bg-opacity-10 rounded px-2'>
+                        {inflection.ending ? (
+                          <>
                             {create_inflection_line(
                               inflection,
                               definition.stem
+                            ) == "" ? null : (
+                              <span className='bg-opacity-10 rounded px-2'>
+                                {create_inflection_line(
+                                  inflection,
+                                  definition.stem
+                                )}
+                              </span>
                             )}
-                          </span>
-                        )}
+                          </>
+                        ) : null}
                       </>
                     ))}
                   </div>
@@ -229,7 +240,9 @@ const TranslationCard = (props: any) => {
               </div>
             ))}
           </>
-        ) : null}
+        ) : (
+          <p className='text-center'>No translations found</p>
+        )}
       </section>
     </section>
   );

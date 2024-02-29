@@ -31,8 +31,8 @@ const Translate: NextPage = () => {
     try {
       const url =
         type === "latin-to-english"
-          ? `https://translator.learninglatin.net/latin_to_english?text=${query.trim()}&max_definitions=${maxDefinitions}&use_tricks=${useTricks}&format_output=true&clean_output=false&sort_output=${sortOutput}&filter_uncommon_translations=${filterUncommonTranslations}`
-          : `https://translator.learninglatin.net/english_to_latin?text=${query.trim()}&max_definitions=${maxDefinitions}&format_output=true&clean_output=false&sort_output=${sortOutput}`;
+          ? `https://translator.learninglatin.net/latin_to_english?latin_text=${query.trim()}&max=${maxDefinitions}&tricks=${useTricks}&sort=${sortOutput}`
+          : `https://translator.learninglatin.net/english_to_latin?english_text=${query.trim()}&max=${maxDefinitions}&sort=${sortOutput}`;
 
       let result = await fetch(url).then((res) => res.json());
 
@@ -111,17 +111,6 @@ const Translate: NextPage = () => {
                   sortOutput ? "bg-primary-color" : ""
                 } rounded border border-primary-color cursor-pointer`}
                 onClick={() => setSortOutput(!sortOutput)}
-              ></div>
-            </div>
-            <div className='flex items-center justify-center gap-2 p-2 border border-neutral-300 rounded flex-grow bg-white bg-opacity-30 backdrop-blur-sm'>
-              <p>Filter Uncommon Translations</p>
-              <div
-                className={`w-5 h-5 ${
-                  filterUncommonTranslations ? "bg-primary-color" : ""
-                } rounded border border-primary-color cursor-pointer`}
-                onClick={() =>
-                  setFilterUncommonTranslations(!filterUncommonTranslations)
-                }
               ></div>
             </div>
           </section>
