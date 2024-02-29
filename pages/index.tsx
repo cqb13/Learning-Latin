@@ -61,7 +61,7 @@ const Home: NextPage = () => {
               title='Latin Translator'
               description='Translate between Latin and English with grammar insights.'
               icon='/translate.svg'
-              link='https://github.com/cqb13/vocab-vault/tree/api'
+              link='https://github.com/cqb13/vocab-vault/tree/new-api'
             />
             <FeatureCard
               title='Custom Textbook'
