@@ -8,7 +8,6 @@ import { NextPage } from "next";
 const Translate: NextPage = () => {
   const [translations, setTranslations] = useState<any[]>([]);
   const [query, setQuery] = useState("");
-
   const [maxDefinitions, setMaxDefinitions] = useState<number>(6);
   const [useTricks, setUseTricks] = useState<boolean>(true);
   const [sortOutput, setSortOutput] = useState<boolean>(true);
@@ -23,21 +22,27 @@ const Translate: NextPage = () => {
   const getTranslation = async (
     type: "latin-to-english" | "english-to-latin"
   ) => {
+    if (query === "") {
+      return;
+    }
+
+    setNothingFound(false);
+
     try {
       const url =
         type === "latin-to-english"
-          ? `https://translator.learninglatin.net/latin_to_english?text=${query}&max_definitions=${maxDefinitions}&use_tricks=${useTricks}&format_output=true&clean_output=false&sort_output=${sortOutput}&filter_uncommon_translations=${filterUncommonTranslations}`
-          : `https://translator.learninglatin.net/english_to_latin?text=${query}&max_definitions=${maxDefinitions}&format_output=true&clean_output=false&sort_output=${sortOutput}`;
+          ? `https://translator.learninglatin.net/latin_to_english?text=${query.trim()}&max_definitions=${maxDefinitions}&use_tricks=${useTricks}&format_output=true&clean_output=false&sort_output=${sortOutput}&filter_uncommon_translations=${filterUncommonTranslations}`
+          : `https://translator.learninglatin.net/english_to_latin?text=${query.trim()}&max_definitions=${maxDefinitions}&format_output=true&clean_output=false&sort_output=${sortOutput}`;
 
       let result = await fetch(url).then((res) => res.json());
+
+      console.log(result);
 
       if (result.error) {
         setNothingFound(true);
         throw new Error(result.error);
       } else {
-        if (result.length > 0) {
-          setNothingFound(false);
-        } else {
+        if (result.length === 0) {
           setNothingFound(true);
         }
 
