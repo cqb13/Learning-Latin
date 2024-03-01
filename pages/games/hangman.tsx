@@ -19,6 +19,7 @@ const Hangman: NextPage = () => {
   const [words, setWords] = useState<string[]>([]);
   const [currentWord, setCurrentWord] = useState("");
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+  const [completedWords, setCompletedWords] = useState<string[]>([]); //TODO: keep track of completed words and show them after game is over
   const [currentGuess, setCurrentGuess] = useState("");
   const [lives, setLives] = useState(STARTING_LIVES);
   const [gameOver, setGameOver] = useState(false);
@@ -37,6 +38,7 @@ const Hangman: NextPage = () => {
     setLives(STARTING_LIVES);
     setGameOver(false);
     setGameStarted(false);
+    setCompletedWords([]);
   };
 
   const startGame = () => {
@@ -74,8 +76,16 @@ const Hangman: NextPage = () => {
       if (currentWord.includes(currentGuess.toLowerCase())) {
         setGuessedLetters([...guessedLetters, currentGuess.toLowerCase()]);
 
-        if (currentWord.length <= 0) return; 
-        if (currentWord.split("").every((letter) => guessedLetters.includes(letter)) && lives > 0 ) {
+        if (currentWord.length <= 0) return;
+        if (
+          currentWord
+            .split("")
+            .every((letter) =>
+              [...guessedLetters, currentGuess].includes(letter)
+            ) &&
+          lives > 0
+        ) {
+          setCompletedWords([...completedWords, currentWord]);
           nextWord(false); // continue to next word
         }
       } else {
@@ -87,6 +97,7 @@ const Hangman: NextPage = () => {
       }
     } else {
       if (currentGuess.toLowerCase() === currentWord) {
+        setCompletedWords([...completedWords, currentWord]);
         nextWord(false);
       } else {
         if (lives - 1 === 0) {
@@ -104,7 +115,6 @@ const Hangman: NextPage = () => {
     try {
       const url = `https://translator.learninglatin.net/get_list?type_of_words=latin&pos_list=noun,verb&amount=10&random=true`;
       //TODO: also keep track of pos and senses to show after game is over
-      //TODO: remember to implement principle part generator for latin words in the gen_list endpoint
       /*
         orth: String,
         parts: Vec<String>,
@@ -170,7 +180,7 @@ const Hangman: NextPage = () => {
                 {lives} lives left
               </div>
               <div className='bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center'>
-                {guessedLetters.length} guesses
+                {completedWords.length} completed
               </div>
             </div>
             {/**Keyboard display with used letters here */}
