@@ -11,7 +11,7 @@ const DEFAULT_WORD_LIST = [
   "canis",
   "femina",
   "puer",
-  "servus"
+  "servus",
 ];
 const STARTING_LIVES = 10;
 
@@ -29,6 +29,15 @@ const Hangman: NextPage = () => {
       get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
     }
   }, [words]);
+
+  const reset = () => {
+    setWords([]);
+    setGuessedLetters([]);
+    setCurrentGuess("");
+    setLives(STARTING_LIVES);
+    setGameOver(false);
+    setGameStarted(false);
+  };
 
   const startGame = () => {
     const randomWord = words[Math.floor(Math.random() * words.length)];
@@ -62,8 +71,13 @@ const Hangman: NextPage = () => {
 
   const guess = () => {
     if (currentGuess.length === 1) {
-      if (currentWord.includes(currentGuess)) {
-        setGuessedLetters([...guessedLetters, currentGuess]);
+      if (currentWord.includes(currentGuess.toLowerCase())) {
+        setGuessedLetters([...guessedLetters, currentGuess.toLowerCase()]);
+
+        if (currentWord.length <= 0) return; 
+        if (currentWord.split("").every((letter) => guessedLetters.includes(letter)) && lives > 0 ) {
+          nextWord(false); // continue to next word
+        }
       } else {
         if (lives - 1 === 0) {
           setGameOver(true);
@@ -72,8 +86,8 @@ const Hangman: NextPage = () => {
         setLives(lives - 1);
       }
     } else {
-      if (currentGuess === currentWord) {
-        setGameOver(true);
+      if (currentGuess.toLowerCase() === currentWord) {
+        nextWord(false);
       } else {
         if (lives - 1 === 0) {
           setGameOver(true);
@@ -125,7 +139,7 @@ const Hangman: NextPage = () => {
         <h1 className='text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]'>
           Hangman
         </h1>
-
+        <p>{currentWord}</p>
         <div className='flex flex-col gap-2 w-3/5 my-2'>
           <section className='flex gap-2 items-center justify-center'>
             {currentWord.split("").map((letter, index) => {
@@ -161,9 +175,15 @@ const Hangman: NextPage = () => {
             </div>
             {/**Keyboard display with used letters here */}
             <div className='flex items-center justify-center w-full gap-2'>
-              <Button onClick={startGame} locked={false} class='w-full'>
-                Start Game
-              </Button>
+              {gameStarted ? (
+                <Button onClick={reset} locked={false} class='w-full'>
+                  Restart
+                </Button>
+              ) : (
+                <Button onClick={startGame} locked={false} class='w-full'>
+                  Start Game
+                </Button>
+              )}
               <Button
                 onClick={() => nextWord(true)}
                 locked={gameOver || !gameStarted}
