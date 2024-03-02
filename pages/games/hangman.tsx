@@ -145,7 +145,7 @@ const Hangman: NextPage = () => {
               [...guessedLetters, currentGuess].includes(letter)
             )
         ) {
-          setCompletedWords((prev) => [...prev, currentWord.info]);
+          setCompletedWords((prev) => [currentWord.info, ...prev]);
           nextWord(false);
         }
       } else {
@@ -156,7 +156,7 @@ const Hangman: NextPage = () => {
         }));
       }
     } else if (currentGuess.toLowerCase() === currentWord.word) {
-      setCompletedWords((prev) => [...prev, currentWord.info]);
+      setCompletedWords((prev) => [currentWord.info, ...prev]);
       nextWord(false);
     } else {
       deductLife();
@@ -212,6 +212,7 @@ const Hangman: NextPage = () => {
         <h1 className='text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]'>
           Hangman
         </h1>
+        <p>{currentWord.word}</p>
         <section className='flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5'>
           <section className='flex gap-2 items-center justify-center'>
             {currentWord.word != "" && gameStarted ? (
@@ -335,7 +336,7 @@ const Hangman: NextPage = () => {
                 <p>{currentWord.info.senses.join(", ")}</p>
               </div>
             ) : null}
-            {completedWords.reverse().map((word) => (
+            {completedWords.map((word) => (
               <div
                 key={word.id}
                 className='bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded'
