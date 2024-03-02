@@ -129,6 +129,10 @@ const Hangman: NextPage = () => {
 
   const guess = () => {
     if (!currentGuess) return;
+    if (guessedLetters.includes(currentGuess.toLowerCase())) {
+      setCurrentGuess("");
+      return;
+    }
     if (currentGuess.length === 1) {
       const guessLower = currentGuess.toLowerCase();
       if (currentWord.word.includes(guessLower)) {
@@ -166,7 +170,6 @@ const Hangman: NextPage = () => {
 
   const get_some_words = async (amount: number) => {
     if (words.length > 0) return;
-    console.log("Fetching words");
     try {
       const url = `https://translator.learninglatin.net/get_list?type_of_words=latin&pos_list=noun,verb&amount=${amount}&random=true`;
       let result = await fetch(url).then((res) => res.json());
