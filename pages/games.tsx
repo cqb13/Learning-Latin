@@ -1,6 +1,5 @@
 import Layout from "@components/shared/layout";
 import Button from "@components/shared/button";
-import { practiceRoutes } from "@lib/routes";
 import { NextPage } from "next";
 
 /*
