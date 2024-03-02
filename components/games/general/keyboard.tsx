@@ -76,7 +76,12 @@ const Keyboard = ({ onChar, onDelete, onEnter, keyStats, locked }: Props) => {
         <Key value='L' onClick={onClick} status={keyStats["L"]} />
       </div>
       <div className='flex justify-center gap-2'>
-        <Key value='ENTER' onClick={onClick} status={keyStats["DELETE"]} />
+        <Key
+          value='ENTER'
+          onClick={onClick}
+          status={keyStats["DELETE"]}
+          className='max-md:hidden'
+        />
         <Key value='Z' onClick={onClick} status={keyStats["Z"]} />
         <Key value='X' onClick={onClick} status={keyStats["X"]} />
         <Key value='C' onClick={onClick} status={keyStats["C"]} />
@@ -84,7 +89,26 @@ const Keyboard = ({ onChar, onDelete, onEnter, keyStats, locked }: Props) => {
         <Key value='B' onClick={onClick} status={keyStats["B"]} />
         <Key value='N' onClick={onClick} status={keyStats["N"]} />
         <Key value='M' onClick={onClick} status={keyStats["M"]} />
-        <Key value='DELETE' onClick={onClick} status={keyStats["ENTER"]} />
+        <Key
+          value='DELETE'
+          onClick={onClick}
+          status={keyStats["ENTER"]}
+          className='max-md:hidden'
+        />
+      </div>
+      <div className='mt-1 flex gap-2 md:hidden'>
+        <Key
+          value='ENTER'
+          onClick={onClick}
+          status={keyStats["ENTER"]}
+          className='flex-grow'
+        />
+        <Key
+          value='DELETE'
+          onClick={onClick}
+          status={keyStats["DELETE"]}
+          className='flex-grow'
+        />
       </div>
     </div>
   );
@@ -94,9 +118,10 @@ type KeyProps = {
   value: string;
   onClick: (value: KeyValue) => void;
   status: "correct" | "incorrect" | "default";
+  className?: string;
 };
 
-const Key = ({ value, onClick, status }: KeyProps) => {
+const Key = ({ value, onClick, status, className }: KeyProps) => {
   const width = value.length === 1 ? "w-12" : "w-32";
 
   const color =
@@ -107,7 +132,7 @@ const Key = ({ value, onClick, status }: KeyProps) => {
       : "bg-white";
   return (
     <div
-      className={`${width} ${color} bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center cursor-pointer hover:bg-opacity-70 transition-colors`}
+      className={`${width} ${color} bg-opacity-30 backdrop-blur-sm text-3xl max-sm:text-xl max-xs:text-lg max-xs:p-1 p-2 border border-neutral-300 rounded flex justify-center items-center cursor-pointer hover:bg-opacity-70 transition-colors ${className}`}
       onClick={() => onClick(value as KeyValue)}
     >
       {value}

@@ -1,6 +1,6 @@
 import Layout from "@components/shared/layout";
 import Button from "@components/shared/button";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Text from "@components/shared/text";
 import { NextPage } from "next";
 import Keyboard from "@components/games/general/keyboard";
@@ -20,7 +20,7 @@ const Hangman: NextPage = () => {
   const [words, setWords] = useState<string[]>([]);
   const [currentWord, setCurrentWord] = useState("");
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
-  const [completedWords, setCompletedWords] = useState<string[]>([]); //TODO: keep track of completed words and show them after game is over
+  const [completedWords, setCompletedWords] = useState<string[]>([]);
   const [keyStats, setKeyStats] = useState<{
     [key: string]: "correct" | "incorrect" | "default";
   }>({});
@@ -33,10 +33,9 @@ const Hangman: NextPage = () => {
     if (words.length === 0) {
       get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
     }
-  }, [words]);
+  }, [gameStarted]);
 
   const reset = () => {
-    setWords([]);
     setGuessedLetters([]);
     setCurrentGuess("");
     setLives(STARTING_LIVES);
@@ -48,116 +47,89 @@ const Hangman: NextPage = () => {
 
   const startGame = () => {
     reset();
-    const randomWord = words[Math.floor(Math.random() * words.length)];
-    setCurrentWord(randomWord);
+    selectNewWord();
     setGameStarted(true);
   };
 
-  const nextWord = (force: boolean) => {
-    select_new_word();
-    if (force) {
-      if (lives - 1 === 0) {
-        setGameOver(true);
-      }
-
-      setLives(lives - 1);
-    }
-
+  const nextWord = () => {
     setGuessedLetters([]);
     setKeyStats({});
+    deductLife();
+    selectNewWord();
   };
 
-  const updateCurrentGuess = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentGuess(e.target.value);
-  };
-
-  const select_new_word = () => {
-    const randomWord = words[Math.floor(Math.random() * words.length)];
-    const newWords = words.filter((word) => word !== randomWord);
-    setWords(newWords);
+  const selectNewWord = useCallback(() => {
+    if (words.length === 0) {
+      console.warn("No words available. Refetching.");
+      get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
+      return;
+    }
+    const randomIndex = Math.floor(Math.random() * words.length);
+    const randomWord = words[randomIndex];
     setCurrentWord(randomWord);
-  };
+    setWords((prevWords) =>
+      prevWords.filter((_, index) => index !== randomIndex)
+    );
+  }, [words]);
+
+  const deductLife = useCallback(() => {
+    setLives((prevLives) => {
+      if (prevLives - 1 <= 0) {
+        setGameOver(true);
+        return 0;
+      }
+      return prevLives - 1;
+    });
+  }, []);
 
   const guess = () => {
+    if (!currentGuess) return;
     if (currentGuess.length === 1) {
-      if (currentWord.includes(currentGuess.toLowerCase())) {
-        setGuessedLetters([...guessedLetters, currentGuess.toLowerCase()]);
-
-        setKeyStats({
-          ...keyStats,
+      const guessLower = currentGuess.toLowerCase();
+      if (currentWord.includes(guessLower)) {
+        setGuessedLetters((prev) => [...prev, guessLower]);
+        setKeyStats((prev) => ({
+          ...prev,
           [currentGuess.toUpperCase()]: "correct"
-        });
-
-        if (currentWord.length <= 0) return;
-        if (
-          currentWord
-            .split("")
-            .every((letter) =>
-              [...guessedLetters, currentGuess].includes(letter)
-            ) &&
-          lives > 0
-        ) {
-          setCompletedWords([...completedWords, currentWord]);
-          nextWord(false);
-        }
+        }));
       } else {
-        if (lives - 1 === 0) {
-          setGameOver(true);
-        }
-
-        setKeyStats({
-          ...keyStats,
+        deductLife();
+        setKeyStats((prev) => ({
+          ...prev,
           [currentGuess.toUpperCase()]: "incorrect"
-        });
-
-        setLives(lives - 1);
+        }));
       }
+    } else if (currentGuess.toLowerCase() === currentWord) {
+      setCompletedWords((prev) => [...prev, currentWord]);
+      selectNewWord();
     } else {
-      if (currentGuess.toLowerCase() === currentWord) {
-        setCompletedWords([...completedWords, currentWord]);
-        nextWord(false);
-      } else {
-        if (lives - 1 === 0) {
-          setGameOver(true);
-        }
-
-        setLives(lives - 1);
-      }
+      deductLife();
     }
-
     setCurrentGuess("");
   };
 
   const get_some_words = async (amount: number) => {
+    if (words.length > 0) return;
+    console.log("Fetching words");
     try {
-      const url = `https://translator.learninglatin.net/get_list?type_of_words=latin&pos_list=noun,verb&amount=10&random=true`;
-      //TODO: also keep track of pos and senses to show after game is over
-      /*
-        orth: String,
-        parts: Vec<String>,
-        senses: Vec<String>,
-        pos: PartOfSpeech,
-        form: Form,
-        info: WordInfo,
-        n: Option<Vec<NValue>>,
-        modifiers: Option<Vec<Modifier>>,
-        id: i32,
-        extension_senses: Option<Vec<String>>,
-       */
+      const url = `https://translator.learninglatin.net/get_list?type_of_words=latin&pos_list=noun,verb&amount=${amount}&random=true`;
       let result = await fetch(url).then((res) => res.json());
 
       if (result.error) {
         setWords(DEFAULT_WORD_LIST);
         console.error(result.error);
       } else {
-        //TODO: in the future, get a random part from the list of parts
-        let words = result.map((word: any) => word.orth);
-        setWords(words);
+        let newWords = result.map((word: any) => word.orth);
+        setWords(newWords);
       }
     } catch (error) {
       console.error(error);
       setWords(DEFAULT_WORD_LIST);
     }
+  };
+
+  const updateCurrentGuess = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCurrentGuess(e.target.value);
   };
 
   const onChar = (key: string) => {
@@ -182,14 +154,14 @@ const Hangman: NextPage = () => {
           Hangman
         </h1>
         <p>{currentWord}</p>
-        <div className='flex flex-col gap-2 w-3/5 my-2'>
+        <section className='flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5'>
           <section className='flex gap-2 items-center justify-center'>
             {currentWord != "" && gameStarted ? (
               currentWord.split("").map((letter, index) => {
                 return (
                   <div
                     key={index}
-                    className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'
+                    className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 max-xs:p-1 border border-neutral-300 rounded flex justify-center items-center'
                   >
                     {guessedLetters.includes(letter) ? letter : "_"}
                   </div>
@@ -197,35 +169,35 @@ const Hangman: NextPage = () => {
               })
             ) : (
               <div className='flex gap-2 items-center justify-center'>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
                   p
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
                   r
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
                   e
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
                   s
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
                   s
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'></div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'></div>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
                   s
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
                   t
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
                   a
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
                   r
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border border-neutral-300 rounded flex justify-center items-center'>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
                   t
                 </div>
               </div>
@@ -233,22 +205,37 @@ const Hangman: NextPage = () => {
           </section>
 
           <section className='flex flex-col gap-2'>
-            <div className='flex gap-2'>
-              <Text
-                placeholder='Enter a letter/word'
-                class=' bg-white bg-opacity-30 backdrop-blur-sm flex-grow'
-                onChange={updateCurrentGuess}
-                value={currentGuess}
-                keyName='Enter'
-              />
-              <Button onClick={guess} locked={gameOver || !gameStarted}>
+            <div className='flex gap-2 max-lg:flex-col'>
+              <div className='flex gap-2 flex-grow'>
+                <Text
+                  placeholder='Enter a letter/word'
+                  class=' bg-white bg-opacity-30 backdrop-blur-sm flex-grow'
+                  onChange={updateCurrentGuess}
+                  value={currentGuess}
+                  keyName='Enter'
+                />
+                <Button
+                  onClick={guess}
+                  locked={gameOver || !gameStarted}
+                  class='max-xs:hidden'
+                >
+                  Guess
+                </Button>
+              </div>
+              <Button
+                onClick={guess}
+                locked={gameOver || !gameStarted}
+                class='xs:hidden'
+              >
                 Guess
               </Button>
-              <div className='bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center'>
-                {lives} lives left
-              </div>
-              <div className='bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center'>
-                {completedWords.length} completed
+              <div className='flex gap-2'>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center max-lg:flex-grow'>
+                  {lives} lives left
+                </div>
+                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center max-lg:flex-grow'>
+                  {completedWords.length} completed
+                </div>
               </div>
             </div>
             <Keyboard
@@ -265,11 +252,11 @@ const Hangman: NextPage = () => {
                 </Button>
               ) : (
                 <Button onClick={startGame} locked={false} class='w-full'>
-                  Start Game
+                  Start
                 </Button>
               )}
               <Button
-                onClick={() => nextWord(true)}
+                onClick={nextWord}
                 locked={gameOver || !gameStarted}
                 class='w-full'
               >
@@ -277,7 +264,7 @@ const Hangman: NextPage = () => {
               </Button>
             </div>
           </section>
-        </div>
+        </section>
       </section>
     </Layout>
   );
