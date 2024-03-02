@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   onChar: (value: string) => void;
@@ -12,7 +12,15 @@ type Props = {
 
 type KeyValue = "ENTER" | "DELETE";
 
-const Keyboard = ({ onChar, onDelete, onEnter, keyStats, locked }: Props) => {
+const Keyboard = ({
+  onChar,
+  onDelete,
+  onEnter,
+  keyStats,
+  locked
+}: Props) => {
+  const [valueOfKeys, setValueOfKeys] = useState();
+
   const onClick = (value: KeyValue) => {
     if (locked) {
       return;

@@ -54,13 +54,29 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "hero-gradient": "radial-gradient(ellipse, #87cefa 20%, #fff 70%)",
         "translate-gradient":
-          "radial-gradient(circle at top right, #87cefa 15rem, #d9c0f3 40rem, #fff 50rem)",
+          "radial-gradient(circle at top right, #87cefa 15%, #d9c0f3 40%, #fff 100%)",
         "practice-gradient":
           "linear-gradient(232deg, rgba(255,255,255,1) 23%, rgba(135,206,250,1) 37%, rgba(217,192,243,1) 53%, rgba(255,255,255,1) 69%)",
         "practice-nav-gradient":
           "radial-gradient(circle, rgba(148,187,233,0.8) 5%, rgba(148,187,233,0.5) 34%, rgba(255,255,255,1) 100%)",
         "textbook-gradient":
-          "linear-gradient(99deg, rgba(255,255,255,0.4) 3%, rgba(135,206,250,0.5) 36%, rgba(217,192,243,0.4) 59%, rgba(255,255,255,1) 68%)"
+          "linear-gradient(99deg, rgba(255,255,255,0.4) 3%, rgba(135,206,250,0.5) 36%, rgba(217,192,243,0.4) 59%, rgba(255,255,255,1) 68%)",
+        "game-nav-gradient":
+          "linear-gradient(40deg, rgba(217,192,243,1) 6%, rgba(217,192,243,0.4) 56%, rgba(255,255,255,1) 68%)",
+        "hangman-gradient":
+          "linear-gradient(110deg, #dbf0ff 0%, #c2d1f0 40%, #dcd3ff 80%)",
+        "not-set-1":
+          "radial-gradient(circle at center, #e0eafc 10%, #f8e2f4 60%, #ffffff 90%)",
+        "not-set-2":
+          "linear-gradient(95deg, #ffffff 0%, #a3d8f4 50%, #beb2f8 100%)",
+        "not-set-3":
+          "linear-gradient(135deg, #e6f9ff 0%, #c9d6ff 50%, #e2e2e2 100%)",
+        "not-set-4":
+          "linear-gradient(190deg, rgba(255,255,255,1) 15%, rgba(135,206,250,0.6) 50%, rgba(217,192,243,0.4) 85%)",
+        "not-set-5":
+          "radial-gradient(circle at bottom left, #ffffff 20%, #87cefa 50%, #d9c0f3 80%)",
+        "not-set-6":
+          "linear-gradient(120deg, rgba(255,255,255,0.3) 10%, rgba(135,206,250,0.7) 45%, rgba(217,192,243,0.5) 80%)"
       },
       height: {
         "slide-image-height": "calc(100vh - 2rem)"
@@ -73,7 +89,7 @@ module.exports = {
   plugins: [
     require("@tailwindcss/forms"),
     require("@headlessui/tailwindcss"),
-    function({ addVariant }) {
+    function ({ addVariant }) {
       addVariant("child", "& > *");
       addVariant("last-child", "&>*:last-child");
     }

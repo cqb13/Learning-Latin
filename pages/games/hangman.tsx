@@ -6,21 +6,56 @@ import { NextPage } from "next";
 import Keyboard from "@components/games/general/keyboard";
 
 const AMOUNT_OF_WORDS_PER_FETCH = 20;
-const DEFAULT_WORD_LIST = [
-  "puella",
-  "discipuli",
-  "canis",
-  "femina",
-  "puer",
-  "servus"
+const DEFAULT_WORD_LIST: LatinWord[] = [
+  {
+    orth: "puella",
+    parts: ["puella", "puellae"],
+    senses: [
+      "girl, (female) child/daughter",
+      "maiden",
+      "young woman/wife",
+      "sweetheart"
+    ],
+    pos: "noun",
+    id: 32256
+  },
+  {
+    orth: "discipulus",
+    parts: ["discipulus", "discipuli"],
+    senses: ["student, pupil, trainee", "follower, disciple"],
+    pos: "noun",
+    id: 18070
+  }
 ];
 const STARTING_LIVES = 10;
 
+type WordList = {
+  word: string;
+  info: LatinWord;
+};
+
+type LatinWord = {
+  orth: string;
+  parts: string[];
+  senses: string[];
+  pos: string;
+  id: number;
+};
+
 const Hangman: NextPage = () => {
-  const [words, setWords] = useState<string[]>([]);
-  const [currentWord, setCurrentWord] = useState("");
+  const [words, setWords] = useState<LatinWord[]>([]);
+  const [currentWord, setCurrentWord] = useState<WordList>({
+    word: "",
+    info: {
+      orth: "",
+      parts: [],
+      senses: [],
+      pos: "",
+      id: 0
+    }
+  });
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
-  const [completedWords, setCompletedWords] = useState<string[]>([]);
+  const [completedWords, setCompletedWords] = useState<LatinWord[]>([]);
   const [keyStats, setKeyStats] = useState<{
     [key: string]: "correct" | "incorrect" | "default";
   }>({});
@@ -51,10 +86,13 @@ const Hangman: NextPage = () => {
     setGameStarted(true);
   };
 
-  const nextWord = () => {
+  const nextWord = (force: boolean) => {
     setGuessedLetters([]);
     setKeyStats({});
-    deductLife();
+    // the player skips a word as they think they can't solve it
+    if (force) {
+      deductLife();
+    }
     selectNewWord();
   };
 
@@ -66,7 +104,14 @@ const Hangman: NextPage = () => {
     }
     const randomIndex = Math.floor(Math.random() * words.length);
     const randomWord = words[randomIndex];
-    setCurrentWord(randomWord);
+
+    const randomPartIndex = Math.floor(Math.random() * randomWord.parts.length);
+    const word = {
+      word: randomWord.parts[randomPartIndex].replace(" | undeclined", ""),
+      info: randomWord
+    };
+
+    setCurrentWord(word);
     setWords((prevWords) =>
       prevWords.filter((_, index) => index !== randomIndex)
     );
@@ -86,12 +131,23 @@ const Hangman: NextPage = () => {
     if (!currentGuess) return;
     if (currentGuess.length === 1) {
       const guessLower = currentGuess.toLowerCase();
-      if (currentWord.includes(guessLower)) {
+      if (currentWord.word.includes(guessLower)) {
         setGuessedLetters((prev) => [...prev, guessLower]);
         setKeyStats((prev) => ({
           ...prev,
           [currentGuess.toUpperCase()]: "correct"
         }));
+
+        if (
+          currentWord.word
+            .split("")
+            .every((letter) =>
+              [...guessedLetters, currentGuess].includes(letter)
+            )
+        ) {
+          setCompletedWords((prev) => [...prev, currentWord.info]);
+          nextWord(false);
+        }
       } else {
         deductLife();
         setKeyStats((prev) => ({
@@ -99,9 +155,9 @@ const Hangman: NextPage = () => {
           [currentGuess.toUpperCase()]: "incorrect"
         }));
       }
-    } else if (currentGuess.toLowerCase() === currentWord) {
-      setCompletedWords((prev) => [...prev, currentWord]);
-      selectNewWord();
+    } else if (currentGuess.toLowerCase() === currentWord.word) {
+      setCompletedWords((prev) => [...prev, currentWord.info]);
+      nextWord(false);
     } else {
       deductLife();
     }
@@ -119,8 +175,17 @@ const Hangman: NextPage = () => {
         setWords(DEFAULT_WORD_LIST);
         console.error(result.error);
       } else {
-        let newWords = result.map((word: any) => word.orth);
-        setWords(newWords);
+        let latinWordList: LatinWord[] = result.map((word: any) => {
+          return {
+            orth: word.orth,
+            parts: word.parts,
+            senses: word.senses,
+            pos: word.pos,
+            id: word.id
+          };
+        });
+
+        setWords(latinWordList);
       }
     } catch (error) {
       console.error(error);
@@ -128,19 +193,13 @@ const Hangman: NextPage = () => {
     }
   };
 
-  const updateCurrentGuess = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentGuess(e.target.value);
-  };
-
   const onChar = (key: string) => {
     const letter = key.toLowerCase();
-    if (!guessedLetters.includes(letter)) {
-      setCurrentGuess(letter);
-    }
+    setCurrentGuess((prev) => prev + letter);
   };
 
   const onDelete = () => {
-    setCurrentGuess("");
+    setCurrentGuess((prev) => prev.slice(0, -1));
   };
 
   const onEnter = () => {
@@ -148,16 +207,15 @@ const Hangman: NextPage = () => {
   };
 
   return (
-    <Layout title='Translator' backgroundClass='bg-translate-gradient'>
+    <Layout title='Translator' backgroundClass='bg-hangman-gradient'>
       <section className='flex flex-col items-center'>
         <h1 className='text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]'>
           Hangman
         </h1>
-        <p>{currentWord}</p>
         <section className='flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5'>
           <section className='flex gap-2 items-center justify-center'>
-            {currentWord != "" && gameStarted ? (
-              currentWord.split("").map((letter, index) => {
+            {currentWord.word != "" && gameStarted ? (
+              currentWord.word.split("").map((letter, index) => {
                 return (
                   <div
                     key={index}
@@ -210,7 +268,6 @@ const Hangman: NextPage = () => {
                 <Text
                   placeholder='Enter a letter/word'
                   class=' bg-white bg-opacity-30 backdrop-blur-sm flex-grow'
-                  onChange={updateCurrentGuess}
                   value={currentGuess}
                   keyName='Enter'
                 />
@@ -256,13 +313,40 @@ const Hangman: NextPage = () => {
                 </Button>
               )}
               <Button
-                onClick={nextWord}
+                onClick={() => nextWord(true)}
                 locked={gameOver || !gameStarted}
                 class='w-full'
               >
                 Next
               </Button>
             </div>
+          </section>
+
+          <section className='flex flex-col gap-2'>
+            {gameOver && lives === 0 ? (
+              <div
+                key={currentWord.info.id}
+                className='bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded'
+              >
+                <h2>
+                  {currentWord.info.orth} | {currentWord.info.pos}
+                </h2>
+                <p>{currentWord.info.parts.join(", ")}</p>
+                <p>{currentWord.info.senses.join(", ")}</p>
+              </div>
+            ) : null}
+            {completedWords.reverse().map((word) => (
+              <div
+                key={word.id}
+                className='bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded'
+              >
+                <h2>
+                  {word.orth} | {word.pos}
+                </h2>
+                <p>{word.parts.join(", ")}</p>
+                <p>{word.senses.join(", ")}</p>
+              </div>
+            ))}
           </section>
         </section>
       </section>
