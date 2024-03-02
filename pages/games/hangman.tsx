@@ -212,7 +212,6 @@ const Hangman: NextPage = () => {
         <h1 className='text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]'>
           Hangman
         </h1>
-        <p>{currentWord.word}</p>
         <section className='flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5'>
           <section className='flex gap-2 items-center justify-center'>
             {currentWord.word != "" && gameStarted ? (

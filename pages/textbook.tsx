@@ -28,7 +28,7 @@ const Textbook: NextPage = () => {
 
   const updateSideBarVisibility = (newState: boolean) => {
     setSideBarOpen(newState);
-  }
+  };
 
   const updateCurrentData = (content: string) => {
     setCurrentData(convertMarkdownContentToHtml(content));
@@ -40,18 +40,15 @@ const Textbook: NextPage = () => {
   }
 
   return (
-    <Layout title="Textbook" backgroundClass=" bg-textbook-gradient">
-      <section className="flex max-mdLg:justify-center max-mdLg:flex-col">
+    <Layout title='Textbook' backgroundClass=' bg-textbook-gradient'>
+      <section className='flex max-mdLg:justify-center max-mdLg:flex-col'>
         <Button
-          class={`mdLg:hidden sticky child:w-5 child:h-5 w-fit rounded-2xl rounded-tl-none rounded-bl-none mt-2 ${sideBarOpen ? "hidden" : ""}`}
+          class={`mdLg:hidden sticky child:w-5 child:h-5 w-fit rounded-2xl rounded-tl-none rounded-bl-none mt-2 ${
+            sideBarOpen ? "hidden" : ""
+          }`}
           onClick={() => setSideBarOpen(!sideBarOpen)}
         >
-          <Image
-            src="/arrowRight.svg"
-            alt="Expand"
-            width={50}
-            height={50}
-          />
+          <Image src='/arrowRight.svg' alt='Expand' width={50} height={50} />
         </Button>
         <TextbookSideNav
           data={groupedTextBookMap}
@@ -60,9 +57,9 @@ const Textbook: NextPage = () => {
           open={sideBarOpen}
         />
         <article
-          className={`py-16 w-7/12 max-lg:w-10/12 max-mdLg:py-0 ${sideBarOpen
-            ? "hidden"
-            : ""}`}
+          className={`py-16 w-7/12 max-lg:w-10/12 max-mdLg:py-0 ${
+            sideBarOpen ? "hidden" : ""
+          }`}
           dangerouslySetInnerHTML={{ __html: currentData }}
         />
       </section>

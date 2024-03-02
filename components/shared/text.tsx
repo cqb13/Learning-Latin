@@ -37,7 +37,6 @@ const Text = (props: textProps) => {
     } else {
       setValue("");
     }
-
   }, [props.id, props.placeholder, props.value]);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,14 +46,14 @@ const Text = (props: textProps) => {
   };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key=== props.keyName) {
+    if (event.key === props.keyName) {
       props.onKeyPress?.(event);
     }
   };
 
   return (
     <input
-      type="text"
+      type='text'
       placeholder={placeholder}
       className={`max-sm:text-center text-xl p-2 border border-neutral-300 rounded focus:outline-none focus:ring-0 focus:border-primary-color-dark placeholder:text-primary-color ${props.class}`}
       onChange={onChange}

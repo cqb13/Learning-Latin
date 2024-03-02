@@ -25,12 +25,12 @@ const ToolTip = ({
 
   return (
     <div
-      className="inline-block relative"
+      className='inline-block relative'
       onMouseEnter={showTip}
       onMouseLeave={hideTip}
     >
       {children}
-      {active &&
+      {active && (
         <div
           className={`mt-1 absolute text-xs border-solid border-transparent rounded left-1/2 -translate-x-1/2 p-1 text-gray-200 bg-black font-sans leading-tight z-50 whitespace-nowrap`}
           style={{
@@ -41,7 +41,8 @@ const ToolTip = ({
           }}
         >
           {content}
-        </div>}
+        </div>
+      )}
     </div>
   );
 };

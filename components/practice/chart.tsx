@@ -26,37 +26,28 @@ const Chart = ({
     createValueArrayMap(data, chartIndex)
   );
 
-  useEffect(
-    () => {
-      if (answers) {
-        const inputs = document.querySelectorAll("input");
-        for (let i = 0; i < inputs.length; i++) {
-          inputs[i].classList.remove("border-red-500", "border-neutral-300");
-          inputs[i].classList.add("border-green-500");
-        }
-        return;
+  useEffect(() => {
+    if (answers) {
+      const inputs = document.querySelectorAll("input");
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].classList.remove("border-red-500", "border-neutral-300");
+        inputs[i].classList.add("border-green-500");
       }
+      return;
+    }
 
-      setValueArrayMap(clearChart(valueArrayMap));
-      setValueArrayMap(createValueArrayMap(data, chartIndex));
-    },
-    [chartIndex, answers]
-  );
+    setValueArrayMap(clearChart(valueArrayMap));
+    setValueArrayMap(createValueArrayMap(data, chartIndex));
+  }, [chartIndex, answers]);
 
-  useEffect(
-    () => {
-      clearChart(valueArrayMap);
-      setValueArrayMap(createValueArrayMap(data, chartIndex));
-    },
-    [clear]
-  );
+  useEffect(() => {
+    clearChart(valueArrayMap);
+    setValueArrayMap(createValueArrayMap(data, chartIndex));
+  }, [clear]);
 
-  useEffect(
-    () => {
-      updateClearable(chartClearable(valueArrayMap));
-    },
-    [valueArrayMap]
-  );
+  useEffect(() => {
+    updateClearable(chartClearable(valueArrayMap));
+  }, [valueArrayMap]);
 
   const checkAnswer = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -97,7 +88,7 @@ const Chart = ({
       value = value.replace(/[^a-zA-Z]/g, "");
       //make sure that the answer has all the elements in the list and no extra elements
       if (
-        list.every(element => answer.includes(element)) &&
+        list.every((element) => answer.includes(element)) &&
         list.length === value.length
       ) {
         changeTextAccuracyState(event, true);
