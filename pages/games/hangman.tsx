@@ -14,18 +14,18 @@ const DEFAULT_WORD_LIST: LatinWord[] = [
       "girl, (female) child/daughter",
       "maiden",
       "young woman/wife",
-      "sweetheart"
+      "sweetheart",
     ],
     pos: "noun",
-    id: 32256
+    id: 32256,
   },
   {
     orth: "discipulus",
     parts: ["discipulus", "discipuli"],
     senses: ["student, pupil, trainee", "follower, disciple"],
     pos: "noun",
-    id: 18070
-  }
+    id: 18070,
+  },
 ];
 const STARTING_LIVES = 10;
 
@@ -51,8 +51,8 @@ const Hangman: NextPage = () => {
       parts: [],
       senses: [],
       pos: "",
-      id: 0
-    }
+      id: 0,
+    },
   });
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [completedWords, setCompletedWords] = useState<LatinWord[]>([]);
@@ -108,7 +108,7 @@ const Hangman: NextPage = () => {
     const randomPartIndex = Math.floor(Math.random() * randomWord.parts.length);
     const word = {
       word: randomWord.parts[randomPartIndex].replace(" | undeclined", ""),
-      info: randomWord
+      info: randomWord,
     };
 
     setCurrentWord(word);
@@ -139,7 +139,7 @@ const Hangman: NextPage = () => {
         setGuessedLetters((prev) => [...prev, guessLower]);
         setKeyStats((prev) => ({
           ...prev,
-          [currentGuess.toUpperCase()]: "correct"
+          [currentGuess.toUpperCase()]: "correct",
         }));
 
         if (
@@ -154,9 +154,10 @@ const Hangman: NextPage = () => {
         }
       } else {
         deductLife();
+        setGuessedLetters((prev) => [...prev, guessLower]);
         setKeyStats((prev) => ({
           ...prev,
-          [currentGuess.toUpperCase()]: "incorrect"
+          [currentGuess.toUpperCase()]: "incorrect",
         }));
       }
     } else if (currentGuess.toLowerCase() === currentWord.word) {
@@ -184,7 +185,7 @@ const Hangman: NextPage = () => {
             parts: word.parts,
             senses: word.senses,
             pos: word.pos,
-            id: word.id
+            id: word.id,
           };
         });
 
