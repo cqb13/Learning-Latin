@@ -9,7 +9,7 @@ import { NextPage } from "next";
 
 const Games: NextPage = () => {
   return (
-    <Layout title='Practice' backgroundClass='bg-game-nav-gradient'>
+    <Layout title='Games' backgroundClass='bg-game-nav-gradient'>
       <section className='flex flex-col items-center'>
         <h1 className='text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)] text-center'>
           Games
@@ -21,6 +21,13 @@ const Games: NextPage = () => {
             class=' w-1/4 max-md:w-3/4 max-xs:w-11/12'
           >
             Hangman
+          </Button>
+          <Button
+            link='/games/wordle'
+            locked={true}
+            class=' w-1/4 max-md:w-3/4 max-xs:w-11/12'
+          >
+            Wordle
           </Button>
           <Button
             link='/games/word-search'
