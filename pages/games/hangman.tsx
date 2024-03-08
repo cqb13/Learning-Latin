@@ -105,7 +105,10 @@ const Hangman: NextPage = () => {
     const randomIndex = Math.floor(Math.random() * words.length);
     const randomWord = words[randomIndex];
 
-    const randomPartIndex = Math.floor(Math.random() * randomWord.parts.length);
+    let wordParts = randomWord.parts;
+    wordParts = wordParts.filter((part) => !part.includes("---"));
+    const randomPartIndex = Math.floor(Math.random() * wordParts.length);
+
     const word = {
       word: randomWord.parts[randomPartIndex].replace(" | undeclined", ""),
       info: randomWord
