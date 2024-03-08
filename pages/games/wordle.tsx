@@ -5,86 +5,92 @@ import Text from "@components/shared/text";
 import { NextPage } from "next";
 import Keyboard from "@components/games/general/keyboard";
 
-// daily word option
-// infinite word option
-// custom word option (send link to friend with encrypted word in url)
-
 enum GameMode {
   Daily,
   Infinite,
-  Custom,
+  Custom
 }
 
 enum WordleGuessStatus {
   Correct,
   Incorrect,
   Invalid,
-  Unknown,
+  Unknown
 }
 
-type WordleGridItem = {
-  value: string;
-  status: WordleGuessStatus;
+const generateWordleGrid = (rows: number, cols: number) => {
+  return Array.from({ length: rows }, () =>
+    Array.from({ length: cols }, () => ({
+      value: "",
+      status: WordleGuessStatus.Unknown
+    }))
+  );
 };
 
-const WordleGridItem: WordleGridItem = {
-  value: "",
-  status: WordleGuessStatus.Unknown,
-};
-
-const WordSearch: NextPage = () => {
-  const [word, setWord] = useState<string>("");
+const Wordle: NextPage = () => {
+  const wordLength = 5;
+  const maxTries = 6;
+  const correctWord = "react";
   const [gameMode, setGameMode] = useState<GameMode>(GameMode.Daily);
+  const [wordleGrid, setWordleGrid] = useState(() =>
+    generateWordleGrid(maxTries, wordLength)
+  );
+  const [currentRow, setCurrentRow] = useState(0);
   const [keyStats, setKeyStats] = useState<{
     [key: string]: "correct" | "incorrect" | "default";
   }>({});
-  const [wordleGrid, setWordleGrid] = useState<WordleGridItem[][]>([
-    [
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-    ], // 0
-    [
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-    ], // 1
-    [
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-    ], // 2
-    [
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-    ], // 3
-    [
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-    ], // 4
-    [
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-      WordleGridItem,
-    ], // 5
-  ]);
-  const [currentRow, setCurrentRow] = useState<number>(0);
 
-  useEffect(() => {}, []);
+  const onChar = (char: string) => {
+    const firstEmptyCellIndex = getIndexOfFirstEmptyCell(
+      wordleGrid[currentRow]
+    );
+
+    setWordleGrid((currentGrid) => {
+      const newGrid = currentGrid.map((row, rowIndex) => {
+        if (rowIndex !== currentRow) return row;
+        const newRow = [...row];
+        if (firstEmptyCellIndex === wordLength) return newRow;
+        newRow[firstEmptyCellIndex].value = char;
+        return newRow;
+      });
+      return newGrid;
+    });
+  };
+
+  const onDelete = () => {
+    const currentRowCells = wordleGrid[currentRow];
+
+    for (let i = currentRowCells.length - 1; i >= 0; i--) {
+      if (currentRowCells[i].value !== "") {
+        setWordleGrid((currentGrid) => {
+          const newGrid = currentGrid.map((row, rowIndex) => {
+            if (rowIndex !== currentRow) return row;
+            const newRow = [...row];
+            newRow[i].value = "";
+            return newRow;
+          });
+          return newGrid;
+        });
+        break;
+      }
+    }
+  };
+
+  const getIndexOfFirstEmptyCell = (
+    row: {
+      value: string;
+      status: WordleGuessStatus;
+    }[]
+  ) => {
+    let index = row.findIndex((cell) => cell.value === "");
+    return index === -1 ? wordLength : index;
+  };
+
+  const onEnter = () => {
+    // Implementation should check the current row's word against the correct word and update statuses
+    // Placeholder for simplification
+    setCurrentRow(currentRow + 1);
+  };
 
   const colorFromGridItemStatus = (status: WordleGuessStatus) => {
     switch (status) {
@@ -100,32 +106,6 @@ const WordSearch: NextPage = () => {
         return "bg-white";
     }
   };
-
-  const onChar = (char: string) => {
-    let grid = wordleGrid;
-    // find the next empty cell in the current row, if there are none, select the last cell
-    let selectedCell = grid[currentRow].findIndex((cell) => cell.value == "");
-    if (selectedCell == -1) {
-      selectedCell = grid[currentRow].length - 1;
-    }
-    grid[currentRow][selectedCell].value = char;
-    console.log(grid);
-    setWordleGrid(grid);
-  };
-
-  const onDelete = () => {
-    const newGrid = wordleGrid;
-    newGrid[currentRow][0].value = "";
-    setWordleGrid(newGrid);
-  };
-
-  const onEnter = () => {
-    const newGrid = wordleGrid;
-    newGrid[currentRow][0].status = WordleGuessStatus.Correct;
-    setWordleGrid(newGrid);
-    setCurrentRow(currentRow + 1);
-  };
-
   return (
     <Layout title='Wordle' backgroundClass='bg-translate-gradient'>
       <section className='flex flex-col items-center'>
@@ -134,17 +114,17 @@ const WordSearch: NextPage = () => {
         </h1>
 
         <section className='flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5'>
-          <section className='flex gap-2 items-center justify-center'>
+          <section className='flex flex-col gap-2 items-center justify-center'>
             {wordleGrid.map((row, rowIndex) => {
               return (
-                <div className='' key={rowIndex}>
+                <div className='flex gap-2' key={rowIndex}>
                   {row.map((gridItem, letterIndex) => {
                     return (
                       <div
                         key={`${rowIndex}-${letterIndex}`}
                         className={`${colorFromGridItemStatus(
                           gridItem.status
-                        )} bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center`}
+                        )} bg-opacity-30 backdrop-blur-sm text-3xl p-2 w-12 h-12 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center`}
                       >
                         {gridItem.value}
                       </div>
@@ -172,4 +152,4 @@ const WordSearch: NextPage = () => {
   );
 };
 
-export default WordSearch;
+export default Wordle;
