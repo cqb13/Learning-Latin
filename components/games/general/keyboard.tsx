@@ -5,7 +5,7 @@ type Props = {
   onDelete: () => void;
   onEnter: () => void;
   keyStats: {
-    [key: string]: "correct" | "incorrect" | "default";
+    [key: string]: "correct" | "incorrect" | "default" | "gray" | "orange";
   };
   locked?: boolean;
 };
@@ -117,22 +117,35 @@ const Keyboard = ({ onChar, onDelete, onEnter, keyStats, locked }: Props) => {
 type KeyProps = {
   value: string;
   onClick: (value: KeyValue) => void;
-  status: "correct" | "incorrect" | "default";
+  status: "correct" | "incorrect" | "default" | "gray" | "orange";
   className?: string;
 };
 
 const Key = ({ value, onClick, status, className }: KeyProps) => {
   const width = value.length === 1 ? "w-12" : "w-32";
 
-  const color =
-    status === "correct"
-      ? "bg-green-500"
-      : status === "incorrect"
-      ? "bg-red-500"
-      : "bg-white";
+  const statusToColor = (status: string) => {
+    switch (status) {
+      case "correct":
+        return "bg-green-300";
+      case "incorrect":
+        return "bg-red-300";
+      case "default":
+        return "bg-white";
+      case "gray":
+        return "bg-neutral-300";
+      case "orange":
+        return "bg-orange-300";
+      default:
+        return "bg-white";
+    }
+  };
+
   return (
     <div
-      className={`${width} ${color} bg-opacity-30 backdrop-blur-sm text-3xl max-sm:text-xl max-xs:text-lg max-xs:p-1 p-2 border border-neutral-300 rounded flex justify-center items-center cursor-pointer hover:bg-opacity-70 transition-colors ${className}`}
+      className={`${width} ${statusToColor(
+        status
+      )} bg-opacity-30 backdrop-blur-sm text-3xl max-sm:text-xl max-xs:text-lg max-xs:p-1 p-2 border border-neutral-300 rounded flex justify-center items-center cursor-pointer hover:bg-opacity-70 transition-colors ${className}`}
       onClick={() => onClick(value as KeyValue)}
     >
       {value}

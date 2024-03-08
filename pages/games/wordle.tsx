@@ -37,7 +37,7 @@ const Wordle: NextPage = () => {
   );
   const [currentRow, setCurrentRow] = useState(0);
   const [keyStats, setKeyStats] = useState<{
-    [key: string]: "correct" | "incorrect" | "default";
+    [key: string]: "correct" | "incorrect" | "default" | "gray" | "orange";
   }>({});
 
   const onChar = (char: string) => {
@@ -89,15 +89,46 @@ const Wordle: NextPage = () => {
   const onEnter = () => {
     // Implementation should check the current row's word against the correct word and update statuses
     // Placeholder for simplification
+    if (
+      currentRow + 1 === maxTries ||
+      wordleGrid[currentRow].some((cell) => cell.value === "")
+    ) {
+      return;
+    }
+
+    processCurrentRow();
+
     setCurrentRow(currentRow + 1);
+  };
+
+  const processCurrentRow = () => {
+    const currentRowCells = wordleGrid[currentRow];
+    const currentRowWord = currentRowCells.map((cell) => cell.value).join("");
+
+    const newKeyStats = { ...keyStats };
+    for (let i = 0; i < wordLength; i++) {
+      const cell = currentRowCells[i];
+      if (cell.value.toLowerCase() === correctWord[i]) {
+        cell.status = WordleGuessStatus.Correct;
+        newKeyStats[cell.value] = "correct";
+      } else if (correctWord.includes(cell.value.toLowerCase())) {
+        cell.status = WordleGuessStatus.Incorrect;
+        newKeyStats[cell.value] = "orange";
+      } else {
+        cell.status = WordleGuessStatus.Invalid;
+        newKeyStats[cell.value] = "gray";
+      }
+    }
+
+    setKeyStats(newKeyStats);
   };
 
   const colorFromGridItemStatus = (status: WordleGuessStatus) => {
     switch (status) {
       case WordleGuessStatus.Correct:
-        return "bg-green-500";
+        return "bg-green-300";
       case WordleGuessStatus.Incorrect:
-        return "bg-red-500";
+        return "bg-orange-300";
       case WordleGuessStatus.Invalid:
         return "bg-neutral-300";
       case WordleGuessStatus.Unknown:
