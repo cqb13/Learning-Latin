@@ -7,8 +7,7 @@ import Keyboard from "@components/games/general/keyboard";
 
 enum GameMode {
   Daily,
-  Infinite,
-  Custom
+  Infinite
 }
 
 enum WordleGuessStatus {
@@ -87,8 +86,6 @@ const Wordle: NextPage = () => {
   };
 
   const onEnter = () => {
-    // Implementation should check the current row's word against the correct word and update statuses
-    // Placeholder for simplification
     if (
       currentRow + 1 === maxTries ||
       wordleGrid[currentRow].some((cell) => cell.value === "")
@@ -104,6 +101,17 @@ const Wordle: NextPage = () => {
   const processCurrentRow = () => {
     const currentRowCells = wordleGrid[currentRow];
     const currentRowWord = currentRowCells.map((cell) => cell.value).join("");
+
+    if (currentRowWord.toLowerCase() === correctWord) {
+      const newKeyStats = { ...keyStats };
+      for (let i = 0; i < wordLength; i++) {
+        const cell = currentRowCells[i];
+        cell.status = WordleGuessStatus.Correct;
+        newKeyStats[cell.value] = "correct";
+      }
+      setKeyStats(newKeyStats);
+      return;
+    }
 
     const newKeyStats = { ...keyStats };
     for (let i = 0; i < wordLength; i++) {
@@ -137,13 +145,41 @@ const Wordle: NextPage = () => {
         return "bg-white";
     }
   };
+
+  const switchToOtherGameMode = () => {
+    setGameMode(
+      gameMode === GameMode.Daily ? GameMode.Infinite : GameMode.Daily
+    );
+  };
+
   return (
-    <Layout title='Wordle' backgroundClass='bg-translate-gradient'>
+    <Layout title='Wordle' backgroundClass='bg-wordle-gradient'>
       <section className='flex flex-col items-center'>
         <h1 className='text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]'>
           Latin Wordle
         </h1>
-
+        <section className='border-neutral-300 border rounded-xl bg-white bg-opacity-30 backdrop-blur-sm w-1/5 flex items-center'>
+          <button
+            onClick={switchToOtherGameMode}
+            className={`grow rounded-l-xl transition-all duration-150 ${
+              gameMode == GameMode.Daily
+                ? "bg-primary-color bg-opacity-30"
+                : "hover:bg-primary-color hover:bg-opacity-10"
+            }`}
+          >
+            Daily
+          </button>
+          <button
+            onClick={switchToOtherGameMode}
+            className={`grow rounded-r-xl transition-all duration-150  ${
+              gameMode == GameMode.Infinite
+                ? "bg-primary-color bg-opacity-30"
+                : "hover:bg-primary-color hover:bg-opacity-10"
+            }`}
+          >
+            Infinite
+          </button>
+        </section>
         <section className='flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5'>
           <section className='flex flex-col gap-2 items-center justify-center'>
             {wordleGrid.map((row, rowIndex) => {

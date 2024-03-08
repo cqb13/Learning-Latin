@@ -65,9 +65,7 @@ module.exports = {
           "linear-gradient(40deg, rgba(217,192,243,1) 6%, rgba(217,192,243,0.4) 56%, rgba(255,255,255,1) 68%)",
         "hangman-gradient":
           "linear-gradient(110deg, #dbf0ff 0%, #c2d1f0 40%, #dcd3ff 80%)",
-        "not-set-1":
-          "radial-gradient(circle at center, #e0eafc 10%, #f8e2f4 60%, #ffffff 90%)",
-        "not-set-2":
+        "wordle-gradient":
           "linear-gradient(95deg, #ffffff 0%, #a3d8f4 50%, #beb2f8 100%)",
         "not-set-3":
           "linear-gradient(135deg, #e6f9ff 0%, #c9d6ff 50%, #e2e2e2 100%)",
