@@ -29,8 +29,17 @@ const generateWordleGrid = (rows: number, cols: number) => {
 const Wordle: NextPage = () => {
   const wordLength = 5;
   const maxTries = 6;
-  const correctWord = "react";
+  const AMOUNT_OF_WORDS_PER_FETCH = 10;
+  const [correctWord, setCorrectWord] = useState("");
   const [gameMode, setGameMode] = useState<GameMode>(GameMode.Daily);
+  const [words, setWords] = useState<LatinWord[]>([]);
+  type LatinWord = {
+    orth: string;
+    parts: string[];
+    senses: string[];
+    pos: string;
+    id: number;
+  };
   const [wordleGrid, setWordleGrid] = useState(() =>
     generateWordleGrid(maxTries, wordLength)
   );
@@ -38,6 +47,31 @@ const Wordle: NextPage = () => {
   const [keyStats, setKeyStats] = useState<{
     [key: string]: "correct" | "incorrect" | "default" | "gray" | "orange";
   }>({});
+  const [gameOver, setGameOver] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
+
+  useEffect(() => {
+    if (words.length === 0) {
+      get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
+    }
+    reset();
+    selectNewWord();
+    setGameStarted(true);
+  }, [gameStarted, words]);
+
+  const reset = () => {
+    setWordleGrid(generateWordleGrid(maxTries, wordLength));
+    setCurrentRow(0);
+    setKeyStats({});
+    setGameOver(false);
+  };
+
+  const selectNewWord = () => {
+    const randomIndex = Math.floor(Math.random() * words.length);
+    console.log(words[randomIndex]);
+    const newWord = words[randomIndex].orth;
+    setCorrectWord(newWord);
+  };
 
   const onChar = (char: string) => {
     const firstEmptyCellIndex = getIndexOfFirstEmptyCell(
@@ -143,6 +177,34 @@ const Wordle: NextPage = () => {
         return "bg-white";
       default:
         return "bg-white";
+    }
+  };
+
+  const get_some_words = async (amount: number) => {
+    if (words.length > 0) return;
+    try {
+      const url = `https://translator.learninglatin.net/get_list?type_of_words=latin&pos_list=noun&amount=${amount}&exact=5&random=true`;
+      let result = await fetch(url).then((res) => res.json());
+
+      if (result.error) {
+        console.error(result.error);
+      } else {
+        let latinWordList: LatinWord[] = result.map((word: any) => {
+          return {
+            orth: word.orth,
+            parts: word.parts,
+            senses: word.senses,
+            pos: word.pos,
+            id: word.id
+          };
+        });
+
+        console.log(latinWordList);
+
+        setWords(latinWordList);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
