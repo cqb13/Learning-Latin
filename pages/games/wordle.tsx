@@ -7,21 +7,21 @@ import Keyboard from "@components/games/general/keyboard";
 
 enum GameMode {
   Daily,
-  Infinite
+  Infinite,
 }
 
 enum WordleGuessStatus {
   Correct,
   Incorrect,
   Invalid,
-  Unknown
+  Unknown,
 }
 
 const generateWordleGrid = (rows: number, cols: number) => {
   return Array.from({ length: rows }, () =>
     Array.from({ length: cols }, () => ({
       value: "",
-      status: WordleGuessStatus.Unknown
+      status: WordleGuessStatus.Unknown,
     }))
   );
 };
@@ -33,6 +33,7 @@ const Wordle: NextPage = () => {
   const [correctWord, setCorrectWord] = useState("");
   const [gameMode, setGameMode] = useState<GameMode>(GameMode.Daily);
   const [words, setWords] = useState<LatinWord[]>([]);
+  const [completedWords, setCompletedWords] = useState<LatinWord[]>([]);
   type LatinWord = {
     orth: string;
     parts: string[];
@@ -55,9 +56,12 @@ const Wordle: NextPage = () => {
       get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
     }
     reset();
-    selectNewWord();
     setGameStarted(true);
-  }, [gameStarted, words]);
+  }, [gameStarted, gameMode]);
+
+  useEffect(() => {
+    selectNewWord();
+  }, [words]);
 
   const reset = () => {
     setWordleGrid(generateWordleGrid(maxTries, wordLength));
@@ -67,10 +71,11 @@ const Wordle: NextPage = () => {
   };
 
   const selectNewWord = () => {
+    if (words.length === 0) return;
+
     const randomIndex = Math.floor(Math.random() * words.length);
-    console.log(words[randomIndex]);
     const newWord = words[randomIndex].orth;
-    setCorrectWord(newWord);
+    setCorrectWord("abcee");
   };
 
   const onChar = (char: string) => {
@@ -120,16 +125,32 @@ const Wordle: NextPage = () => {
   };
 
   const onEnter = () => {
-    if (
-      currentRow + 1 === maxTries ||
-      wordleGrid[currentRow].some((cell) => cell.value === "")
-    ) {
+    if (wordleGrid[currentRow].some((cell) => cell.value === "")) {
       return;
     }
 
     processCurrentRow();
 
+    if (currentRow + 1 === maxTries) {
+      setGameOver(true);
+
+      if (gameMode === GameMode.Daily) {
+        winOnDailyMode();
+      }
+
+      return;
+    }
+
     setCurrentRow(currentRow + 1);
+  };
+
+  const winOnDailyMode = () => {
+    const newCompletedWords = [...completedWords];
+    const word = words.find((word) => word.orth === correctWord);
+    if (word) {
+      newCompletedWords.push(word);
+      setCompletedWords(newCompletedWords);
+    }
   };
 
   const processCurrentRow = () => {
@@ -150,16 +171,19 @@ const Wordle: NextPage = () => {
     const newKeyStats = { ...keyStats };
     for (let i = 0; i < wordLength; i++) {
       const cell = currentRowCells[i];
+
       if (cell.value.toLowerCase() === correctWord[i]) {
         cell.status = WordleGuessStatus.Correct;
         newKeyStats[cell.value] = "correct";
-      } else if (correctWord.includes(cell.value.toLowerCase())) {
-        cell.status = WordleGuessStatus.Incorrect;
-        newKeyStats[cell.value] = "orange";
-      } else {
+        continue;
+      }
+
+      if (!correctWord.includes(cell.value.toLowerCase())) {
         cell.status = WordleGuessStatus.Invalid;
         newKeyStats[cell.value] = "gray";
+        continue;
       }
+
     }
 
     setKeyStats(newKeyStats);
@@ -195,7 +219,7 @@ const Wordle: NextPage = () => {
             parts: word.parts,
             senses: word.senses,
             pos: word.pos,
-            id: word.id
+            id: word.id,
           };
         });
 
@@ -274,7 +298,20 @@ const Wordle: NextPage = () => {
             />
           </section>
 
-          <section className='flex flex-col gap-2'></section>
+          <section className='flex flex-col gap-2'>
+            {completedWords.map((word) => (
+              <div
+                key={word.id}
+                className='bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded'
+              >
+                <h2>
+                  {word.orth} | {word.pos}
+                </h2>
+                <p>{word.parts.join(", ")}</p>
+                <p>{word.senses.join(", ")}</p>
+              </div>
+            ))}
+          </section>
         </section>
       </section>
     </Layout>
