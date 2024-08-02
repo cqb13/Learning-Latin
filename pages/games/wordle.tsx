@@ -265,7 +265,7 @@ const Wordle: NextPage = () => {
         <h1 className='text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]'>
           Latin Wordle
         </h1>
-        <section className='border-neutral-300 border rounded-xl bg-white bg-opacity-30 backdrop-blur-sm w-1/5 flex items-center'>
+        <section className='border-neutral-300 border rounded-xl bg-white bg-opacity-30 backdrop-blur-sm xl:w-1/5 flex items-center lg:w-2/5 max-lg:w-2/5 max-sm:w-4/5'>
           <button
             onClick={switchToOtherGameMode}
             className={`grow rounded-l-xl transition-all duration-150 ${
