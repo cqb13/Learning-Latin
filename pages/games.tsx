@@ -24,7 +24,7 @@ const Games: NextPage = () => {
           </Button>
           <Button
             link='/games/wordle'
-            locked={true}
+            locked={false}
             class=' w-1/4 max-md:w-3/4 max-xs:w-11/12'
           >
             Wordle

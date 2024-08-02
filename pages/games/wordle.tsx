@@ -5,23 +5,18 @@ import Text from "@components/shared/text";
 import { NextPage } from "next";
 import Keyboard from "@components/games/general/keyboard";
 
-enum GameMode {
-  Daily,
-  Infinite,
-}
-
 enum WordleGuessStatus {
   Correct,
   Incorrect,
   Invalid,
-  Unknown,
+  Unknown
 }
 
 const generateWordleGrid = (rows: number, cols: number) => {
   return Array.from({ length: rows }, () =>
     Array.from({ length: cols }, () => ({
       value: "",
-      status: WordleGuessStatus.Unknown,
+      status: WordleGuessStatus.Unknown
     }))
   );
 };
@@ -31,7 +26,6 @@ const Wordle: NextPage = () => {
   const maxTries = 6;
   const AMOUNT_OF_WORDS_PER_FETCH = 10;
   const [correctWord, setCorrectWord] = useState("");
-  const [gameMode, setGameMode] = useState<GameMode>(GameMode.Daily);
   const [words, setWords] = useState<LatinWord[]>([]);
   const [completedWords, setCompletedWords] = useState<LatinWord[]>([]);
   type LatinWord = {
@@ -57,7 +51,7 @@ const Wordle: NextPage = () => {
     }
     reset();
     setGameStarted(true);
-  }, [gameStarted, gameMode]);
+  }, [gameStarted]);
 
   useEffect(() => {
     selectNewWord();
@@ -75,7 +69,8 @@ const Wordle: NextPage = () => {
 
     const randomIndex = Math.floor(Math.random() * words.length);
     const newWord = words[randomIndex].orth;
-    setCorrectWord("abcee");
+    console.log(newWord);
+    setCorrectWord(newWord);
   };
 
   const onChar = (char: string) => {
@@ -134,23 +129,10 @@ const Wordle: NextPage = () => {
     if (currentRow + 1 === maxTries) {
       setGameOver(true);
 
-      if (gameMode === GameMode.Daily) {
-        winOnDailyMode();
-      }
-
       return;
     }
 
     setCurrentRow(currentRow + 1);
-  };
-
-  const winOnDailyMode = () => {
-    const newCompletedWords = [...completedWords];
-    const word = words.find((word) => word.orth === correctWord);
-    if (word) {
-      newCompletedWords.push(word);
-      setCompletedWords(newCompletedWords);
-    }
   };
 
   const processCurrentRow = () => {
@@ -169,21 +151,42 @@ const Wordle: NextPage = () => {
     }
 
     const newKeyStats = { ...keyStats };
+
+    const contained_letters = correctWord.split("");
+
     for (let i = 0; i < wordLength; i++) {
       const cell = currentRowCells[i];
 
       if (cell.value.toLowerCase() === correctWord[i]) {
         cell.status = WordleGuessStatus.Correct;
         newKeyStats[cell.value] = "correct";
+        contained_letters[i] = "";
+        continue;
+      }
+    }
+
+    for (let i = 0; i < wordLength; i++) {
+      const cell = currentRowCells[i];
+
+      if (cell.status === WordleGuessStatus.Correct) {
         continue;
       }
 
-      if (!correctWord.includes(cell.value.toLowerCase())) {
+      if (contained_letters.includes(cell.value.toLowerCase())) {
+        cell.status = WordleGuessStatus.Incorrect;
+        newKeyStats[cell.value] = "orange";
+        contained_letters[contained_letters.indexOf(cell.value.toLowerCase())] =
+          "";
+      }
+    }
+
+    for (let i = 0; i < wordLength; i++) {
+      const cell = currentRowCells[i];
+
+      if (cell.status === WordleGuessStatus.Unknown) {
         cell.status = WordleGuessStatus.Invalid;
         newKeyStats[cell.value] = "gray";
-        continue;
       }
-
     }
 
     setKeyStats(newKeyStats);
@@ -219,7 +222,7 @@ const Wordle: NextPage = () => {
             parts: word.parts,
             senses: word.senses,
             pos: word.pos,
-            id: word.id,
+            id: word.id
           };
         });
 
@@ -232,40 +235,12 @@ const Wordle: NextPage = () => {
     }
   };
 
-  const switchToOtherGameMode = () => {
-    setGameMode(
-      gameMode === GameMode.Daily ? GameMode.Infinite : GameMode.Daily
-    );
-  };
-
   return (
     <Layout title='Wordle' backgroundClass='bg-wordle-gradient'>
       <section className='flex flex-col items-center'>
         <h1 className='text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]'>
-          Latin Wordle
+          Infinite Latin Wordle
         </h1>
-        <section className='border-neutral-300 border rounded-xl bg-white bg-opacity-30 backdrop-blur-sm w-1/5 flex items-center'>
-          <button
-            onClick={switchToOtherGameMode}
-            className={`grow rounded-l-xl transition-all duration-150 ${
-              gameMode == GameMode.Daily
-                ? "bg-primary-color bg-opacity-30"
-                : "hover:bg-primary-color hover:bg-opacity-10"
-            }`}
-          >
-            Daily
-          </button>
-          <button
-            onClick={switchToOtherGameMode}
-            className={`grow rounded-r-xl transition-all duration-150  ${
-              gameMode == GameMode.Infinite
-                ? "bg-primary-color bg-opacity-30"
-                : "hover:bg-primary-color hover:bg-opacity-10"
-            }`}
-          >
-            Infinite
-          </button>
-        </section>
         <section className='flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5'>
           <section className='flex flex-col gap-2 items-center justify-center'>
             {wordleGrid.map((row, rowIndex) => {
