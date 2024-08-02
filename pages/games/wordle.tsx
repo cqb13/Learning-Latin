@@ -1,9 +1,8 @@
-import Layout from "@components/shared/layout";
-import Button from "@components/shared/button";
-import { useEffect, useState } from "react";
-import Text from "@components/shared/text";
-import { NextPage } from "next";
 import Keyboard from "@components/games/general/keyboard";
+import Button from "@components/shared/button";
+import Layout from "@components/shared/layout";
+import { useEffect, useState } from "react";
+import { NextPage } from "next";
 
 enum GameMode {
   Daily,
@@ -29,7 +28,7 @@ const generateWordleGrid = (rows: number, cols: number) => {
 const Wordle: NextPage = () => {
   const wordLength = 5;
   const maxTries = 6;
-  const [correctWord, setCorrectWord] = useState("");
+  const [correctWord, setCorrectWord] = useState<LatinWord>();
   const [gameMode, setGameMode] = useState<GameMode>(GameMode.Daily);
   const [words, setWords] = useState<LatinWord[]>([]);
   const [completedWords, setCompletedWords] = useState<LatinWord[]>([]);
@@ -58,8 +57,6 @@ const Wordle: NextPage = () => {
   const [keyStats, setKeyStats] = useState<{
     [key: string]: "correct" | "incorrect" | "default" | "gray" | "orange";
   }>({});
-  const [gameOver, setGameOver] = useState(false);
-  const [gameStarted, setGameStarted] = useState(false);
 
   useEffect(() => {
     get_words();
@@ -67,32 +64,30 @@ const Wordle: NextPage = () => {
 
   useEffect(() => {
     reset();
-    setGameStarted(true);
-  }, [gameStarted, GameMode]);
+  }, [GameMode]);
 
   useEffect(() => {
-    selectNewWord();
+    selectNewWord(gameMode);
   }, [words]);
 
   const reset = () => {
     setWordleGrid(generateWordleGrid(maxTries, wordLength));
     setCurrentRow(0);
     setKeyStats({});
-    setGameOver(false);
   };
 
-  const selectNewWord = () => {
+  const selectNewWord = (mode: GameMode) => {
     if (words.length === 0) return;
 
-    if (gameMode === GameMode.Daily) {
+    if (mode === GameMode.Daily) {
       const dayOfYear = new Date().getDate();
       const wordIndex = dayOfYear % words.length;
       const word = words[wordIndex];
-      setCorrectWord(word.orth.toLowerCase());
+      setCorrectWord(word);
     } else {
       const randomIndex = Math.floor(Math.random() * words.length);
-      const newWord = words[randomIndex].orth;
-      setCorrectWord(newWord.toLowerCase());
+      const newWord = words[randomIndex];
+      setCorrectWord(newWord);
     }
   };
 
@@ -149,11 +144,13 @@ const Wordle: NextPage = () => {
 
     processCurrentRow();
 
-    if (currentRow + 1 === maxTries) {
-      setGameOver(true);
-
-      //TODO: handle win on daily and infinite mode
-
+    if (
+      wordleGrid[currentRow].every(
+        (cell) => cell.status === WordleGuessStatus.Correct
+      ) ||
+      currentRow + 1 === maxTries
+    ) {
+      setCompletedWords([correctWord as LatinWord, ...completedWords]);
       return;
     }
 
@@ -164,7 +161,11 @@ const Wordle: NextPage = () => {
     const currentRowCells = wordleGrid[currentRow];
     const currentRowWord = currentRowCells.map((cell) => cell.value).join("");
 
-    if (currentRowWord.toLowerCase() === correctWord) {
+    if (correctWord === undefined) {
+      return;
+    }
+
+    if (currentRowWord.toLowerCase() === correctWord.orth.toLowerCase()) {
       const newKeyStats = { ...keyStats };
       for (let i = 0; i < wordLength; i++) {
         const cell = currentRowCells[i];
@@ -177,12 +178,12 @@ const Wordle: NextPage = () => {
 
     const newKeyStats = { ...keyStats };
 
-    const contained_letters = correctWord.split("");
+    const contained_letters = correctWord.orth.toLowerCase().split("");
 
     for (let i = 0; i < wordLength; i++) {
       const cell = currentRowCells[i];
 
-      if (cell.value.toLowerCase() === correctWord[i]) {
+      if (cell.value.toLowerCase() === correctWord.orth.toLowerCase()[i]) {
         cell.status = WordleGuessStatus.Correct;
         newKeyStats[cell.value] = "correct";
         contained_letters[i] = "";
@@ -244,6 +245,18 @@ const Wordle: NextPage = () => {
     setGameMode(
       gameMode === GameMode.Daily ? GameMode.Infinite : GameMode.Daily
     );
+    if (gameMode === GameMode.Daily) {
+      selectNewWord(GameMode.Infinite);
+    } else {
+      selectNewWord(GameMode.Daily);
+    }
+    setCompletedWords([]);
+    reset();
+  };
+
+  const continueGame = () => {
+    reset();
+    selectNewWord(GameMode.Infinite);
   };
 
   return (
@@ -305,7 +318,13 @@ const Wordle: NextPage = () => {
               locked={false}
             />
           </section>
-
+          <Button
+            locked={false}
+            class={`w-full ${gameMode === GameMode.Infinite ? "" : "hidden"}`}
+            onClick={continueGame}
+          >
+            Next Word
+          </Button>
           <section className='flex flex-col gap-2'>
             {completedWords.map((word) => (
               <div
