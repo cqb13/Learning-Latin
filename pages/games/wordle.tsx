@@ -38,6 +38,7 @@ const Wordle: NextPage = () => {
   const [gameMode, setGameMode] = useState<GameMode>(GameMode.Daily);
   const [words, setWords] = useState<LatinWord[]>([]);
   const [completedWords, setCompletedWords] = useState<LatinWord[]>([]);
+  const [finished, setFinished] = useState(false);
   type LatinWord = {
     extension_senses: null;
     form: string;
@@ -80,6 +81,7 @@ const Wordle: NextPage = () => {
     setWordleGrid(generateWordleGrid(maxTries, wordLength));
     setCurrentRow(0);
     setKeyStats({});
+    setFinished(false);
   };
 
   const selectNewWord = (mode: GameMode) => {
@@ -115,6 +117,8 @@ const Wordle: NextPage = () => {
   };
 
   const onDelete = () => {
+    if (finished) return;
+
     const currentRowCells = wordleGrid[currentRow];
 
     for (let i = currentRowCells.length - 1; i >= 0; i--) {
@@ -208,6 +212,7 @@ const Wordle: NextPage = () => {
         newKeyStats[cell.value] = "correct";
       }
       setKeyStats(newKeyStats);
+      setFinished(true);
       return;
     }
 
