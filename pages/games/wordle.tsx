@@ -1,9 +1,9 @@
+import Notification from "@components/shared/notification";
 import Keyboard from "@components/games/general/keyboard";
 import Button from "@components/shared/button";
 import Layout from "@components/shared/layout";
 import { useEffect, useState } from "react";
 import { NextPage } from "next";
-
 enum GameMode {
   Daily,
   Infinite
@@ -26,6 +26,12 @@ const generateWordleGrid = (rows: number, cols: number) => {
 };
 
 const Wordle: NextPage = () => {
+  const [notification, setNotification] = useState(false);
+  const [notificationTitle, setNotificationTitle] = useState("");
+  const [notificationType, setNotificationType] = useState<
+    "success" | "error" | "warning"
+  >("success");
+  const [notificationMessage, setNotificationMessage] = useState("");
   const wordLength = 5;
   const maxTries = 6;
   const [correctWord, setCorrectWord] = useState<LatinWord>();
@@ -137,8 +143,32 @@ const Wordle: NextPage = () => {
     return index === -1 ? wordLength : index;
   };
 
+  const wordIsInList = (word: string) => {
+    for (let i = 0; i < words.length; i++) {
+      if (words[i].orth.toLowerCase() === word.toLowerCase()) {
+        return true;
+      }
+    }
+  };
+
   const onEnter = () => {
     if (wordleGrid[currentRow].some((cell) => cell.value === "")) {
+      triggerNotification(
+        "Incomplete Word",
+        "warning",
+        "Please fill in all the letters."
+      );
+      return;
+    }
+
+    if (
+      !wordIsInList(wordleGrid[currentRow].map((cell) => cell.value).join(""))
+    ) {
+      triggerNotification(
+        "Invalid Word",
+        "warning",
+        "Word is not in the list of valid words."
+      );
       return;
     }
 
@@ -162,6 +192,11 @@ const Wordle: NextPage = () => {
     const currentRowWord = currentRowCells.map((cell) => cell.value).join("");
 
     if (correctWord === undefined) {
+      triggerNotification(
+        "Error",
+        "error",
+        "Correct word is not defined. Please try reloading the page."
+      );
       return;
     }
 
@@ -259,6 +294,17 @@ const Wordle: NextPage = () => {
     selectNewWord(GameMode.Infinite);
   };
 
+  const triggerNotification = (
+    title: string,
+    type: "success" | "error" | "warning",
+    message: string
+  ) => {
+    setNotification(true);
+    setNotificationTitle(title);
+    setNotificationType(type);
+    setNotificationMessage(message);
+  };
+
   return (
     <Layout title='Wordle' backgroundClass='bg-wordle-gradient'>
       <section className='flex flex-col items-center'>
@@ -341,6 +387,15 @@ const Wordle: NextPage = () => {
           </section>
         </section>
       </section>
+      {notification ? (
+        <Notification
+          title={notificationTitle}
+          type={notificationType}
+          message={notificationMessage}
+          timeout={5000}
+          updateNotification={(value) => setNotification(value)}
+        />
+      ) : null}
     </Layout>
   );
 };
