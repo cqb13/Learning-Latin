@@ -30,18 +30,18 @@ const Games: NextPage = () => {
             Wordle
           </Button>
           <Button
+            link='/games/word-scramble'
+            locked={false}
+            class=' w-1/4 max-md:w-3/4 max-xs:w-11/12'
+          >
+            Word Scramble
+          </Button>
+          <Button
             link='/games/word-search'
             locked={true}
             class=' w-1/4 max-md:w-3/4 max-xs:w-11/12'
           >
             Word Search
-          </Button>
-          <Button
-            link='/games/word-scramble'
-            locked={true}
-            class=' w-1/4 max-md:w-3/4 max-xs:w-11/12'
-          >
-            Word Scramble
           </Button>
         </section>
       </section>

@@ -1,9 +1,9 @@
+import Keyboard from "@components/games/general/keyboard";
+import { useEffect, useState, useCallback } from "react";
 import Layout from "@components/shared/layout";
 import Button from "@components/shared/button";
-import { useEffect, useState, useCallback } from "react";
 import Text from "@components/shared/text";
 import { NextPage } from "next";
-import Keyboard from "@components/games/general/keyboard";
 
 const AMOUNT_OF_WORDS_PER_FETCH = 20;
 const DEFAULT_WORD_LIST: LatinWord[] = [
