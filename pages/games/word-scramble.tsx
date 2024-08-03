@@ -105,11 +105,6 @@ const WordScramble: NextPage = () => {
 
   const selectNewWord = useCallback(() => {
     if (words.length === 0) {
-      triggerNotification(
-        "No Words Left",
-        "warning",
-        "No words left to guess. Fetching more words."
-      );
       get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
       return;
     }
