@@ -3,7 +3,15 @@ import Button from "@components/shared/button";
 import { useState } from "react";
 import Image from "next/image";
 
-const TranslationCard = (props: any) => {
+const TranslationCard = ({
+  kind,
+  data,
+  removeCard,
+}: {
+  kind: "latin" | "english";
+  data: any;
+  removeCard: () => void;
+}) => {
   const [isMinimized, setIsMinimized] = useState<boolean>(false);
   const [moreInfo, setMoreInfo] = useState<boolean>(false);
 
@@ -12,43 +20,39 @@ const TranslationCard = (props: any) => {
   };
 
   const deleteCard = () => {
-    props.removeCard();
+    removeCard();
   };
 
-  const create_form_line = (formInfo: any) => {
-    if (formInfo == "POS") {
-      return "Part of Speech";
-    } else if (formInfo == "X") {
-      return "";
+  const createLatinFormLine = (form: any) => {
+    if (typeof form == "string") {
+      return form;
     }
 
-    let form = `${
-      formInfo.comparison == "unknown" ? "" : formInfo.comparison
-    } ${formInfo.declension == "unknown" ? "" : formInfo.declension} ${
-      formInfo.declension_type == "unknown" ? "" : formInfo.declension_type
-    }
-    ${formInfo.gender == "unknown" ? "" : formInfo.gender}
-    ${formInfo.mood == "unknown" ? "" : formInfo.mood}
-    ${formInfo.noun == "unknown" ? "" : formInfo.noun}
-    ${formInfo.number == "unknown" ? "" : formInfo.number}
-    ${formInfo.numeral == "unknown" ? "" : formInfo.numeral}
-    ${formInfo.person == "unknown" ? "" : formInfo.person}
-    ${formInfo.pos == "unknown" ? "" : formInfo.pos}
-    ${formInfo.pronoun == "unknown" ? "" : formInfo.pronoun}
-    ${formInfo.tense == "unknown" ? "" : formInfo.tense}
-    ${formInfo.verb == "unknown" ? "" : formInfo.verb}
-    ${formInfo.verb_type == "unknown" ? "" : formInfo.verb_type}
-    ${formInfo.voice == "unknown" ? "" : formInfo.voice}`;
+    let formString = `${form.comparison == "unknown" ? "" : form.comparison} ${
+      form.declension == "unknown" ? "" : form.declension
+    } ${form.declension_type == "unknown" ? "" : form.declension_type}
+    ${form.gender == "unknown" ? "" : form.gender}
+    ${form.mood == "unknown" ? "" : form.mood}
+    ${form.noun == "unknown" ? "" : form.noun}
+    ${form.number == "unknown" ? "" : form.number}
+    ${form.numeral == "unknown" ? "" : form.numeral}
+    ${form.person == "unknown" ? "" : form.person}
+    ${form.pos == "unknown" ? "" : form.pos}
+    ${form.pronoun == "unknown" ? "" : form.pronoun}
+    ${form.tense == "unknown" ? "" : form.tense}
+    ${form.verb == "unknown" ? "" : form.verb}
+    ${form.verb_type == "unknown" ? "" : form.verb_type}
+    ${form.voice == "unknown" ? "" : form.voice}`;
 
-    return form;
+    return formString;
   };
 
-  const create_inflection_line = (inflectionInfo: any, stemInfo: any) => {
+  const createInflectionLine = (inflectionInfo: any, stemInfo: any) => {
     const stem = stemInfo.orth;
     const ending = inflectionInfo.ending;
     const inflectionForm = inflectionInfo.form;
 
-    let info = create_form_line(inflectionForm);
+    let info = createLatinFormLine(inflectionForm);
 
     let word = `${stem}.${ending}`;
 
@@ -57,38 +61,38 @@ const TranslationCard = (props: any) => {
 
   return (
     <section
-      className='bg-slate-50 bg-opacity-10 rounded flex flex-col p-4 shadow-card'
-      key={props.data.word}
+      className="bg-slate-50 bg-opacity-10 rounded flex flex-col p-4 shadow-card"
+      key={data.word}
     >
-      <section className='flex justify-between mb-3'>
+      <section className="flex justify-between mb-3">
         <div>
-          <h2 className='text-3xl font-bold'>{props.data.word}</h2>
-          {!isMinimized && props.data.definitions.length > 0 ? (
+          <h2 className="text-3xl font-bold">{data.word}</h2>
+          {!isMinimized && data.definitions.length > 0 ? (
             <button
-              className='text-primary-color hover:underline active:text-primary-color-dark'
+              className="text-primary-color hover:underline active:text-primary-color-dark"
               onClick={() => setMoreInfo(!moreInfo)}
             >
               {moreInfo ? "less info" : "more info"}
             </button>
           ) : null}
         </div>
-        <div className='flex gap-3'>
+        <div className="flex gap-3">
           <ToolTip
             content={isMinimized ? "expand card" : "shrink card"}
             delay={20}
           >
-            <Button onClick={changeVisibility} class='h-full'>
+            <Button onClick={changeVisibility} class="h-full">
               {isMinimized ? (
                 <Image
-                  src='/plus.svg'
-                  alt='expand card'
+                  src="/plus.svg"
+                  alt="expand card"
                   width={20}
                   height={20}
                 />
               ) : (
                 <Image
-                  src='/minus.svg'
-                  alt='shrink card'
+                  src="/minus.svg"
+                  alt="shrink card"
                   width={20}
                   height={20}
                 />
@@ -96,10 +100,10 @@ const TranslationCard = (props: any) => {
             </Button>
           </ToolTip>
           <ToolTip content={"remove card"} delay={20}>
-            <Button onClick={deleteCard} class='h-full'>
+            <Button onClick={deleteCard} class="h-full">
               <Image
-                src='/clear.svg'
-                alt='remove card'
+                src="/clear.svg"
+                alt="remove card"
                 width={20}
                 height={20}
               />
@@ -108,13 +112,13 @@ const TranslationCard = (props: any) => {
         </div>
       </section>
       <section className={`${isMinimized ? "hidden" : ""} flex flex-col gap-3`}>
-        {props.data.definitions.length > 0 ? (
+        {data.definitions.length > 0 ? (
           <>
-            {props.data.definitions.map((definition: any) => (
-              <div className='bg-slate-50 bg-opacity-25 rounded shadow-card p-2'>
+            {data.definitions.map((definition: any) => (
+              <div className="bg-slate-50 bg-opacity-25 rounded shadow-card p-2">
                 {definition.word ? (
                   <>
-                    <div className='flex gap-3 text-2xl font-semibold'>
+                    <div className="flex gap-3 text-2xl font-semibold">
                       {definition.word.parts ? (
                         <>
                           {definition.word.parts.map((part: any) => (
@@ -130,7 +134,7 @@ const TranslationCard = (props: any) => {
                         </>
                       ) : null}
                       {moreInfo ? (
-                        <span className='text-primary-color'>
+                        <span className="text-primary-color">
                           word id:{" "}
                           {definition.word.id
                             ? definition.word.id
@@ -144,17 +148,17 @@ const TranslationCard = (props: any) => {
                   <>
                     <div>
                       {definition.tricks ? (
-                        <div className='flex flex-wrap gap-2'>
+                        <div className="flex flex-wrap gap-2">
                           <p>Tricks</p>
                           {definition.tricks.map((trick: any) => (
-                            <p className='bg-primary-color bg-opacity-10 rounded px-2'>
+                            <p className="bg-primary-color bg-opacity-10 rounded px-2">
                               {trick}
                             </p>
                           ))}
                         </div>
                       ) : null}
                     </div>
-                    <div className='pl-2 py-2'>
+                    <div className="pl-2 py-2">
                       {definition.word.info ? (
                         <>
                           <p>Age: {definition.word.info.age}</p>
@@ -180,23 +184,24 @@ const TranslationCard = (props: any) => {
                 ) : (
                   <p>{definition.translation.pos}</p>
                 )}
-                {definition.word.form ? (
-                  <p>{create_form_line(definition.word.form)}</p>
-                ) : (
-                  <p>{create_form_line(definition.translation.form)}</p>
-                )}
+                {kind == "latin" && definition.word.form ? (
+                  <p>{createLatinFormLine(definition.word.form)}</p>
+                ) : null}
+                {kind == "english" && definition.translation.form ? (
+                  <p>{createLatinFormLine(definition.translation.form)}</p>
+                ) : null}
                 {definition.inflections ? (
-                  <div className='flex flex-col gap-2 my-3 w-fit'>
+                  <div className="flex flex-col gap-2 my-3 w-fit">
                     {definition.inflections.map((inflection: any) => (
                       <>
                         {inflection.ending ? (
                           <>
-                            {create_inflection_line(
+                            {createInflectionLine(
                               inflection,
                               definition.stem
                             ) == "" ? null : (
-                              <span className='bg-opacity-10 rounded px-2'>
-                                {create_inflection_line(
+                              <span className="bg-opacity-10 rounded px-2">
+                                {createInflectionLine(
                                   inflection,
                                   definition.stem
                                 )}
@@ -208,11 +213,11 @@ const TranslationCard = (props: any) => {
                     ))}
                   </div>
                 ) : null}
-                <div className='flex flex-wrap gap-3'>
+                <div className="flex flex-wrap gap-3">
                   {definition.word.senses ? (
                     <>
                       {definition.word.senses.map((sense: any) => (
-                        <p className=' bg-primary-color bg-opacity-10 rounded px-2'>
+                        <p className=" bg-primary-color bg-opacity-10 rounded px-2">
                           {sense}
                         </p>
                       ))}
@@ -221,7 +226,7 @@ const TranslationCard = (props: any) => {
                   {definition.word.extension_senses ? (
                     <>
                       {definition.word.extension_senses.map((sense: any) => (
-                        <p className=' bg-primary-color bg-opacity-10 rounded px-2'>
+                        <p className=" bg-primary-color bg-opacity-10 rounded px-2">
                           {sense}
                         </p>
                       ))}
@@ -230,7 +235,7 @@ const TranslationCard = (props: any) => {
                   {definition.translation ? (
                     <>
                       {definition.translation.senses.map((sense: any) => (
-                        <p className=' bg-primary-color bg-opacity-10 rounded px-2'>
+                        <p className=" bg-primary-color bg-opacity-10 rounded px-2">
                           {sense}
                         </p>
                       ))}
@@ -241,7 +246,7 @@ const TranslationCard = (props: any) => {
             ))}
           </>
         ) : (
-          <p className='text-center'>No translations found</p>
+          <p className="text-center">No translations found</p>
         )}
       </section>
     </section>
