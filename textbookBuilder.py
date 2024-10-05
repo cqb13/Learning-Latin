@@ -1,7 +1,5 @@
 import os
-# Webpack broke the system here https://github.com/cqb13/Learning-Latin/tree/c04de0fd34123734c76d213dbc3811bf31fe43ab/lib/utils/textbook
-# I think it is because it relied on the file structure of the textbook folder
-# Either way I did not want to deal with it, so this should give the same result
+
 
 def get_textbook_map():
     textbook_path = os.path.join(os.getcwd(), "textbook")
