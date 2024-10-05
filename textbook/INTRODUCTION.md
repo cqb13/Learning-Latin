@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Welcome to "The Basics of Latin Grammar"! This comprehensive textbook is designed to provide you with a solid foundation in the intricacies of the Latin language's grammar.
+Welcome to "The Basics of Latin Grammar"! This textbook is designed to provide you with a solid foundation in the basics of Latin grammar.
 
 ## Chapter I: Declension
 
@@ -19,7 +19,7 @@ Nouns, the building blocks of language, play a pivotal role in Latin grammar. In
 
 ### B. Adjectives
 
-Adjectives, the descriptive companions of nouns, bring color and specificity to Latin sentences. 
+Adjectives, the descriptive companions of nouns, bring color and specificity to Latin sentences.
 
 1. First and Second Declension Adjectives
 2. Third Declension Adjectives
