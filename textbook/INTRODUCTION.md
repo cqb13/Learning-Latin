@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Welcome to "The Basics of Latin Grammar"! This comprehensive textbook is designed to provide you with a solid foundation in the intricacies of the Latin languages Grammar.
+Welcome to "The Basics of Latin Grammar"! This comprehensive textbook is designed to provide you with a solid foundation in the intricacies of the Latin language's grammar.
 
 ## Chapter I: Declension
 
