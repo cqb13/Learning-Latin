@@ -54,6 +54,10 @@ const TranslationCard = ({
 
     let info = createLatinFormLine(inflectionForm);
 
+    if (info == "") {
+      return "";
+    }
+
     let word = `${stem}.${ending}`;
 
     return `${word} | ${info}`;
