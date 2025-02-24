@@ -28,7 +28,7 @@ const Home: NextPage = () => {
           </sub>
           <Button
             class="mt-6 w-fit bg-primary-500 bg-opacity-80 hover:bg-primary-700"
-            link="/textbook"
+            link="/practice"
           >
             Begin Your Journey
           </Button>
@@ -63,10 +63,11 @@ const Home: NextPage = () => {
               icon="/translate.svg"
               link="https://github.com/cqb13/vocab-vault/tree/new-api"
             />
+            {/* TODO: replace with game card */}
             <FeatureCard
-              title="Custom Textbook"
-              description="Learn systematically with our curated Latin textbook."
-              icon="/book.svg"
+              title="Games"
+              description="Learn new words through games."
+              icon="/games.svg"
             />
           </div>
         </div>
@@ -117,16 +118,12 @@ const Home: NextPage = () => {
           </h2>
           <div className="max-w-4xl mx-auto flex flex-col gap-2">
             <FaqCard
-              question="Can I contribute to the Latin textbook?"
-              answer="Absolutely! Our project is open source, and we welcome contributions from everyone. Visit our GitHub page to get started."
-            />
-            <FaqCard
               question="Do I need any prior knowledge of Latin to start?"
               answer="No, our resources are designed to accommodate beginners with no prior knowledge of Latin, guiding you through from the basics to advanced topics."
             />
             <FaqCard
               question="Are there any costs involved?"
-              answer="No, all our resources are completely free, including the Latin textbook, practice charts, and translator tool."
+              answer="No, all our resources are completely free."
             />
           </div>
         </div>

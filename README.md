@@ -9,15 +9,10 @@
 
 ---
 
-## About Learning Latin
-
-Learning Latin is a modern, interactive platform designed to make Latin language learning accessible and engaging for users of all levels. With a range of tools from practice charts to a Latin translator and a custom textbook, the platform provides a holistic approach to learning this ancient language.
-
 ## Key Features
 
 - **Interactive Charts**: Practice Latin grammar with dynamic, interactive charts.
 - **Latin Translator**: Translate between Latin and English with insights into grammar.
-- **Custom Textbook**: Learn systematically with our curated textbook, covering all key aspects of Latin grammar.
 - **Open Source Community**: Contribute and collaborate on the Learning Latin platform to help it grow.
 
 ## Technologies

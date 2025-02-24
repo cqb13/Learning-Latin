@@ -3,7 +3,6 @@ const routes: [string, string][] = [
   ["Practice", "/practice"],
   ["Games", "/games"],
   ["Translate", "/translate"],
-  ["Textbook", "/textbook"]
 ];
 
 const practiceRoutes: [string, string][] = [
@@ -12,7 +11,7 @@ const practiceRoutes: [string, string][] = [
   ["Perfect Tense", "/practice/perfect-tense"],
   ["Personal Endings", "/practice/personal-endings"],
   ["Personal Pronouns", "/practice/personal-pronouns"],
-  ["Relative Pronouns", "/practice/relative-pronouns"]
+  ["Relative Pronouns", "/practice/relative-pronouns"],
 ];
 
 export { routes, practiceRoutes };
