@@ -1,4 +1,6 @@
-import textProps from "@prop-types/textProps";
+"use client";
+
+import textProps from "@/lib/types/textProps";
 import { useState, useEffect } from "react";
 
 const Text = (props: textProps) => {
@@ -53,7 +55,7 @@ const Text = (props: textProps) => {
 
   return (
     <input
-      type='text'
+      type="text"
       placeholder={placeholder}
       className={`max-sm:text-center text-xl p-2 border border-neutral-300 rounded focus:outline-none focus:ring-0 focus:border-primary-color-dark placeholder:text-primary-color ${props.class}`}
       onChange={onChange}

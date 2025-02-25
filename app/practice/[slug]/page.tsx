@@ -20,7 +20,7 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }: { params: { id: string } }) {
+export async function getStaticParams({ params }: { params: { id: string } }) {
   const { id } = params;
 
   let data;

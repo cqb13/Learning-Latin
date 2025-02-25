@@ -1,11 +1,13 @@
-import changeTextAccuracyState from "@utils/changeTextAccuracyState";
-import createValueArrayMap from "@utils/createValueArrayMap";
-import checkForMacrons from "@utils/checkForMacrons";
-import chartClearable from "@utils/chartClearable";
-import macronHandler from "@utils/macronHandler";
-import chartProps from "@prop-types/chartProps";
+"use client";
+
+import changeTextAccuracyState from "@/utils/changeTextAccuracyState";
+import createValueArrayMap from "@/utils/createValueArrayMap";
+import checkForMacrons from "@/utils/checkForMacrons";
+import chartClearable from "@/utils/chartClearable";
+import macronHandler from "@/utils/macronHandler";
+import chartProps from "@/lib/types/chartProps";
 import { useEffect, useState } from "react";
-import Text from "@components/shared/text";
+import Text from "@/components/shared/text";
 
 const Chart = ({
   data,
@@ -13,7 +15,7 @@ const Chart = ({
   answers,
   chartIndex,
   clearChart,
-  updateClearable
+  updateClearable,
 }: {
   clear: boolean;
   answers: boolean;
@@ -23,7 +25,7 @@ const Chart = ({
   updateClearable: (clearable: boolean) => void;
 }) => {
   const [valueArrayMap, setValueArrayMap] = useState(
-    createValueArrayMap(data, chartIndex)
+    createValueArrayMap(data, chartIndex),
   );
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const Chart = ({
   const checkAnswer = (
     event: React.ChangeEvent<HTMLInputElement>,
     rowIndex: number,
-    index: number
+    index: number,
   ) => {
     const id = event.target.id;
     const answer = event.target.value.toLowerCase();
@@ -127,7 +129,7 @@ const Chart = ({
                       placeholder="Answer" 
                       id={content}
                       class="w-full text-center bg-slate-50 bg-opacity-30"
-                      onChange={(event) => checkAnswer(event, rowIndex, index)}
+                      onChange={(event: any) => checkAnswer(event, rowIndex, index)}
                       value={valueArrayMap[rowIndex][index]}
                     />
                   )}

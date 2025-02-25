@@ -1,4 +1,4 @@
-import chartProps from "@prop-types/chartProps";
+import chartProps from "@/lib/types/chartProps";
 
 const perfectTense: chartProps = {
   chartCount: 1,
@@ -11,19 +11,19 @@ const perfectTense: chartProps = {
       rows: [
         {
           rowTitle: "1st",
-          rowContent: ["ī", "īmus"]
+          rowContent: ["ī", "īmus"],
         },
         {
           rowTitle: "2nd",
-          rowContent: ["istī", "istis"]
+          rowContent: ["istī", "istis"],
         },
         {
           rowTitle: "3rd",
-          rowContent: ["it", "ērunt"]
-        }
-      ]
-    }
-  ]
+          rowContent: ["it", "ērunt"],
+        },
+      ],
+    },
+  ],
 };
 
 export default perfectTense;

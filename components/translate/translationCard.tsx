@@ -1,5 +1,7 @@
-import ToolTip from "@components/shared/toolTip";
-import Button from "@components/shared/button";
+"use client";
+
+import ToolTip from "@/components/shared/toolTip";
+import Button from "@/components/shared/button";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -118,23 +120,28 @@ const TranslationCard = ({
       <section className={`${isMinimized ? "hidden" : ""} flex flex-col gap-3`}>
         {data.definitions.length > 0 ? (
           <>
-            {data.definitions.map((definition: any) => (
-              <div className="bg-slate-50 bg-opacity-25 rounded shadow-card p-2">
+            {data.definitions.map((definition: any, i: number) => (
+              <div
+                className="bg-slate-50 bg-opacity-25 rounded shadow-card p-2"
+                key={i}
+              >
                 {definition.word ? (
                   <>
                     <div className="flex gap-3 text-2xl font-semibold">
                       {definition.word.parts ? (
                         <>
-                          {definition.word.parts.map((part: any) => (
-                            <span>{part}</span>
+                          {definition.word.parts.map((part: any, k: number) => (
+                            <span key={k}>{part}</span>
                           ))}
                         </>
                       ) : null}
                       {definition.translation ? (
                         <>
-                          {definition.translation.parts.map((part: any) => (
-                            <span>{part}</span>
-                          ))}
+                          {definition.translation.parts.map(
+                            (part: any, k: number) => (
+                              <span key={k}>{part}</span>
+                            ),
+                          )}
                         </>
                       ) : null}
                       {moreInfo ? (
@@ -154,8 +161,11 @@ const TranslationCard = ({
                       {definition.tricks ? (
                         <div className="flex flex-wrap gap-2">
                           <p>Tricks</p>
-                          {definition.tricks.map((trick: any) => (
-                            <p className="bg-primary-color bg-opacity-10 rounded px-2">
+                          {definition.tricks.map((trick: any, k: number) => (
+                            <p
+                              className="bg-primary-color bg-opacity-10 rounded px-2"
+                              key={k}
+                            >
                               {trick}
                             </p>
                           ))}
@@ -202,12 +212,12 @@ const TranslationCard = ({
                           <>
                             {createInflectionLine(
                               inflection,
-                              definition.stem
+                              definition.stem,
                             ) == "" ? null : (
                               <span className="bg-opacity-10 rounded px-2">
                                 {createInflectionLine(
                                   inflection,
-                                  definition.stem
+                                  definition.stem,
                                 )}
                               </span>
                             )}
@@ -220,8 +230,11 @@ const TranslationCard = ({
                 <div className="flex flex-wrap gap-3">
                   {definition.word.senses ? (
                     <>
-                      {definition.word.senses.map((sense: any) => (
-                        <p className=" bg-primary-color bg-opacity-10 rounded px-2">
+                      {definition.word.senses.map((sense: any, k: number) => (
+                        <p
+                          className=" bg-primary-color bg-opacity-10 rounded px-2"
+                          key={k}
+                        >
                           {sense}
                         </p>
                       ))}
@@ -229,20 +242,30 @@ const TranslationCard = ({
                   ) : null}
                   {definition.word.extension_senses ? (
                     <>
-                      {definition.word.extension_senses.map((sense: any) => (
-                        <p className=" bg-primary-color bg-opacity-10 rounded px-2">
-                          {sense}
-                        </p>
-                      ))}
+                      {definition.word.extension_senses.map(
+                        (sense: any, k: number) => (
+                          <p
+                            className=" bg-primary-color bg-opacity-10 rounded px-2"
+                            key={k}
+                          >
+                            {sense}
+                          </p>
+                        ),
+                      )}
                     </>
                   ) : null}
                   {definition.translation ? (
                     <>
-                      {definition.translation.senses.map((sense: any) => (
-                        <p className=" bg-primary-color bg-opacity-10 rounded px-2">
-                          {sense}
-                        </p>
-                      ))}
+                      {definition.translation.senses.map(
+                        (sense: any, k: number) => (
+                          <p
+                            className=" bg-primary-color bg-opacity-10 rounded px-2"
+                            key={k}
+                          >
+                            {sense}
+                          </p>
+                        ),
+                      )}
                     </>
                   ) : null}
                 </div>

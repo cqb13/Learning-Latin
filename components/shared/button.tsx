@@ -1,9 +1,11 @@
-import buttonProps from "@prop-types/buttonProps";
+"use client";
+
+import buttonProps from "@/lib/types/buttonProps";
 import Link from "next/link";
 
 const Button = (props: buttonProps) => {
   const handleClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => {
     if (props.locked) return;
     props.onClick?.(event);

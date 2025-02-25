@@ -1,6 +1,6 @@
-import ToolTip from "@components/shared/toolTip";
-import chartProps from "@prop-types/chartProps";
-import Button from "@components/shared/button";
+import ToolTip from "@/components/shared/toolTip";
+import chartProps from "@/lib/types/chartProps";
+import Button from "@/components/shared/button";
 import Image from "next/image";
 
 const chartFooter = ({
@@ -11,7 +11,7 @@ const chartFooter = ({
   chartIndex,
   clearChart,
   answers,
-  data
+  data,
 }: {
   switchToLinkedChart: (link: string | undefined) => void;
   updateClearable: (clearable: boolean) => void;
@@ -30,13 +30,13 @@ const chartFooter = ({
   };
 
   return (
-    <section className='flex items-center gap-3'>
+    <section className="flex items-center gap-3">
       <ToolTip content={answers ? "questions" : "answers"} delay={20}>
-        <Button onClick={toggleAnswers} class='child:w-5 child:h-5'>
+        <Button onClick={toggleAnswers} class="child:w-5 child:h-5">
           {answers ? (
-            <Image src='/question.svg' alt='question' width={20} height={20} />
+            <Image src="/question.svg" alt="question" width={20} height={20} />
           ) : (
-            <Image src='/answer.svg' alt='answer' width={20} height={20} />
+            <Image src="/answer.svg" alt="answer" width={20} height={20} />
           )}
         </Button>
       </ToolTip>
@@ -45,9 +45,9 @@ const chartFooter = ({
         <Button
           onClick={clear}
           locked={!chartClearable}
-          class='child:w-5 child:h-5'
+          class="child:w-5 child:h-5"
         >
-          <Image src='/clear.svg' alt='clear' width={20} height={20} />
+          <Image src="/clear.svg" alt="clear" width={20} height={20} />
         </Button>
       </ToolTip>
 
@@ -60,14 +60,15 @@ const chartFooter = ({
           delay={20}
         >
           <Button
-            class='child:w-5 child:h-5'
+            class="child:w-5 child:h-5"
             onClick={() =>
               switchToLinkedChart(
-                data.chart[chartIndex].link || data.chart[chartIndex].returnLink
+                data.chart[chartIndex].link ||
+                  data.chart[chartIndex].returnLink,
               )
             }
           >
-            <Image src='/flip.svg' alt='flip' width={20} height={20} />
+            <Image src="/flip.svg" alt="flip" width={20} height={20} />
           </Button>
         </ToolTip>
       ) : null}

@@ -1,6 +1,6 @@
 "use client";
 
-import fetchLatestCommits from "@/lib/utils/fetchLatestCommits";
+import fetchLatestCommits from "@/utils/fetchLatestCommits";
 import FeatureCard from "@/components/home/featureCard";
 import CommitCard from "@/components/home/commitCard";
 import Button from "@/components/shared/button";
@@ -81,6 +81,7 @@ export default function Home() {
           <Button
             class="mt-6 w-fit bg-primary-500 bg-opacity-80 hover:bg-primary-700"
             href="https://github.com/cqb13/Learning-Latin"
+            target="_blank"
           >
             Join Us on GitHub
           </Button>

@@ -4,7 +4,7 @@ import ChartFooter from "@/components/practice/chartFooter";
 import chartProps from "@/lib/types/chartProps";
 import Button from "@/components/shared/button";
 import Chart from "@/components/practice/chart";
-import clearChart from "@/lib/utils/clearChart";
+import clearChart from "@/utils/clearChart";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 

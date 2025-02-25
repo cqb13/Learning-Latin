@@ -1,4 +1,4 @@
-import chartProps from "@prop-types/chartProps";
+import chartProps from "@/lib/types/chartProps";
 
 const declensions: chartProps = {
   chartCount: 5,
@@ -10,25 +10,25 @@ const declensions: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["a", "ae", "subject"]
+          rowContent: ["a", "ae", "subject"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["ae", "ārum", "possession"]
+          rowContent: ["ae", "ārum", "possession"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["ae", "īs", "indirect object"]
+          rowContent: ["ae", "īs", "indirect object"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["am", "ās", "direct object"]
+          rowContent: ["am", "ās", "direct object"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["ā", "īs", "by/with/from"]
-        }
-      ]
+          rowContent: ["ā", "īs", "by/with/from"],
+        },
+      ],
     },
     {
       name: "Second Declension",
@@ -36,25 +36,25 @@ const declensions: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["us", "ī"]
+          rowContent: ["us", "ī"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["ī", "ōrum"]
+          rowContent: ["ī", "ōrum"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["ō", "īs"]
+          rowContent: ["ō", "īs"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["um", "ōs"]
+          rowContent: ["um", "ōs"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["ō", "īs"]
-        }
-      ]
+          rowContent: ["ō", "īs"],
+        },
+      ],
     },
     {
       name: "Third Declension",
@@ -63,25 +63,25 @@ const declensions: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: [["r", "x", "s", "o", "n", "l"], "ēs"]
+          rowContent: [["r", "x", "s", "o", "n", "l"], "ēs"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["is", "um"]
+          rowContent: ["is", "um"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["ī", "ibus"]
+          rowContent: ["ī", "ibus"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["em", "ēs"]
+          rowContent: ["em", "ēs"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["e", "ibus"]
-        }
-      ]
+          rowContent: ["e", "ibus"],
+        },
+      ],
     },
     {
       name: "Third Declension Neuter",
@@ -90,25 +90,25 @@ const declensions: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: [["r", "x", "s", "o", "n", "l"], "a"]
+          rowContent: [["r", "x", "s", "o", "n", "l"], "a"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["is", "um"]
+          rowContent: ["is", "um"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["ī", "ibus"]
+          rowContent: ["ī", "ibus"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["--", "a"]
+          rowContent: ["--", "a"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["e", "ibus"]
-        }
-      ]
+          rowContent: ["e", "ibus"],
+        },
+      ],
     },
     {
       name: "Fourth Declension",
@@ -117,25 +117,25 @@ const declensions: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["us", "ūs"]
+          rowContent: ["us", "ūs"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["ūs", "uum"]
+          rowContent: ["ūs", "uum"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["ūi", "ibus"]
+          rowContent: ["ūi", "ibus"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["um", "ūs"]
+          rowContent: ["um", "ūs"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["ū", "ibus"]
-        }
-      ]
+          rowContent: ["ū", "ibus"],
+        },
+      ],
     },
     {
       name: "Fourth Declension Neuter",
@@ -144,25 +144,25 @@ const declensions: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["ū", "ua"]
+          rowContent: ["ū", "ua"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["ūs", "uum"]
+          rowContent: ["ūs", "uum"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["ū", "ibus"]
+          rowContent: ["ū", "ibus"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["ū", "ua"]
+          rowContent: ["ū", "ua"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["ū", "ibus"]
-        }
-      ]
+          rowContent: ["ū", "ibus"],
+        },
+      ],
     },
     {
       name: "Fifth Declension",
@@ -170,27 +170,27 @@ const declensions: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["ēs", "ēs"]
+          rowContent: ["ēs", "ēs"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["ī", "ērum"]
+          rowContent: ["ī", "ērum"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["eī", "ēbus"]
+          rowContent: ["eī", "ēbus"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["em", "ēs"]
+          rowContent: ["em", "ēs"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["ē", "ēbus"]
-        }
-      ]
-    }
-  ]
+          rowContent: ["ē", "ēbus"],
+        },
+      ],
+    },
+  ],
 };
 
 export default declensions;

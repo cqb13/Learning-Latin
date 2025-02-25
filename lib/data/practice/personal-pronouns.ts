@@ -1,4 +1,4 @@
-import chartProps from "@prop-types/chartProps";
+import chartProps from "@/lib/types/chartProps";
 
 const personalPronouns: chartProps = {
   chartCount: 4,
@@ -12,25 +12,25 @@ const personalPronouns: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["ego", "nōs"]
+          rowContent: ["ego", "nōs"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["meī", ["nostrum", "nostrī"]]
+          rowContent: ["meī", ["nostrum", "nostrī"]],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["mihi", "nōbīs"]
+          rowContent: ["mihi", "nōbīs"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["mē", "nos"]
+          rowContent: ["mē", "nos"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["me", "nōbīs"]
-        }
-      ]
+          rowContent: ["me", "nōbīs"],
+        },
+      ],
     },
     {
       name: "Personal Pronouns [I, of me] Meaning",
@@ -40,25 +40,25 @@ const personalPronouns: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["I", "we"]
+          rowContent: ["I", "we"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["of me", "of us"]
+          rowContent: ["of me", "of us"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["to/for me", "to/for us"]
+          rowContent: ["to/for me", "to/for us"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["me", "us"]
+          rowContent: ["me", "us"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["in/at/by/with/from you", "in/at/by/with/from you"]
-        }
-      ]
+          rowContent: ["in/at/by/with/from you", "in/at/by/with/from you"],
+        },
+      ],
     },
     {
       name: "Personal Pronouns [You, of you]",
@@ -68,25 +68,25 @@ const personalPronouns: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["tū", "vōs"]
+          rowContent: ["tū", "vōs"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["tūī", ["vestrum", "vestrī"]]
+          rowContent: ["tūī", ["vestrum", "vestrī"]],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["tibi", "vōbīs"]
+          rowContent: ["tibi", "vōbīs"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["tē", "vōs"]
+          rowContent: ["tē", "vōs"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["tē", "vōbīs"]
-        }
-      ]
+          rowContent: ["tē", "vōbīs"],
+        },
+      ],
     },
     {
       name: "Personal Pronouns [You, of you] Meaning",
@@ -96,25 +96,25 @@ const personalPronouns: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["you", "you"]
+          rowContent: ["you", "you"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["of you", "of you"]
+          rowContent: ["of you", "of you"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["to/for you", "to/for you"]
+          rowContent: ["to/for you", "to/for you"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["you", "you"]
+          rowContent: ["you", "you"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["in/at/by/with/from you", "in/at/by/with/from you"]
-        }
-      ]
+          rowContent: ["in/at/by/with/from you", "in/at/by/with/from you"],
+        },
+      ],
     },
     {
       name: "Personal Pronouns [He, She, It] Singular",
@@ -124,25 +124,25 @@ const personalPronouns: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["is", "ea", "id"]
+          rowContent: ["is", "ea", "id"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["ēius", "ēius", "ēius"]
+          rowContent: ["ēius", "ēius", "ēius"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["ēī", "ēī", "ēī"]
+          rowContent: ["ēī", "ēī", "ēī"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["eum", "eam", "id"]
+          rowContent: ["eum", "eam", "id"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["eō", "eā", "eō"]
-        }
-      ]
+          rowContent: ["eō", "eā", "eō"],
+        },
+      ],
     },
     {
       name: "Personal Pronouns [He, She, It] Singular Meaning",
@@ -152,29 +152,29 @@ const personalPronouns: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["he", "she", "it"]
+          rowContent: ["he", "she", "it"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["of him", "of her", "of it"]
+          rowContent: ["of him", "of her", "of it"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["to/for him", "to/for her", "to/for it"]
+          rowContent: ["to/for him", "to/for her", "to/for it"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["him", "her", "it"]
+          rowContent: ["him", "her", "it"],
         },
         {
           rowTitle: "Ablative",
           rowContent: [
             "in/at/by/with/from him",
             "in/at/by/with/from her",
-            "in/at/by/with/from it"
-          ]
-        }
-      ]
+            "in/at/by/with/from it",
+          ],
+        },
+      ],
     },
     {
       name: "Personal Pronouns [He, She, It] Plural",
@@ -184,25 +184,25 @@ const personalPronouns: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["eī", "eae", "ea"]
+          rowContent: ["eī", "eae", "ea"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["eōrum", "eārum", "eōrum"]
+          rowContent: ["eōrum", "eārum", "eōrum"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["eīs", "eīs", "eīs"]
+          rowContent: ["eīs", "eīs", "eīs"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["eōs", "eās", "ea"]
+          rowContent: ["eōs", "eās", "ea"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["eīs", "eīs", "eīs"]
-        }
-      ]
+          rowContent: ["eīs", "eīs", "eīs"],
+        },
+      ],
     },
     {
       name: "Personal Pronouns [He, She, It] Plural Meaning",
@@ -212,27 +212,27 @@ const personalPronouns: chartProps = {
       rows: [
         {
           rowTitle: "Nominative",
-          rowContent: ["they", "they", "they"]
+          rowContent: ["they", "they", "they"],
         },
         {
           rowTitle: "Genitive",
-          rowContent: ["of them", "of them", "of them"]
+          rowContent: ["of them", "of them", "of them"],
         },
         {
           rowTitle: "Dative",
-          rowContent: ["to/for them", "to/for them", "to/for them"]
+          rowContent: ["to/for them", "to/for them", "to/for them"],
         },
         {
           rowTitle: "Accusative",
-          rowContent: ["them", "them", "them"]
+          rowContent: ["them", "them", "them"],
         },
         {
           rowTitle: "Ablative",
-          rowContent: ["to/for them", "to/for them", "to/for them"]
-        }
-      ]
-    }
-  ]
+          rowContent: ["to/for them", "to/for them", "to/for them"],
+        },
+      ],
+    },
+  ],
 };
 
 export default personalPronouns;

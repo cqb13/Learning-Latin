@@ -400,7 +400,7 @@ export default function Wordle() {
           type={notificationType}
           message={notificationMessage}
           timeout={5000}
-          updateNotification={(value) => setNotification(value)}
+          updateNotificationAction={(value) => setNotification(value)}
         />
       ) : null}
     </>

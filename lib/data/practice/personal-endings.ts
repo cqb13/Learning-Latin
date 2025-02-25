@@ -1,4 +1,4 @@
-import chartProps from "@prop-types/chartProps";
+import chartProps from "@/lib/types/chartProps";
 
 const personalEndings: chartProps = {
   chartCount: 1,
@@ -11,17 +11,17 @@ const personalEndings: chartProps = {
       rows: [
         {
           rowTitle: "1st",
-          rowContent: [["ō", "m"], "mus"]
+          rowContent: [["ō", "m"], "mus"],
         },
         {
           rowTitle: "2nd",
-          rowContent: ["s", "tis"]
+          rowContent: ["s", "tis"],
         },
         {
           rowTitle: "3rd",
-          rowContent: ["t", "nt"]
-        }
-      ]
+          rowContent: ["t", "nt"],
+        },
+      ],
     },
     {
       name: "Personal Endings Meaning",
@@ -30,19 +30,19 @@ const personalEndings: chartProps = {
       rows: [
         {
           rowTitle: "1st",
-          rowContent: ["I", "we"]
+          rowContent: ["I", "we"],
         },
         {
           rowTitle: "2nd",
-          rowContent: ["you", "you all"]
+          rowContent: ["you", "you all"],
         },
         {
           rowTitle: "3rd",
-          rowContent: [["he", "she", "it"], "they"]
-        }
-      ]
-    }
-  ]
+          rowContent: [["he", "she", "it"], "they"],
+        },
+      ],
+    },
+  ],
 };
 
 export default personalEndings;

@@ -3,44 +3,44 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
-    "./app/**/*.{js,ts,jsx,tsx}"
+    "./app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       screens: {
         xs: "470px",
-        mdLg: "800px"
+        mdLg: "800px",
       },
       keyframes: {
         slideIn: {
           "0%": {
-            transform: "translateX(-100%)"
+            transform: "translateX(-100%)",
           },
           "100%": {
-            transform: "translateX(0)"
-          }
+            transform: "translateX(0)",
+          },
         },
         slideOut: {
           "0%": {
-            transform: "translateX(0)"
+            transform: "translateX(0)",
           },
           "100%": {
-            transform: "translateX(-100%)"
-          }
-        }
+            transform: "translateX(-100%)",
+          },
+        },
       },
       animation: {
         slideIn: "slideIn 0.5s ease-in-out",
-        slideOut: "slideOut 0.5s ease-in-out"
+        slideOut: "slideOut 0.5s ease-in-out",
       },
       textShadow: {
         sm: "0 1px 1px rgba(0, 0, 0, 0.2)",
         default: "0 1px 2px rgba(0, 0, 0, 0.2)",
-        md: "0 2px 4px rgba(0, 0, 0, 0.2)"
+        md: "0 2px 4px rgba(0, 0, 0, 0.2)",
       },
       boxShadow: {
         card: "0 0 10px rgba(0, 0, 0, 0.1)",
-        bar: "0px 1px 3px rgba(0, 0, 0, 0.3)"
+        bar: "0px 1px 3px rgba(0, 0, 0, 0.3)",
       },
       colors: {
         "primary-color": "#496bbe",
@@ -48,7 +48,7 @@ module.exports = {
         "secondary-color": "#f5f5f5",
         "highlight-color": "#87cefa",
         "text-color": "#333333",
-        "text-color-light": "#666666"
+        "text-color-light": "#666666",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -74,22 +74,20 @@ module.exports = {
         "not-set-5":
           "radial-gradient(circle at bottom left, #ffffff 20%, #87cefa 50%, #d9c0f3 80%)",
         "not-set-6":
-          "linear-gradient(120deg, rgba(255,255,255,0.3) 10%, rgba(135,206,250,0.7) 45%, rgba(217,192,243,0.5) 80%)"
+          "linear-gradient(120deg, rgba(255,255,255,0.3) 10%, rgba(135,206,250,0.7) 45%, rgba(217,192,243,0.5) 80%)",
       },
       height: {
-        "slide-image-height": "calc(100vh - 2rem)"
+        "slide-image-height": "calc(100vh - 2rem)",
       },
       fontFamily: {
-        times: ["Times New Roman", "serif"]
-      }
-    }
+        times: ["Times New Roman", "serif"],
+      },
+    },
   },
   plugins: [
-    require("@tailwindcss/forms"),
-    require("@headlessui/tailwindcss"),
     function ({ addVariant }) {
       addVariant("child", "& > *");
       addVariant("last-child", "&>*:last-child");
-    }
-  ]
+    },
+  ],
 };

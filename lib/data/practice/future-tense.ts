@@ -1,4 +1,4 @@
-import chartProps from "@prop-types/chartProps";
+import chartProps from "@/lib/types/chartProps";
 
 const futureTense: chartProps = {
   chartCount: 2,
@@ -11,17 +11,17 @@ const futureTense: chartProps = {
       rows: [
         {
           rowTitle: "1st",
-          rowContent: ["bō", "bimus"]
+          rowContent: ["bō", "bimus"],
         },
         {
           rowTitle: "2nd",
-          rowContent: ["bis", "bitis"]
+          rowContent: ["bis", "bitis"],
         },
         {
           rowTitle: "3rd",
-          rowContent: ["bit", "bunt"]
-        }
-      ]
+          rowContent: ["bit", "bunt"],
+        },
+      ],
     },
     {
       name: "Future Tense 3rd, 3rd-io, and 4th Conjugation Verbs",
@@ -30,19 +30,19 @@ const futureTense: chartProps = {
       rows: [
         {
           rowTitle: "1st",
-          rowContent: ["am", "ēmus"]
+          rowContent: ["am", "ēmus"],
         },
         {
           rowTitle: "2nd",
-          rowContent: ["ēs", "ētis"]
+          rowContent: ["ēs", "ētis"],
         },
         {
           rowTitle: "3rd",
-          rowContent: ["ēt", "ent"]
-        }
-      ]
-    }
-  ]
+          rowContent: ["ēt", "ent"],
+        },
+      ],
+    },
+  ],
 };
 
 export default futureTense;

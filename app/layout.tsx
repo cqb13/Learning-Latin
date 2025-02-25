@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     siteName: "Learning Latin",
     images: [
       {
-        url: "https://learninglatin.net/logo/favicon.svg",
+        url: "https://learninglatin.net/favicon.svg",
         width: 600,
         height: 600,
         alt: "Logo",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/logo/favicon.svg",
+    icon: "/favicon.svg",
   },
   robots: {
     index: true,

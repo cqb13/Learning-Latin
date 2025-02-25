@@ -1,4 +1,4 @@
-import macronList from "@data/macronList";
+import macronList from "@/lib/data/macronList";
 
 const checkForMacrons = (str: string) => {
   for (let i = 0; i < str.length; i++) {

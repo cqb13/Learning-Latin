@@ -1,9 +1,11 @@
+"use client";
+
 import { useState } from "react";
 
 const ToolTip = ({
   delay,
   content,
-  children
+  children,
 }: {
   delay?: number;
   content: any;
@@ -25,7 +27,7 @@ const ToolTip = ({
 
   return (
     <div
-      className='inline-block relative'
+      className="inline-block relative"
       onMouseEnter={showTip}
       onMouseLeave={hideTip}
     >
@@ -37,7 +39,7 @@ const ToolTip = ({
             top: "100%",
             transformOrigin: "top",
             borderWidth: "0 2px 2px",
-            transform: "translateX(-50%)"
+            transform: "translateX(-50%)",
           }}
         >
           {content}
