@@ -1,0 +1,25 @@
+{
+  "name": "Learning Latin",
+  "short_name": "Learning Latin",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f2f2f2",
+  "description": "A comprehensive platform for both novice and seasoned Latin enthusiasts.",
+  "icons": [
+    {
+      "src": "https://learninglatin.net/favicon.svg",
+      "sizes": "600x600",
+      "type": "image/svg"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://maksimstraus.dev"
+    },
+    {
+      "platform": "web",
+      "url": "https://github.com/cqb13"
+    }
+  ]
+}

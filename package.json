@@ -1,29 +1,28 @@
 {
+  "name": "talon-website",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "prod-start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.7",
-    "@headlessui/tailwindcss": "^0.1.2",
-    "@heroicons/react": "^2.0.16",
-    "@tailwindcss/forms": "^0.5.3",
+    "@next/third-parties": "^15.1.6",
     "@vercel/analytics": "^0.1.9-beta.4",
     "next": "^15.1.6",
     "react": "^18",
-    "react-dom": "^18",
-    "swr": "^2.1.0",
-    "vercel": "^41.2.1"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "@types/node": "18.11.3",
-    "@types/react": "18.0.21",
-    "@types/react-dom": "18.0.6",
-    "autoprefixer": "^10.4.12",
-    "postcss": "^8.4.18",
-    "tailwindcss": "^3.2.4",
-    "typescript": "4.9.4"
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
