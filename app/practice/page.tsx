@@ -10,7 +10,7 @@ export default function Practice() {
       <section className="mt-6 flex flex-wrap justify-center items-center gap-3 w-full max-md:flex-col">
         {practiceRoutes.map((route, i) => (
           <Button
-            link={`/practice/${route[0].toLowerCase().replace(" ", "-")}`}
+            link={`/practice/chart?type=${route[0].toLowerCase().replace(" ", "-")}`}
             class=" w-1/4 max-md:w-3/4 max-xs:w-11/12"
             key={i}
           >

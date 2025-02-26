@@ -101,8 +101,8 @@ export default function Home() {
         </h2>
         <div className="max-w-4xl mx-auto text-center">
           <p className="mb-6">
-            Get a glimpse of what we're working on and what's coming next to
-            enhance your Latin learning experience.
+            Get a glimpse of what we&apos;re working on and what&apos;s coming
+            next to enhance your Latin learning experience.
           </p>
           <p className="text-lg font-semibold">
             - More practice charts - Some Time 2025

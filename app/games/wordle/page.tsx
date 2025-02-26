@@ -73,12 +73,10 @@ export default function Wordle() {
   }, []);
 
   useEffect(() => {
-    reset();
-  }, [GameMode]);
-
-  useEffect(() => {
-    selectNewWord(gameMode);
-  }, [words]);
+    if (finished || correctWord == undefined) {
+      selectNewWord(gameMode);
+    }
+  });
 
   const reset = () => {
     setWordleGrid(generateWordleGrid(maxTries, wordLength));

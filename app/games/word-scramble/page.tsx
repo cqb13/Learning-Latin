@@ -71,12 +71,6 @@ export default function WordScramble() {
   >("success");
   const [notificationMessage, setNotificationMessage] = useState("");
 
-  useEffect(() => {
-    if (words.length === 0) {
-      get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
-    }
-  }, [gameStarted]);
-
   const reset = () => {
     setShuffledWord([]);
     setCurrentGuess("");
@@ -103,7 +97,7 @@ export default function WordScramble() {
     selectNewWord();
   };
 
-  const selectNewWord = useCallback(() => {
+  const selectNewWord = () => {
     if (words.length === 0) {
       get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
       return;
@@ -125,7 +119,7 @@ export default function WordScramble() {
     setWords((prevWords) =>
       prevWords.filter((_, index) => index !== randomIndex),
     );
-  }, [words]);
+  };
 
   const shuffleWord = (word: string) => {
     let shuffledWord = word
@@ -172,6 +166,10 @@ export default function WordScramble() {
       setWords(DEFAULT_WORD_LIST);
     }
   };
+
+  if (words.length === 0) {
+    get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
+  }
 
   const checkWord = () => {
     if (currentGuess === "") return;

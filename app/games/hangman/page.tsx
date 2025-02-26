@@ -64,12 +64,6 @@ export default function Hangman() {
   const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
 
-  useEffect(() => {
-    if (words.length === 0) {
-      get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
-    }
-  }, [gameStarted]);
-
   const reset = () => {
     setGuessedLetters([]);
     setCurrentGuess("");
@@ -96,7 +90,7 @@ export default function Hangman() {
     selectNewWord();
   };
 
-  const selectNewWord = useCallback(() => {
+  const selectNewWord = () => {
     if (words.length === 0) {
       console.warn("No words available. Refetching.");
       get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
@@ -118,7 +112,7 @@ export default function Hangman() {
     setWords((prevWords) =>
       prevWords.filter((_, index) => index !== randomIndex),
     );
-  }, [words]);
+  };
 
   const deductLife = useCallback(() => {
     setLives((prevLives) => {
@@ -200,6 +194,10 @@ export default function Hangman() {
     }
   };
 
+  if (words.length === 0) {
+    get_some_words(AMOUNT_OF_WORDS_PER_FETCH);
+  }
+
   const onChar = (key: string) => {
     const letter = key.toLowerCase();
     setCurrentGuess((prev) => prev + letter);
@@ -212,6 +210,7 @@ export default function Hangman() {
   const onEnter = () => {
     guess();
   };
+
   return (
     <section className="flex flex-col items-center">
       <h1 className="text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">
