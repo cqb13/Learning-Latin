@@ -57,7 +57,7 @@ function WordLadderLayout({ children }: { children: any }) {
       }
     };
 
-    updateChartFromUrl(); // Initial check
+    updateChartFromUrl();
 
     window.addEventListener("popstate", updateChartFromUrl);
     return () => window.removeEventListener("popstate", updateChartFromUrl);

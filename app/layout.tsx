@@ -90,8 +90,13 @@ export default function RootLayout({
       >
         <NavBar />
         <main className={`flex-1`}>{children}</main>
-        <footer className="flex shrink-0 justify-between items-center px-2 my-1">
-          <p>Learning Latin | By: Maksim Straus</p>
+        <footer className="flex shrink-0 justify-between items-center px-2 my-1 text-xs">
+          <a
+            href="https://github.com/cqb13/Learning-Latin/blob/main/LICENSE"
+            target="_blank"
+          >
+            Learning Latin © 2025| By: Maksim Straus
+          </a>
           <a href="https://github.com/cqb13" target="_blank">
             <Image src="/github.svg" alt="github" width={30} height={30} />
           </a>

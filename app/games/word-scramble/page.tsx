@@ -2,8 +2,8 @@
 
 import Notification from "@/components/shared/notification";
 import Keyboard from "@/components/games/general/keyboard";
-import { useEffect, useState, useCallback } from "react";
 import Button from "@/components/shared/button";
+import { useState, useCallback } from "react";
 import Text from "@/components/shared/text";
 
 const AMOUNT_OF_WORDS_PER_FETCH = 20;
