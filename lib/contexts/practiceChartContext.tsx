@@ -32,29 +32,30 @@ export function PracticeChartContextProvider({
   const [currentChart, setCurrentChart] = useState<PracticeCharts>(
     PracticeCharts.DeclensionEndings,
   );
-  let chartData: chartProps = declensions;
+
+  const [chartData, setChartData] = useState<chartProps>(declensions);
 
   const updateCurrentChart = (chart: PracticeCharts) => {
     setCurrentChart(chart);
 
     switch (chart) {
       case PracticeCharts.DeclensionEndings:
-        chartData = declensions;
+        setChartData(declensions);
         break;
       case PracticeCharts.FutureTense:
-        chartData = futureTense;
+        setChartData(futureTense);
         break;
       case PracticeCharts.PerfectTense:
-        chartData = perfectTense;
+        setChartData(perfectTense);
         break;
       case PracticeCharts.PersonalEndings:
-        chartData = personalEndings;
+        setChartData(personalEndings);
         break;
       case PracticeCharts.PersonalPronouns:
-        chartData = personalPronouns;
+        setChartData(personalPronouns);
         break;
       case PracticeCharts.RelativePronouns:
-        chartData = relativePronouns;
+        setChartData(relativePronouns);
         break;
     }
   };

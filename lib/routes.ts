@@ -1,3 +1,5 @@
+import { PracticeCharts } from "./contexts/practiceChartContext";
+
 const routes: [string, string][] = [
   ["Home", "/"],
   ["Practice", "/practice"],
@@ -5,13 +7,13 @@ const routes: [string, string][] = [
   ["Translate", "/translate"],
 ];
 
-const practiceRoutes: [string, string][] = [
-  ["Declension Endings", "/practice/declension-endings"],
-  ["Future Tense", "/practice/future-tense"],
-  ["Perfect Tense", "/practice/perfect-tense"],
-  ["Personal Endings", "/practice/personal-endings"],
-  ["Personal Pronouns", "/practice/personal-pronouns"],
-  ["Relative Pronouns", "/practice/relative-pronouns"],
+const practiceRoutes: [string, PracticeCharts][] = [
+  ["Declension Endings", PracticeCharts.DeclensionEndings],
+  ["Future Tense", PracticeCharts.FutureTense],
+  ["Perfect Tense", PracticeCharts.PerfectTense],
+  ["Personal Endings", PracticeCharts.PersonalEndings],
+  ["Personal Pronouns", PracticeCharts.PersonalPronouns],
+  ["Relative Pronouns", PracticeCharts.RelativePronouns],
 ];
 
 export { routes, practiceRoutes };

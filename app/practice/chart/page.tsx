@@ -1,27 +1,15 @@
 "use client";
 
+import { usePracticeChartContext } from "@/lib/contexts/practiceChartContext";
 import ChartFooter from "@/components/practice/chartFooter";
-import Button from "@/components/shared/button";
 import Chart from "@/components/practice/chart";
+import Button from "@/components/shared/button";
 import chartProps from "@/lib/types/chartProps";
 import clearChart from "@/utils/clearChart";
 import { useState } from "react";
 import Image from "next/image";
-import {
-  usePracticeChartContext,
-  PracticeChartContextProvider,
-  PracticeCharts,
-} from "@/lib/contexts/practiceChartContext";
 
-export default function PracticeChartWrapper() {
-  return (
-    <PracticeChartContextProvider>
-      <PracticeChart />
-    </PracticeChartContextProvider>
-  );
-}
-
-function PracticeChart() {
+export default function PracticeChart() {
   const [triggerClear, setTriggerClear] = useState(false); //used to trigger clearChart in chart
   const [showAnswers, setShowAnswers] = useState(false);
   const [currentChartNumber, setCurrentChartNumber] = useState(1);
@@ -29,9 +17,8 @@ function PracticeChart() {
   const [clearable, setClearable] = useState(false);
   const [chartIndex, setChartIndex] = useState(0);
 
-  const { data, updateCurrentChart } = usePracticeChartContext() as {
+  const { data } = usePracticeChartContext() as {
     data: chartProps;
-    updateCurrentChart: (chart: PracticeCharts) => void;
   };
 
   //Finds all charts that are accessed by a link, so they can be skipped when switching charts
