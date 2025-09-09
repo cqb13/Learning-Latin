@@ -6,24 +6,20 @@
     "prod-start": "next start"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.7",
-    "@headlessui/tailwindcss": "^0.1.2",
-    "@heroicons/react": "^2.0.16",
-    "@tailwindcss/forms": "^0.5.3",
-    "@vercel/analytics": "^0.1.9-beta.4",
-    "next": "^15.1.6",
-    "react": "^18",
-    "react-dom": "^18",
-    "swr": "^2.1.0",
-    "vercel": "^41.2.1"
+    "@vercel/analytics": "^1.5.0",
+    "next": "^15.5.2",
+    "react": "^19",
+    "react-dom": "^19",
+    "swr": "^2.3.6",
+    "vercel": "^47.0.5"
   },
   "devDependencies": {
-    "@types/node": "18.11.3",
-    "@types/react": "18.0.21",
-    "@types/react-dom": "18.0.6",
-    "autoprefixer": "^10.4.12",
-    "postcss": "^8.4.18",
-    "tailwindcss": "^3.2.4",
-    "typescript": "4.9.4"
+    "@types/node": "24.3.1",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.4",
+    "typescript": "5.9.2"
   }
 }
