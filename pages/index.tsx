@@ -103,12 +103,9 @@ const Home: NextPage = () => {
             Upcoming Features & Roadmap
           </h2>
           <div className="max-w-4xl mx-auto text-center">
-            <p className="mb-6">
-              Get a glimpse of what we're working on and what's coming next to
-              enhance your Latin learning experience.
-            </p>
             <p className="text-lg font-semibold">
-              - More practice charts - Some Time 2025
+              No new features planned at this time, open an issue on GitHub for
+              suggestions.
             </p>
           </div>
         </div>

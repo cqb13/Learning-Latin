@@ -24,8 +24,8 @@ const TranslationCard = ({
   };
 
   const createLatinFormLine = (form: any) => {
-    if (typeof form == "string") {
-      return form;
+    if (!form || typeof form == "string") {
+      return typeof form == "string" ? form : "";
     }
 
     let formString = `${form.comparison == "unknown" ? "" : form.comparison} ${
@@ -48,6 +48,10 @@ const TranslationCard = ({
   };
 
   const createInflectionLine = (inflectionInfo: any, stemInfo: any) => {
+    if (!stemInfo?.orth || !inflectionInfo?.ending) {
+      return "";
+    }
+
     const stem = stemInfo.orth;
     const ending = inflectionInfo.ending;
     const inflectionForm = inflectionInfo.form;
@@ -130,9 +134,9 @@ const TranslationCard = ({
                           ))}
                         </>
                       ) : null}
-                      {definition.translation ? (
+                      {definition.translation?.parts ? (
                         <>
-                          {definition.translation.parts.map((part: any) => (
+                          {definition.translation?.parts.map((part: any) => (
                             <span>{part}</span>
                           ))}
                         </>
@@ -173,11 +177,11 @@ const TranslationCard = ({
                         </>
                       ) : (
                         <>
-                          <p>Age: {definition.translation.info.age}</p>
-                          <p>Area: {definition.translation.info.area}</p>
-                          <p>Origin: {definition.translation.info.geo}</p>
-                          <p>Frequency: {definition.translation.info.freq}</p>
-                          <p>Source: {definition.translation.info.source}</p>
+                          <p>Age: {definition.translation?.info.age}</p>
+                          <p>Area: {definition.translation?.info.area}</p>
+                          <p>Origin: {definition.translation?.info.geo}</p>
+                          <p>Frequency: {definition.translation?.info.freq}</p>
+                          <p>Source: {definition.translation?.info.source}</p>
                         </>
                       )}
                     </div>
@@ -186,13 +190,13 @@ const TranslationCard = ({
                 {definition.word.pos ? (
                   <p>{definition.word.pos}</p>
                 ) : (
-                  <p>{definition.translation.pos}</p>
+                  <p>{definition.translation?.pos}</p>
                 )}
                 {kind == "latin" && definition.word.form ? (
                   <p>{createLatinFormLine(definition.word.form)}</p>
                 ) : null}
-                {kind == "english" && definition.translation.form ? (
-                  <p>{createLatinFormLine(definition.translation.form)}</p>
+                {kind == "english" && definition.translation?.form ? (
+                  <p>{createLatinFormLine(definition.translation?.form)}</p>
                 ) : null}
                 {definition.inflections ? (
                   <div className="flex flex-col gap-2 my-3 w-fit">
@@ -202,12 +206,12 @@ const TranslationCard = ({
                           <>
                             {createInflectionLine(
                               inflection,
-                              definition.stem
+                              definition.stem,
                             ) == "" ? null : (
                               <span className="bg-opacity-10 rounded px-2">
                                 {createInflectionLine(
                                   inflection,
-                                  definition.stem
+                                  definition.stem,
                                 )}
                               </span>
                             )}
@@ -236,9 +240,9 @@ const TranslationCard = ({
                       ))}
                     </>
                   ) : null}
-                  {definition.translation ? (
+                  {definition.translation?.parts ? (
                     <>
-                      {definition.translation.senses.map((sense: any) => (
+                      {definition.translation?.senses.map((sense: any) => (
                         <p className=" bg-primary-color bg-opacity-10 rounded px-2">
                           {sense}
                         </p>

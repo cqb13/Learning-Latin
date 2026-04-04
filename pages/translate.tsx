@@ -19,7 +19,7 @@ const Translate: NextPage = () => {
   };
 
   const getTranslation = async (
-    type: "latin-to-english" | "english-to-latin"
+    type: "latin-to-english" | "english-to-latin",
   ) => {
     if (query === "") {
       return;
@@ -76,13 +76,22 @@ const Translate: NextPage = () => {
             keyName="Enter"
             value={query}
           />
-          <a
-            href="https://github.com/cqb13/vocab-vault/tree/api"
-            className="text-xs my-2 hover:underline transition-all w-fit"
-            target="_blank"
-          >
-            Powered by Vocab Vault
-          </a>
+          <div className="flex justify-between w-full">
+            <a
+              href="https://github.com/cqb13/vocab-vault/tree/new-api"
+              className="text-xs my-2 hover:underline transition-all w-fit"
+              target="_blank"
+            >
+              Powered by Vocab Vault
+            </a>
+            <a
+              href="https://ko-fi.com/cqb13"
+              className="text-xs my-2 hover:underline transition-all w-fit"
+              target="_blank"
+            >
+              Help keep the translator running
+            </a>
+          </div>
           <section className="flex justify-between max-sm:flex-col gap-2">
             <div className="p-2 border border-neutral-300 rounded flex-grow bg-white bg-opacity-30 backdrop-blur-sm">
               <p>Max Definitions</p>
