@@ -2,7 +2,11 @@
 module.exports = {
     reactStrictMode: true,
     images: {
-      domains: ["upcdn.io", "replicate.delivery", "lh3.googleusercontent.com"],
+      remotePatterns: [
+        { protocol: "https", hostname: "upcdn.io" },
+        { protocol: "https", hostname: "replicate.delivery" },
+        { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      ],
     },
     async redirects() {
       return [

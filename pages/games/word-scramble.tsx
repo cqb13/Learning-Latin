@@ -16,18 +16,18 @@ const WordScramble: NextPage = () => {
         "girl, (female) child/daughter",
         "maiden",
         "young woman/wife",
-        "sweetheart"
+        "sweetheart",
       ],
       pos: "noun",
-      id: 32256
+      id: 32256,
     },
     {
       orth: "discipulus",
       parts: ["discipulus", "discipuli"],
       senses: ["student, pupil, trainee", "follower, disciple"],
       pos: "noun",
-      id: 18070
-    }
+      id: 18070,
+    },
   ];
   const STARTING_LIVES = 10;
 
@@ -52,8 +52,8 @@ const WordScramble: NextPage = () => {
       parts: [],
       senses: [],
       pos: "",
-      id: 0
-    }
+      id: 0,
+    },
   });
   const [shuffledWord, setShuffledWord] = useState<string[]>([]);
   const [completedWords, setCompletedWords] = useState<LatinWord[]>([]);
@@ -117,13 +117,13 @@ const WordScramble: NextPage = () => {
 
     const word = {
       word: randomWord.parts[randomPartIndex].replace(" | undeclined", ""),
-      info: randomWord
+      info: randomWord,
     };
 
     setShuffledWord(shuffleWord(word.word));
     setCurrentWord(word);
     setWords((prevWords) =>
-      prevWords.filter((_, index) => index !== randomIndex)
+      prevWords.filter((_, index) => index !== randomIndex),
     );
   }, [words]);
 
@@ -149,7 +149,8 @@ const WordScramble: NextPage = () => {
     if (words.length > 0) return;
     try {
       const url = `https://translator.learninglatin.net/get_list?type_of_words=latin&pos_list=noun,verb,adjective,participle,adverb&amount=${amount}&random=true`;
-      let result = await fetch(url).then((res) => res.json());
+      const response = await fetch(url);
+      const result = await response.json();
 
       if (result.error) {
         setWords(DEFAULT_WORD_LIST);
@@ -161,7 +162,7 @@ const WordScramble: NextPage = () => {
             parts: word.parts,
             senses: word.senses,
             pos: word.pos,
-            id: word.id
+            id: word.id,
           };
         });
 
@@ -203,7 +204,7 @@ const WordScramble: NextPage = () => {
   const triggerNotification = (
     title: string,
     type: "success" | "error" | "warning",
-    message: string
+    message: string,
   ) => {
     setNotification(true);
     setNotificationTitle(title);
@@ -212,83 +213,83 @@ const WordScramble: NextPage = () => {
   };
 
   return (
-    <Layout title='Translator' backgroundClass='bg-translate-gradient'>
-      <section className='flex flex-col items-center'>
-        <h1 className='text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]'>
+    <Layout title="Translator" backgroundClass="bg-translate-gradient">
+      <section className="flex flex-col items-center">
+        <h1 className="text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">
           Word Scramble
         </h1>
-        <section className='flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5'>
-          <section className='flex gap-2 items-center justify-center'>
+        <section className="flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5">
+          <section className="flex gap-2 items-center justify-center">
             {shuffledWord.length !== 0 && gameStarted ? (
               shuffledWord.map((letter, index) => {
                 return (
                   <div
                     key={index}
-                    className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 max-xs:p-1 border border-neutral-300 rounded flex justify-center items-center'
+                    className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 max-xs:p-1 border border-neutral-300 rounded flex justify-center items-center"
                   >
                     {letter}
                   </div>
                 );
               })
             ) : (
-              <div className='flex gap-2 items-center justify-center'>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+              <div className="flex gap-2 items-center justify-center">
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   p
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   r
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   e
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   s
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   s
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'></div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center"></div>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   s
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   t
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   a
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   r
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   t
                 </div>
               </div>
             )}
           </section>
-          <div className='flex items-center justify-center gap-2'>
+          <div className="flex items-center justify-center gap-2">
             {currentWord.info.senses.map((sense, index) => (
               <p
                 key={index}
-                className='bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded'
+                className="bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded"
               >
                 {sense}
               </p>
             ))}
           </div>
-          <section className='flex flex-col gap-2'>
-            <div className='flex gap-2 max-lg:flex-col'>
-              <div className='flex gap-2 flex-grow'>
+          <section className="flex flex-col gap-2">
+            <div className="flex gap-2 max-lg:flex-col">
+              <div className="flex gap-2 flex-grow">
                 <Text
-                  placeholder='Enter a letter/word'
-                  class=' bg-white bg-opacity-30 backdrop-blur-sm flex-grow'
+                  placeholder="Enter a letter/word"
+                  class=" bg-white bg-opacity-30 backdrop-blur-sm flex-grow"
                   value={currentGuess}
-                  keyName='Enter'
+                  keyName="Enter"
                 />
                 <Button
                   onClick={checkWord}
                   locked={gameOver || !gameStarted}
-                  class='max-xs:hidden'
+                  class="max-xs:hidden"
                 >
                   Guess
                 </Button>
@@ -296,15 +297,15 @@ const WordScramble: NextPage = () => {
               <Button
                 onClick={checkWord}
                 locked={gameOver || !gameStarted}
-                class='xs:hidden'
+                class="xs:hidden"
               >
                 Guess
               </Button>
-              <div className='flex gap-2'>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center max-lg:flex-grow'>
+              <div className="flex gap-2">
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center max-lg:flex-grow">
                   {lives} lives left
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center max-lg:flex-grow'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center max-lg:flex-grow">
                   {completedWords.length} completed
                 </div>
               </div>
@@ -316,31 +317,31 @@ const WordScramble: NextPage = () => {
               keyStats={keyStats}
               locked={gameOver || !gameStarted}
             />
-            <div className='flex items-center justify-center w-full gap-2'>
+            <div className="flex items-center justify-center w-full gap-2">
               {gameStarted ? (
-                <Button onClick={reset} locked={false} class='w-full'>
+                <Button onClick={reset} locked={false} class="w-full">
                   Restart
                 </Button>
               ) : (
-                <Button onClick={startGame} locked={false} class='w-full'>
+                <Button onClick={startGame} locked={false} class="w-full">
                   Start
                 </Button>
               )}
               <Button
                 onClick={() => nextWord(true)}
                 locked={gameOver || !gameStarted}
-                class='w-full'
+                class="w-full"
               >
                 Next
               </Button>
             </div>
           </section>
 
-          <section className='flex flex-col gap-2'>
+          <section className="flex flex-col gap-2">
             {completedWords.map((word) => (
               <div
                 key={word.id}
-                className='bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded'
+                className="bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded"
               >
                 <h2>
                   {word.orth} | {word.pos}

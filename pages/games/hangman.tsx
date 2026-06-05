@@ -14,18 +14,18 @@ const DEFAULT_WORD_LIST: LatinWord[] = [
       "girl, (female) child/daughter",
       "maiden",
       "young woman/wife",
-      "sweetheart"
+      "sweetheart",
     ],
     pos: "noun",
-    id: 32256
+    id: 32256,
   },
   {
     orth: "discipulus",
     parts: ["discipulus", "discipuli"],
     senses: ["student, pupil, trainee", "follower, disciple"],
     pos: "noun",
-    id: 18070
-  }
+    id: 18070,
+  },
 ];
 const STARTING_LIVES = 10;
 
@@ -51,8 +51,8 @@ const Hangman: NextPage = () => {
       parts: [],
       senses: [],
       pos: "",
-      id: 0
-    }
+      id: 0,
+    },
   });
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const [completedWords, setCompletedWords] = useState<LatinWord[]>([]);
@@ -111,12 +111,12 @@ const Hangman: NextPage = () => {
 
     const word = {
       word: randomWord.parts[randomPartIndex].replace(" | undeclined", ""),
-      info: randomWord
+      info: randomWord,
     };
 
     setCurrentWord(word);
     setWords((prevWords) =>
-      prevWords.filter((_, index) => index !== randomIndex)
+      prevWords.filter((_, index) => index !== randomIndex),
     );
   }, [words]);
 
@@ -142,14 +142,14 @@ const Hangman: NextPage = () => {
         setGuessedLetters((prev) => [...prev, guessLower]);
         setKeyStats((prev) => ({
           ...prev,
-          [currentGuess.toUpperCase()]: "correct"
+          [currentGuess.toUpperCase()]: "correct",
         }));
 
         if (
           currentWord.word
             .split("")
             .every((letter) =>
-              [...guessedLetters, currentGuess].includes(letter)
+              [...guessedLetters, currentGuess].includes(letter),
             )
         ) {
           setCompletedWords((prev) => [currentWord.info, ...prev]);
@@ -160,7 +160,7 @@ const Hangman: NextPage = () => {
         setGuessedLetters((prev) => [...prev, guessLower]);
         setKeyStats((prev) => ({
           ...prev,
-          [currentGuess.toUpperCase()]: "incorrect"
+          [currentGuess.toUpperCase()]: "incorrect",
         }));
       }
     } else if (currentGuess.toLowerCase() === currentWord.word) {
@@ -176,7 +176,8 @@ const Hangman: NextPage = () => {
     if (words.length > 0) return;
     try {
       const url = `https://translator.learninglatin.net/get_list?type_of_words=latin&pos_list=noun,verb&amount=${amount}&random=true`;
-      let result = await fetch(url).then((res) => res.json());
+      const response = await fetch(url);
+      const result = await response.json();
 
       if (result.error) {
         setWords(DEFAULT_WORD_LIST);
@@ -188,7 +189,7 @@ const Hangman: NextPage = () => {
             parts: word.parts,
             senses: word.senses,
             pos: word.pos,
-            id: word.id
+            id: word.id,
           };
         });
 
@@ -214,74 +215,74 @@ const Hangman: NextPage = () => {
   };
 
   return (
-    <Layout title='Hangman' backgroundClass='bg-hangman-gradient'>
-      <section className='flex flex-col items-center'>
-        <h1 className='text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]'>
+    <Layout title="Hangman" backgroundClass="bg-hangman-gradient">
+      <section className="flex flex-col items-center">
+        <h1 className="text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">
           Hangman
         </h1>
-        <section className='flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5'>
-          <section className='flex gap-2 items-center justify-center'>
+        <section className="flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5">
+          <section className="flex gap-2 items-center justify-center">
             {currentWord.word != "" && gameStarted ? (
               currentWord.word.split("").map((letter, index) => {
                 return (
                   <div
                     key={index}
-                    className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 max-xs:p-1 border border-neutral-300 rounded flex justify-center items-center'
+                    className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 max-xs:p-1 border border-neutral-300 rounded flex justify-center items-center"
                   >
                     {guessedLetters.includes(letter) ? letter : "_"}
                   </div>
                 );
               })
             ) : (
-              <div className='flex gap-2 items-center justify-center'>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+              <div className="flex gap-2 items-center justify-center">
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   p
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   r
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   e
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   s
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   s
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'></div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center"></div>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   s
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   t
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   a
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   r
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-3xl p-2 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center">
                   t
                 </div>
               </div>
             )}
           </section>
 
-          <section className='flex flex-col gap-2'>
-            <div className='flex gap-2 max-lg:flex-col'>
-              <div className='flex gap-2 flex-grow'>
+          <section className="flex flex-col gap-2">
+            <div className="flex gap-2 max-lg:flex-col">
+              <div className="flex gap-2 flex-grow">
                 <Text
-                  placeholder='Enter a letter/word'
-                  class=' bg-white bg-opacity-30 backdrop-blur-sm flex-grow'
+                  placeholder="Enter a letter/word"
+                  class=" bg-white bg-opacity-30 backdrop-blur-sm flex-grow"
                   value={currentGuess}
-                  keyName='Enter'
+                  keyName="Enter"
                 />
                 <Button
                   onClick={guess}
                   locked={gameOver || !gameStarted}
-                  class='max-xs:hidden'
+                  class="max-xs:hidden"
                 >
                   Guess
                 </Button>
@@ -289,15 +290,15 @@ const Hangman: NextPage = () => {
               <Button
                 onClick={guess}
                 locked={gameOver || !gameStarted}
-                class='xs:hidden'
+                class="xs:hidden"
               >
                 Guess
               </Button>
-              <div className='flex gap-2'>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center max-lg:flex-grow'>
+              <div className="flex gap-2">
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center max-lg:flex-grow">
                   {lives} lives left
                 </div>
-                <div className='bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center max-lg:flex-grow'>
+                <div className="bg-white bg-opacity-30 backdrop-blur-sm text-md p-2 border border-neutral-300 rounded flex justify-center items-center max-lg:flex-grow">
                   {completedWords.length} completed
                 </div>
               </div>
@@ -309,31 +310,31 @@ const Hangman: NextPage = () => {
               keyStats={keyStats}
               locked={gameOver || !gameStarted}
             />
-            <div className='flex items-center justify-center w-full gap-2'>
+            <div className="flex items-center justify-center w-full gap-2">
               {gameStarted ? (
-                <Button onClick={reset} locked={false} class='w-full'>
+                <Button onClick={reset} locked={false} class="w-full">
                   Restart
                 </Button>
               ) : (
-                <Button onClick={startGame} locked={false} class='w-full'>
+                <Button onClick={startGame} locked={false} class="w-full">
                   Start
                 </Button>
               )}
               <Button
                 onClick={() => nextWord(true)}
                 locked={gameOver || !gameStarted}
-                class='w-full'
+                class="w-full"
               >
                 Next
               </Button>
             </div>
           </section>
 
-          <section className='flex flex-col gap-2'>
+          <section className="flex flex-col gap-2">
             {gameOver && lives === 0 ? (
               <div
                 key={currentWord.info.id}
-                className='bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded'
+                className="bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded"
               >
                 <h2>
                   {currentWord.info.orth} | {currentWord.info.pos}
@@ -345,7 +346,7 @@ const Hangman: NextPage = () => {
             {completedWords.map((word) => (
               <div
                 key={word.id}
-                className='bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded'
+                className="bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded"
               >
                 <h2>
                   {word.orth} | {word.pos}

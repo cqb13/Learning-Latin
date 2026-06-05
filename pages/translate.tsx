@@ -39,7 +39,8 @@ const Translate: NextPage = () => {
           ? `https://translator.learninglatin.net/latin_to_english?latin_text=${query.trim()}&max=${maxDefinitions}&tricks=${useTricks}&sort=${sortOutput}`
           : `https://translator.learninglatin.net/english_to_latin?english_text=${query.trim()}&max=${maxDefinitions}&sort=${sortOutput}`;
 
-      let result = await fetch(url).then((res) => res.json());
+      const response = await fetch(url);
+      const result = await response.json();
 
       if (result.error) {
         setNothingFound(true);

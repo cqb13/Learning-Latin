@@ -63,7 +63,6 @@ const Home: NextPage = () => {
               icon="/translate.svg"
               link="https://github.com/cqb13/vocab-vault/tree/new-api"
             />
-            {/* TODO: replace with game card */}
             <FeatureCard
               title="Games"
               description="Learn new words through games."
@@ -84,7 +83,7 @@ const Home: NextPage = () => {
               class="mt-6 w-fit bg-primary-500 bg-opacity-80 hover:bg-primary-700"
               href="https://github.com/cqb13/Learning-Latin"
             >
-              Join Us on GitHub
+              View on GitHub
             </Button>
           </div>
         </div>
