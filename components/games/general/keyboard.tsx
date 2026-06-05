@@ -79,7 +79,7 @@ const Keyboard = ({ onChar, onDelete, onEnter, keyStats, locked }: Props) => {
         <Key
           value='ENTER'
           onClick={onClick}
-          status={keyStats["DELETE"]}
+          status={keyStats["ENTER"]}
           className='max-md:hidden'
         />
         <Key value='Z' onClick={onClick} status={keyStats["Z"]} />
@@ -92,7 +92,7 @@ const Keyboard = ({ onChar, onDelete, onEnter, keyStats, locked }: Props) => {
         <Key
           value='DELETE'
           onClick={onClick}
-          status={keyStats["ENTER"]}
+          status={keyStats["DELETE"]}
           className='max-md:hidden'
         />
       </div>

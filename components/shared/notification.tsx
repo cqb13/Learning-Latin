@@ -23,7 +23,7 @@ export default function Notification({
       updateNotification(false);
     }, timeout);
     return () => clearTimeout(timer);
-  });
+  }, [timeout, updateNotification]);
 
   const getBgColor = () => {
     switch (type) {
