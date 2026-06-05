@@ -1,10 +1,10 @@
 const macronHandler = (str: string) => {
   return str
-    .replace(/ā/g, "a")
-    .replace(/ē/g, "e")
-    .replace(/ī/g, "i")
-    .replace(/ō/g, "o")
-    .replace(/ū/g, "u");
+    .replace(/ā|Ā/g, "a")
+    .replace(/ē|Ē/g, "e")
+    .replace(/ī|Ī/g, "i")
+    .replace(/ō|Ō/g, "o")
+    .replace(/ū|Ū/g, "u");
 };
 
 export default macronHandler;

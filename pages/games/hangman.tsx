@@ -1,46 +1,15 @@
 import Keyboard from "@components/games/general/keyboard";
 import { useEffect, useState, useCallback } from "react";
+import type { LatinWord, WordList } from "@prop-types/latinWord";
+import defaultWordList from "@data/defaultWordList";
+import fetchLatinWords from "@utils/fetchLatinWords";
 import Layout from "@components/shared/layout";
 import Button from "@components/shared/button";
 import Text from "@components/shared/text";
 import { NextPage } from "next";
 
 const AMOUNT_OF_WORDS_PER_FETCH = 20;
-const DEFAULT_WORD_LIST: LatinWord[] = [
-  {
-    orth: "puella",
-    parts: ["puella", "puellae"],
-    senses: [
-      "girl, (female) child/daughter",
-      "maiden",
-      "young woman/wife",
-      "sweetheart",
-    ],
-    pos: "noun",
-    id: 32256,
-  },
-  {
-    orth: "discipulus",
-    parts: ["discipulus", "discipuli"],
-    senses: ["student, pupil, trainee", "follower, disciple"],
-    pos: "noun",
-    id: 18070,
-  },
-];
 const STARTING_LIVES = 10;
-
-type WordList = {
-  word: string;
-  info: LatinWord;
-};
-
-type LatinWord = {
-  orth: string;
-  parts: string[];
-  senses: string[];
-  pos: string;
-  id: number;
-};
 
 const Hangman: NextPage = () => {
   const [words, setWords] = useState<LatinWord[]>([]);
@@ -89,7 +58,6 @@ const Hangman: NextPage = () => {
   const nextWord = (force: boolean) => {
     setGuessedLetters([]);
     setKeyStats({});
-    // the player skips a word as they think they can't solve it
     if (force) {
       deductLife();
     }
@@ -174,31 +142,8 @@ const Hangman: NextPage = () => {
 
   const get_some_words = async (amount: number) => {
     if (words.length > 0) return;
-    try {
-      const url = `https://translator.learninglatin.net/get_list?type_of_words=latin&pos_list=noun,verb&amount=${amount}&random=true`;
-      const response = await fetch(url);
-      const result = await response.json();
-
-      if (result.error) {
-        setWords(DEFAULT_WORD_LIST);
-        console.error(result.error);
-      } else {
-        let latinWordList: LatinWord[] = result.map((word: any) => {
-          return {
-            orth: word.orth,
-            parts: word.parts,
-            senses: word.senses,
-            pos: word.pos,
-            id: word.id,
-          };
-        });
-
-        setWords(latinWordList);
-      }
-    } catch (error) {
-      console.error(error);
-      setWords(DEFAULT_WORD_LIST);
-    }
+    const fetched = await fetchLatinWords(amount, "noun,verb");
+    setWords(fetched.length > 0 ? fetched : defaultWordList);
   };
 
   const onChar = (key: string) => {

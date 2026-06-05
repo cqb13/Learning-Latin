@@ -55,22 +55,21 @@ const PracticeChart = ({ data }: { data: chartProps }) => {
   const [triggerClear, setTriggerClear] = useState(false); //used to trigger clearChart in chart
   const [showAnswers, setShowAnswers] = useState(false);
   const [currentChart, setCurrentChart] = useState(1);
-  const [linkedChartIndex] = useState([] as number[]);
-  const [clearable, setClearable] = useState(false);
-  const [chartIndex, setChartIndex] = useState(0);
-
-  useEffect(() => {
-    //Finds all charts that are accessed by a link, so they can be skipped when switching charts
+  const linkedChartIndex = (() => {
+    const indices: number[] = [];
     for (let i = 0; i < data.chart.length; i++) {
       if (data.chart[i].link) {
         for (let j = 0; j < data.chart.length; j++) {
           if (data.chart[j].name === data.chart[i].link) {
-            linkedChartIndex.push(j);
+            indices.push(j);
           }
         }
       }
     }
-  }, []);
+    return indices;
+  })();
+  const [clearable, setClearable] = useState(false);
+  const [chartIndex, setChartIndex] = useState(0);
 
   //triggers a useEffect within chart component which calls clearChart function
   const updateTrigger = () => {

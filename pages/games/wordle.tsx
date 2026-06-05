@@ -4,24 +4,25 @@ import Button from "@components/shared/button";
 import Layout from "@components/shared/layout";
 import { useEffect, useState } from "react";
 import { NextPage } from "next";
+
 enum GameMode {
   Daily,
-  Infinite
+  Infinite,
 }
 
 enum WordleGuessStatus {
   Correct,
   Incorrect,
   Invalid,
-  Unknown
+  Unknown,
 }
 
 const generateWordleGrid = (rows: number, cols: number) => {
   return Array.from({ length: rows }, () =>
     Array.from({ length: cols }, () => ({
       value: "",
-      status: WordleGuessStatus.Unknown
-    }))
+      status: WordleGuessStatus.Unknown,
+    })),
   );
 };
 
@@ -58,7 +59,7 @@ const Wordle: NextPage = () => {
     senses: string[];
   };
   const [wordleGrid, setWordleGrid] = useState(() =>
-    generateWordleGrid(maxTries, wordLength)
+    generateWordleGrid(maxTries, wordLength),
   );
   const [currentRow, setCurrentRow] = useState(0);
   const [keyStats, setKeyStats] = useState<{
@@ -101,7 +102,7 @@ const Wordle: NextPage = () => {
 
   const onChar = (char: string) => {
     const firstEmptyCellIndex = getIndexOfFirstEmptyCell(
-      wordleGrid[currentRow]
+      wordleGrid[currentRow],
     );
 
     setWordleGrid((currentGrid) => {
@@ -141,7 +142,7 @@ const Wordle: NextPage = () => {
     row: {
       value: string;
       status: WordleGuessStatus;
-    }[]
+    }[],
   ) => {
     let index = row.findIndex((cell) => cell.value === "");
     return index === -1 ? wordLength : index;
@@ -160,7 +161,7 @@ const Wordle: NextPage = () => {
       triggerNotification(
         "Incomplete Word",
         "warning",
-        "Please fill in all the letters."
+        "Please fill in all the letters.",
       );
       return;
     }
@@ -171,7 +172,7 @@ const Wordle: NextPage = () => {
       triggerNotification(
         "Invalid Word",
         "warning",
-        "Word is not in the list of valid words."
+        "Word is not in the list of valid words.",
       );
       return;
     }
@@ -180,7 +181,7 @@ const Wordle: NextPage = () => {
 
     if (
       wordleGrid[currentRow].every(
-        (cell) => cell.status === WordleGuessStatus.Correct
+        (cell) => cell.status === WordleGuessStatus.Correct,
       ) ||
       currentRow + 1 === maxTries
     ) {
@@ -199,7 +200,7 @@ const Wordle: NextPage = () => {
       triggerNotification(
         "Error",
         "error",
-        "Correct word is not defined. Please try reloading the page."
+        "Correct word is not defined. Please try reloading the page.",
       );
       return;
     }
@@ -275,15 +276,12 @@ const Wordle: NextPage = () => {
 
   const get_words = async () => {
     const jsonTokens = await import("../../lib/data/words.json");
-    const jsonData = JSON.stringify(jsonTokens);
-    const words = JSON.parse(jsonData);
-
-    setWords(words);
+    setWords(jsonTokens.default as LatinWord[]);
   };
 
   const switchToOtherGameMode = () => {
     setGameMode(
-      gameMode === GameMode.Daily ? GameMode.Infinite : GameMode.Daily
+      gameMode === GameMode.Daily ? GameMode.Infinite : GameMode.Daily,
     );
     if (gameMode === GameMode.Daily) {
       selectNewWord(GameMode.Infinite);
@@ -302,7 +300,7 @@ const Wordle: NextPage = () => {
   const triggerNotification = (
     title: string,
     type: "success" | "error" | "warning",
-    message: string
+    message: string,
   ) => {
     setNotification(true);
     setNotificationTitle(title);
@@ -311,12 +309,12 @@ const Wordle: NextPage = () => {
   };
 
   return (
-    <Layout title='Wordle' backgroundClass='bg-wordle-gradient'>
-      <section className='flex flex-col items-center'>
-        <h1 className='text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]'>
+    <Layout title="Wordle" backgroundClass="bg-wordle-gradient">
+      <section className="flex flex-col items-center">
+        <h1 className="text-5xl text-zinc-800 font-bold m-0 [text-shadow:0_1px_1px_rgba(0,0,0,0.2)]">
           Latin Wordle
         </h1>
-        <section className='border-neutral-300 border rounded-xl bg-white bg-opacity-30 backdrop-blur-sm xl:w-1/5 flex items-center lg:w-2/5 max-lg:w-2/5 max-sm:w-4/5'>
+        <section className="border-neutral-300 border rounded-xl bg-white bg-opacity-30 backdrop-blur-sm xl:w-1/5 flex items-center lg:w-2/5 max-lg:w-2/5 max-sm:w-4/5">
           <button
             onClick={switchToOtherGameMode}
             className={`grow rounded-l-xl transition-all duration-150 ${
@@ -338,17 +336,17 @@ const Wordle: NextPage = () => {
             Infinite
           </button>
         </section>
-        <section className='flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5'>
-          <section className='flex flex-col gap-2 items-center justify-center'>
+        <section className="flex flex-col gap-2 w-3/5 mt-2 max-xs:w-4/5">
+          <section className="flex flex-col gap-2 items-center justify-center">
             {wordleGrid.map((row, rowIndex) => {
               return (
-                <div className='flex gap-2' key={rowIndex}>
+                <div className="flex gap-2" key={rowIndex}>
                   {row.map((gridItem, letterIndex) => {
                     return (
                       <div
                         key={`${rowIndex}-${letterIndex}`}
                         className={`${colorFromGridItemStatus(
-                          gridItem.status
+                          gridItem.status,
                         )} bg-opacity-30 backdrop-blur-sm text-3xl p-2 w-12 h-12 border max-xs:p-1 border-neutral-300 rounded flex justify-center items-center`}
                       >
                         {gridItem.value}
@@ -360,7 +358,7 @@ const Wordle: NextPage = () => {
             })}
           </section>
 
-          <section className='flex flex-col gap-2'>
+          <section className="flex flex-col gap-2">
             <Keyboard
               onChar={onChar}
               onDelete={onDelete}
@@ -376,11 +374,11 @@ const Wordle: NextPage = () => {
           >
             Next Word
           </Button>
-          <section className='flex flex-col gap-2'>
+          <section className="flex flex-col gap-2">
             {completedWords.map((word) => (
               <div
                 key={word.id}
-                className='bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded'
+                className="bg-white bg-opacity-30 backdrop-blur-sm p-2 border border-neutral-300 rounded"
               >
                 <h2>
                   {word.orth} | {word.pos}
